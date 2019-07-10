@@ -1,12 +1,18 @@
+
 #padding {
-    padding: 2% 2%;
-  }
-  #avatar {
-    background-image: url("https://avatars0.githubusercontent.com/u/9064066?v=4&s=460");
-    height: 150%;
-    background-position: center;
-    background-size: contain;
-  }
-  [v-cloak]{
-    display: none;
-  }
+  padding: 2% 2%;
+}
+#avatar {
+  background-image: url("https://avatars0.githubusercontent.com/u/9064066?v=4&s=460");
+  height: 150%;
+  background-position: center;
+  background-size: contain;
+}
+[v-cloak]{
+  display: none;
+}
+#picker{
+  position:absolute;
+  left:80px; 
+  top:20px;
+}
