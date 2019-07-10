@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="hannahstyle.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	</head>
+	<div id="app1" v-cloak>
+		<v-app>
+			<v-content>
+                <v-toolbar height=80>
+                    <v-toolbar-title>Resume<span class="font-weight-light">Builder</span> </v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <v-btn flat @click="page = 'form' ">Input Form</v-btn>
+                        <v-btn flat @click="page = 'preview' ">Preview</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+                <div v-if="page == 'form'">
+                        <v-container>
+                            <v-layout>
+                                <v-flex>
+                                   <v-card>
+                                        <v-expansion-panel expand>
+                                            <v-expansion-panel-content id="personalinformation">
+                                                <template v-slot:header> <v-card-text class="display-1">Personal Infomation</v-card-text></template>
+                                                <v-card class="ma-2 pa-4">
+                                                    <v-card-text>
+                                                        <v-layout>
+                                                            <v-flex xs6 pa-3>
+                                                                <v-text-field label="First Name" v-model="info.first_name"></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex pa-3>
+                                                                <v-text-field label="Last Name" v-model="info.last_name"></v-text-field>
+                                                            </v-flex>
+                                                        </v-layout>
+                                                        <v-layout>
+                                                            <v-flex xs12 pa-3>
+                                                                <v-text-field label="Address" v-model="info.address"></v-text-field>
+                                                            </v-flex>
+                                                        </v-layout>
+                                                        <v-layout>
+                                                            <v-flex xs6 pa-3>
+                                                                <v-text-field label="City" v-model="info.city"></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex pa-3>
+                                                                <v-text-field label="State" v-model="info.state"></v-text-field>
+                                                            </v-flex>
+                                                        </v-layout>
+                                                        <v-layout>
+                                                            <v-flex xs6 pa-3>
+                                                                <v-text-field label="Zip Code" v-model="info.zip"></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex xs6 pa-3>
+                                                                <v-text-field label="Country" v-model="info.country"></v-text-field>
+                                                            </v-flex>
+                                                        </v-layout>
+                                                        <v-layout>
+                                                            <v-flex xs6 pa-3>
+                                                                <v-text-field label="Phone number" v-model="info.phone"></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex xs6 pa-3>
+                                                                <v-text-field label="Email adress" v-model="info.email"></v-text-field>
+                                                            </v-flex>
+                                                        </v-layout>
+                                                        
+                                                    </v-card-text>
+                                                </v-card>
+                                            </v-expansion-panel-content>
+                                            <v-expansion-panel-content>
+                                                <template v-slot:header> <v-card-text class="display-1">Work experience</v-card-text></template>
+                                                <v-card class="ma-2 pa-4">
+                                                    <v-card  flat v-for="experience in workexplist">
+                                                        <v-card-title>{{experience.work_title}}, {{experience.work_startdate}} - {{experience.work_enddate}}</v-card-title>
+                                                        <v-card-text>{{experience.work_company}}</v-card-text>
+                                                        <v-card-text>{{experience.work_description}}</v-card-text>
+                                                        <v-btn icon><v-icon color="red">delete</v-icon></v-btn>
+                                                        <v-btn icon><v-icon color="red">edit</v-icon></v-btn>
+                                                    </v-card>
+                                                    <v-text-field label="Company" v-model="workexpEdit.work_company"></v-text-field>
+                                                    <v-text-field label="Job Title" v-model="workexpEdit.work_title"></v-text-field>
+                                                    <v-menu
+                                                        ref="workexpEdit.start_menu"
+                                                        v-model="workexpEdit.start_menu"
+                                                        :close-on-content-click="false"
+                                                        :nudge-right="40"
+                                                        :return-value.sync="workexpEdit.work_startdate"
+                                                        lazy
+                                                        transition="scale-transition"
+                                                        offset-y
+                                                        full-width
+                                                        min-width="290px"
+                                                    >
+                                                        <template v-slot:activator="{ on }">
+                                                        <v-text-field
+                                                            v-model="workexpEdit.work_startdate"
+                                                            label="Start date"
+                                                            prepend-icon="event"
+                                                            readonly
+                                                            v-on="on"
+                                                        ></v-text-field>
+                                                        </template>
+                                                        <v-date-picker v-model="workexpEdit.work_startdate">
+                                                            <v-spacer></v-spacer>
+                                                            <v-btn flat color="primary" @click="workexpEdit.start_menu = false">Cancel</v-btn>
+                                                            <v-btn flat color="primary" @click="$refs.workexpEdit.start_menu.save(workexpEdit.work_startdate)">OK</v-btn>
+                                                        </v-date-picker>
+                                                    </v-menu>
+                                                    
+                                                    <v-menu
+                                                        ref="workexpedit.end_menu"
+                                                        v-model="workexpEdit.end_menu"
+                                                        :close-on-content-click="true"
+                                                        :nudge-right="40"
+                                                        :return-value.sync="workexpEdit.work_enddate"
+                                                        lazy
+                                                        transition="scale-transition"
+                                                        offset-y
+                                                        full-width
+                                                        min-width="290px">
+                                                        <template v-slot:activator="{ on }">
+                                                            <v-text-field
+                                                                v-model="workexpEdit.work_enddate"
+                                                                label="End date"
+                                                                prepend-icon="event"
+                                                                readonly
+                                                                v-on="on"
+                                                            ></v-text-field>
+                                                        </template>
+                                                        
+                                                        <v-date-picker v-model="workexpEdit.work_enddate"></v-date-picker>
+                                                    </v-menu>
+                                                    <v-text-field label="Brief description" v-model="workexpEdit.work_description"></v-text-field>
+                                                    <v-btn @click="addWork()">Add Work Experience</v-btn>
+                                                </v-card>
+                                            </v-expansion-panel-content>
+                                            <v-expansion-panel-content id="education">
+                                                    <template v-slot:header> <v-card-text class="display-1">Education</v-card-text></template>
+                                                    <v-card class="ma-2 pa-4">
+                                                        <v-card  flat v-for="school in educationlist">
+                                                                <v-card-title>{{school.college}}, {{school.degree}} - {{school.gradyear}}</v-card-title>
+                                        
+                                                                <v-btn icon><v-icon color="red">delete</v-icon></v-btn>
+                                                                <v-btn icon><v-icon color="red">edit</v-icon></v-btn>
+                                                            </v-card>
+                                                        <v-text-field label="School attended" v-model="educationEdit.college"></v-text-field>
+                                                        <v-text-field label="Degree" v-model="educationEdit.degree"></v-text-field>
+                                                        <template v-slot:activator="{ on }">
+                                                            <v-text-field
+                                                                v-model="educationEdit.gradyear"
+                                                                label="Graduation"
+                                                                prepend-icon="event"
+                                                                readonly
+                                                                v-on="on"
+                                                            ></v-text-field>
+                                                        </template>
+                                                        <v-menu
+                                                        ref="educationlist.menu"
+                                                        v-model="educationlist.menu"
+                                                        :close-on-content-click="false"
+                                                        :nudge-right="40"
+                                                        :return-value.sync="educationEdit.gradyear"
+                                                        lazy
+                                                        transition="scale-transition"
+                                                        offset-y
+                                                        full-width
+                                                        min-width="290px">
+                                                        
+                                                        <v-date-picker v-model="educationEdit.gradyear"></v-date-picker>
+                                                        </v-menu>
+                                                        <v-btn @click="addEducation()">Add Education</v-btn>
+    
+                                                    </v-card>
+                                            </v-expansion-panel-content>
+    
+                                            <v-expansion-panel-content id="accomplishments">
+                                                    <template v-slot:header> <v-card-text class="display-1">Accomplishments</v-card-text></template>
+                                                    <v-card class="ma-2 pa-4">
+                                                        <v-text-field label="Accomplishment" v-model="accomplishmentEdit.title"></v-text-field>
+                                                        <v-textarea label="Brief description" v-model="accomplishmentEdit.description"></v-textarea>
+                                                        <v-btn @click="addAccomplishment()">Add Accomplishment</v-btn>
+    
+                                                    </v-card>
+                                            </v-expansion-panel-content>
+    
+                                            <v-expansion-panel-content id="languages">
+                                                    <template v-slot:header> <v-card-text class="display-1">Languages</v-card-text></template>
+                                                    <v-card class="ma-2 pa-4">
+                                                        <v-text-field label="Languages" v-model="languagesEdit.title"></v-text-field>
+                                                        <v-select
+                                                            :items="proficiencylist"
+                                                            label="Proficiency"
+                                                            editable
+                                                            item-value=""
+                                                            v-model="languagesEdit.proficiency">
+                                                        </v-select>
+                                                        <v-btn @click="addLanguage()">Add Language</v-btn>
+    
+                                                    </v-card>
+                                            </v-expansion-panel-content>
+    
+                                            <v-expansion-panel-content id="techskills">
+                                                    <template v-slot:header> <v-card-text class="display-1">Programs & Software</v-card-text></template>
+                                                    <v-card class="ma-2 pa-4">
+                                                        <v-text-field label="Tech skill" v-model="programsEdit.title"></v-text-field>
+                                                        <v-select
+                                                            :items="proficiencylist"
+                                                            label="Programs or Software"
+                                                            editable
+                                                            item-value=""
+                                                            v-model="programsEdit.proficiency">
+                                                        </v-select>
+                                                        <v-btn @click="addSkill()">Add Skill</v-btn>
+    
+                                                    </v-card>
+                                            </v-expansion-panel-content>
+    
+                                            <v-expansion-panel-content id="awards">
+                                                    <template v-slot:header> <v-card-text class="display-1">Awards</v-card-text></template>
+                                                    <v-card class="ma-2 pa-4">
+                                                        <v-text-field label="Title" v-model="awardsEdit.title"></v-text-field>
+                                                        <v-text-field label="Received from" v-model="awardsEdit.receivedfrom"></v-text-field>
+                                                        <v-menu
+                                                            ref="menu"
+                                                            v-model="menu"
+                                                            :close-on-content-click="false"
+                                                            :nudge-right="40"
+                                                            :return-value.sync="date"
+                                                            lazy
+                                                            transition="scale-transition"
+                                                            offset-y
+                                                            full-width
+                                                            min-width="290px">
+                                                            <template v-slot:activator="{ on }">
+                                                                <v-text-field
+                                                                    v-model="awardsEdit.date"
+                                                                    label="Date"
+                                                                    prepend-icon="event"
+                                                                    readonly
+                                                                    v-on="on"
+                                                                ></v-text-field>
+                                                            </template>
+                                                            <v-date-picker v-model="awardsEdit.date"></v-date-picker>
+                                                        </v-menu>
+                                                        <v-textarea label="Brief description" v-model="workexpEdit.work1description"></v-textarea>
+                                                        <v-btn @click="addAward()">Add Award</v-btn>
+                                                    </v-card>
+                                            </v-expansion-panel-content>
+    
+                                            <v-expansion-panel-content id="extracurricularEdit">
+                                                    <template v-slot:header> <v-card-text class="display-1">Extracurricular</v-card-text></template>
+                                                    <v-card class="ma-2 pa-4">
+                                                        <v-text-field label="Activity" v-model="extracurricularEdit.title"></v-text-field>
+                                                        <v-textarea label="Brief description" v-model="extracurricularEdit.description"></v-textarea>
+                                                        <v-menu
+                                                            ref="menu"
+                                                            v-model="menu"
+                                                            :close-on-content-click="false"
+                                                            :nudge-right="40"
+                                                            :return-value.sync="date"
+                                                            lazy
+                                                            transition="scale-transition"
+                                                            offset-y
+                                                            full-width
+                                                            min-width="290px">
+                                                            <template v-slot:activator="{ on }">
+                                                                <v-text-field
+                                                                    v-model="extracurricularEdit.date"
+                                                                    label="Date"
+                                                                    prepend-icon="event"
+                                                                    readonly
+                                                                    v-on="on"
+                                                                ></v-text-field>
+                                                            </template>
+                                                            <v-date-picker v-model="extracurricularEdit.date"></v-date-picker>
+                                                        </v-menu>
+                                                    </v-card>
+                                            </v-expansion-panel-content>
+    
+                                            <v-expansion-panel-content id="sofskillsEdit">
+                                                    <template v-slot:header> <v-card-text class="display-1">Soft Skill</v-card-text></template>
+                                                    <v-card class="ma-2 pa-4">
+                                                        <v-text-field label="Soft Skills" v-model="softskillsEdit.title"></v-text-field>
+                                                    </v-card>
+                                            </v-expansion-panel-content>
+    
+                                        </v-expansion-panel>
+                                        
+                                    </v-card>
+                                    <v-btn @click="page = 'preview'" >See Preview</v-btn>
+                            
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </div>
+
+                <div v-if="page == 'preview'">
+                    <v-toolbar class="grey lighten-2" height=80>
+                        <v-btn @click="template = 'malia'" v-model="selected_color">Template 1</v-btn>
+                        <v-btn @click="template = 'hannah'">Template 2</v-btn>
+                        <v-btn @click="template = 'taft'">Template 3</v-btn>
+                        <v-btn @click="template = 'sharon'">Template 4</v-btn>
+                        <v-btn fab @click="selected_color = 'red'" color="red"></v-btn>
+                        <v-btn fab color="orange"></v-btn>
+                        <v-btn fab color="yellow"></v-btn>
+                        <v-btn fab color="green"></v-btn>
+                        <v-btn fab color="teal"></v-btn>
+                        <v-btn fab color="blue"></v-btn>
+                        <v-btn fab color="purple"></v-btn>
+                        <v-btn fab color="black"></v-btn>
+                        <v-btn color="selected_color">button</v-btn>
+                    </v-toolbar>
+
+                    <v-container v-if="template == 'malia'">
+                            <v-layout justify-center row-wrap>
+                                    <v-flex xs12 sm10>
+                                        <v-card>
+                                            <v-responsive :aspect-ratio="8.5/11">
+                                                <v-card id="padding" align-center justify-center flat color="blue-grey" height="20%">
+                                                    <v-layout>
+                                                        <v-flex xs3>
+                                                            <div>
+                                                                <v-img>
+                                                             </v-img>
+                                                            </div>
+                                                        </v-flex>
+                                                        <v-flex  xs8 offset-xs1 >
+                                                            <v-card>
+                                                                <v-card-text>{{info.summary}}</v-card-text>
+                                                            </v-card>
+                                                    </v-flex>
+                                                    </v-layout>
+                                                </v-card>
+                                                    <v-layout>
+                                                        <v-flex xs4 class="text-xs-center">
+                                                            <v-card color="blue-grey darken-2" height="500%">
+                                                                <v-card tile height="4%">
+                                                                    <v-card-text>
+                                                                        <h1 :class="{'headline': $vuetify.breakpoint.xsOnly, 'display-1': $vuetify.breakpoint.smOnly}">{{info.first_name}} {{info.last_name}}</h1>
+                                                                    </v-card-text>
+                                                                </v-card>
+                                                                <v-card tile>
+                                                                    <v-card-text>
+                                                                        <h3>{{info.professional_title}}</h3>
+                                                                    </v-card-text>
+                                                                </v-card>
+                                                                <v-card tile>
+                                                                    <v-card-text>
+                                                                        <h4>{{info.email}}</h4>
+                                                                    </v-card-text>
+                                                                </v-card>
+                                                                <v-card tile>
+                                                                    <v-card-text>
+                                                                        <h4>{{info.phone}}</h4>
+                                                                    </v-card-text>
+                                                                </v-card>
+                                                                <v-card tile class="text-xs-left">
+                                                                    <v-card-text>
+                                                                        <h4 class="smol">{{info.address}}, <br> {{info.city}}, {{info.state}}, {{info.country}}<br> {{info.zip}} </h4>
+                                                                    </v-card-text>
+                                                                </v-card>
+                                                                <v-card flat color="transparent">
+                                                                    <v-card-text>
+             
+                                                                    </v-card-text>
+                                                                </v-card>
+                                                            </v-card>
+                                                        </v-flex>
+            
+                                                            <v-flex xs-8>
+                                                            <v-card>
+                                                                <v-card-text>
+                                                                    <h1>Work Experience</h1>
+                                                                    <v-layout row wrap>
+                                                                    <div v-for="exp in workexplist">
+                                                                        <v-flex xs12>
+                                                                            <v-card flat color="transparent">
+                                                                                <v-card-text>
+            
+                                                                                            <h3>{{exp.work_company}}</h3>
+                                                                                            <h3>{{exp.work_title}}</h3>
+                                                                                            <h3>{{exp.work_startdate}} - {{exp.work_enddate}}</h3>
+                                                                                            <p>{{exp.work_description}}</p>
+                                                                                </v-card-text>
+                                                                            </v-card>
+                                                                        </v-flex>
+                                                                    </div>
+                                                                    </v-layout>
+                                                                </v-card-text>
+                                                        </v-card>
+                                                        </v-flex>
+            
+            
+                                                    </v-layout>
+                                            </v-responsive>
+                                        </v-card>
+            
+                                </v-flex>
+                            </v-layout>
+                    </v-container>
+
+                    <v-container grid-list-lg fluid v-if="template == 'hannah'">
+                        <v-layout row wrap>
+                            <v-flex>
+                                <v-card xs12 sm10>
+                                    <v-responsive :aspect-ratio="8.5/11">
+                                        <br>
+                                        <v-layout>
+                                            <v-flex xs4></v-flex>
+                                            <v-flex xs8 height=15%>
+                                                <v-card class="blue lighten-2 ma-4 pa-4 text-xs-right" >
+                                                    <v-card-text class="display-3 pa-1 white--text">{{info.first_name}}{{info.last_name}}</v-card-text>
+                                                    <v-card-text class="display-1 pa-1 white--text">{{info.email}}</v-card-text>
+                                                    <v-card-text class="headline pa-1 white--text">{{info.phone}}</v-card-text>
+                                                </v-card>
+                                            </v-flex>
+                                        </v-layout>
+
+                                        <v-layout>
+                                            <v-flex xs8 offset-xs1 class="pa-1 ma-4">
+                                                <v-card class="pa-3 ma-3 transparent" flat>
+                                                    <v-card-title class="pa-1 display-1">Work Experience</v-card-title>
+                                                    <v-card-text class="pa-1">{{workexpEdit.work_company}}</v-card-text>
+                                                    <v-card-text class="pa-1">{{workexpEdit.work_title}}</v-card-text>
+                                                    <v-card-text class="pa-1">{{workexpEdit.work_startdate}}</v-card-text>
+                                                    <v-card-text class="pa-1">{{workexpEdit.work_enddate}}</v-card-text>
+                                                    <v-card-text class="pa-1">{{workexpEdit.work_description}}</v-card-text>
+                                                </v-card>
+                                                <v-card class="pa-3 ma-3 transparent" flat>
+                                                    <v-card-title class="pa-1 display-1">Education</v-card-title>
+                                                    <v-card-text class="pa-1">{{educationEdit.college}}</v-card-text>
+                                                    <v-card-text class="pa-1">{{educationEdit.degree}}</v-card-text>
+                                                    <v-card-text class="pa-1">{{educationEdit.gradyear}}</v-card-text>
+                                                </v-card>
+                                                <v-card class="pa-3 ma-3 transparent" flat>
+                                                    <v-card-title class="pa-1 display-1">Awards</v-card-title>
+                                                    <v-card-text class="pa-1">I have awards but none that mean anything to me</v-card-text>
+                                                    <v-card-text class="pa-1">{{awardsEdit.title}}</v-card-text>
+                                                    <v-card-text class="pa-1">{{awardsEdit.receivedfrom}}{{awardsEdit.date}}</v-card-text>
+                                                    
+                                                    <v-card-text class="pa-1">{{awardsEdit.description}}</v-card-text>
+                                                </v-card>
+                                            </v-flex>
+                                        <!-- </v-layout>
+
+                                        <v-layout> -->
+                                            <v-flex xs3 class="pa-1">
+                                                <v-container grid-list-lg fluid>
+                                                    <v-layout column>
+                                                        <v-flex xs12>
+                                                            <v-card class="blue lighten-4 pa-2" height=600 flat>
+                                                                <v-card-text class="headline">Skills
+                                                                </v-card-text>
+                                                                <v-card-text class="">{{softskillsEdit.title}}</v-card-text>
+                                                            </v-card>
+                                                        </v-flex>
+                                                    </v-layout>
+                                                </v-container>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-responsive>
+                                </v-card>
+                            </v-flex>
+                          
+                        </v-layout>
+                    </v-container>
+
+                    <v-container grid-list-lg fluid v-if="template == 'taft'">
+                        
+                    </v-container>
+
+                    <v-container grid-list-lg fluid v-if="template == 'sharon'">
+                        
+                    </v-container>
+
+
+                </div>
+
+
+			</v-content>
+		</v-app>
+
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+	<script src="hannahcode.js"></script>
+</html>
