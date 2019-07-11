@@ -4,7 +4,10 @@ var app= new Vue ({
   el: "#app1",
 
   data: {
-    
+    menu:false,
+    modal: false,
+    page: "form",
+    color: "",
 
       educationlist:[],
       workexplist:[],
@@ -15,22 +18,23 @@ var app= new Vue ({
       softskillslist:[],
       awardslist:[],
       statementlist:[],
+
       
       personalinfoEdit:
-        {
-            first_name:"",
-            last_name:"",
-            address: "",
-            city:"",
-            state:"",
-            zip:"", 
-            country: "",
-            email: "",
-            phone: "",
-            branding_statement: "",
-            professional_title: "",
-            linkedin: "",
-        },
+      {
+          first_name:"",
+          last_name:"",
+          address: "",
+          city:"",
+          state:"",
+          zip:"", 
+          country: "",
+          email: "",
+          phone: "",
+          branding_statement: "",
+          professional_title: "",
+          linkedin: "",
+      },
 
       statementEdit: {
         statement: "",
@@ -50,9 +54,8 @@ var app= new Vue ({
       educationEdit: {
         college: "",
         degree: "",
-        gradyear: "",
-        start_menu: false,
-        end_menu: false,
+        gradyear: new Date().toISOString().substr(0, 10),
+        menu: false
       },
       
       accomplishmentEdit: {
@@ -78,8 +81,9 @@ var app= new Vue ({
       awardsEdit: {
         title: "",
         receivedfrom:  "",
-        date: "",
+        date: new Date().toISOString().substr(0, 10),
         description: "",
+        menu:false
       },
       proficiencylist: [
         "Beginner",
@@ -88,27 +92,6 @@ var app= new Vue ({
         "Advanced",
         "Expert"
       ],
-      page: "form",
-      template: "malia",
-      templateLabel: "Choose a Template",
-      templates: [
-        {
-          model: "malia",
-          name: "Template 1"
-        },
-        {
-          model: "hannah",
-          name: "Template 2"
-        },
-        {
-          model: "taft",
-          name: "Template 3"
-        },
-        {
-          model: "sharon",
-          name: "Template 4"
-        },
-      ],
       colors: [
           "orange",
           "black",
@@ -116,26 +99,44 @@ var app= new Vue ({
           "blue",
           "green"
       ],
-      selected_color: "",
       picked_color: "black",
-      pickingColor: false,
       color_brightness: 6,
       accent: 0,
+      
+    template: "malia",
+    templateLabel: "Choose a Template",
+    templates: [
+      {
+        model: "malia",
+        name: "Template 1"
+      },
+      {
+        model: "hannah",
+        name: "Template 2"
+      },
+      {
+        model: "taft",
+        name: "Template 3"
+      },
+      {
+        model: "sharon",
+        name: "Template 4"
+      },
+    ],
+    
+    statementdisplay: [],
+    workexpdisplay: [],
+    educationdisplay: [],
+    accomplishmentdisplay: [],
+    extracurriculardisplay: [],
+    languagesdisplay: [],
+    programsdisplay: [],
+    softskillsdisplay: [],
+    awardsdisplay: [],
 
-      statementdisplay: [],
-      workexpdisplay: [],
-      educationdisplay: [],
-      accomplishmentdisplay: [],
-      extracurriculardisplay: [],
-      languagesdisplay: [],
-      programsdisplay: [],
-      softskillsdisplay: [],
-      awardsdisplay: [],
-
-
-
+    add_remove: "",
+      
   },
-
   created: function () {
     new KellyColorPicker({
       place : 'color-picker',
@@ -167,7 +168,7 @@ var app= new Vue ({
         
       }
     },
-      addEducation: function(){
+    addEducation: function(){
         this.educationlist.push(this.educationEdit)
 
         this.educationEdit= {
@@ -178,7 +179,6 @@ var app= new Vue ({
         }
       
     },
-
     addAccomplishment: function(){
       this.accomplishmentlist.push(this.accomplishmentEdit)
 
@@ -188,7 +188,6 @@ var app= new Vue ({
       }
 
     },
-
     addLanguage: function(){
       this.languageslist.push(this.languagesEdit)
 
@@ -196,26 +195,19 @@ var app= new Vue ({
         title: "",
         proficiency:  "",
       }
-    },
 
+
+    },
     addSkill: function(){
-      this.softskillslist.push(this.softskillsEdit)
+      this.programslist.push(this.programsEdit)
 
-      this.softskillsEdit= {
+      this.programsEdit= {
         title: "",
         proficiency:  "",
       }
+
+
     },
-
-    addExtracurricular: function(){
-      this.extracurricularlist.push(this.extracurricularEdit)
-
-      this.extracurricularEdit= {
-        title: "",
-        proficiency:  "",
-      }
-    },
-
     addAward: function(){
       this.awardslist.push(this.awardsEdit)
 
@@ -226,41 +218,58 @@ var app= new Vue ({
         description: "",
       }
     },
+    addExtracurricular: function(){
+      this.extracurricularlist.push(this.extracurricularEdit)
 
+      this.extracurricularEdit= {
+        title: "",
+        proficiency:  "",
+      }
+    },
+
+    includeStatement: function(exp) {
+      this.statementdisplay.push(exp);
+      this.add_remove = "remove";
+      return true;
+    },
     includeWork: function(exp) {
       this.workexpdisplay.push(exp);
+      this.add_remove = "remove";
       return true;
     },
     includeEducation: function(exp) {
-      this.workexpdisplay.push(exp);
+      this.educationdisplay.push(exp);
+      this.add_remove = "remove";
       return true;
     },
     includeAccomplishment: function(exp) {
-      this.workexpdisplay.push(exp);
+      this.accomplishmentdisplay.push(exp);
+      this.add_remove = "remove";
       return true;
     },
     includeAward: function(exp) {
-      this.workexpdisplay.push(exp);
+      this.awardsdisplay.push(exp);
+      this.add_remove = "remove";
       return true;
     },
     includeProgram: function(exp) {
-      this.workexpdisplay.push(exp);
+      this.programsdisplay.push(exp);
+      this.add_remove = "remove";
       return true;
     },
     includeSkill: function(exp) {
-      this.workexpdisplay.push(exp);
+      this.softskillsdisplay.push(exp);
+      this.add_remove = "remove";
       return true;
     },
     includeExtracurricular: function(exp) {
-      this.workexpdisplay.push(exp);
+      this.extracurriculardisplay.push(exp);
+      this.add_remove = "remove";
       return true;
     },
     includeLanguage: function(exp) {
-      this.workexpdisplay.push(exp);
-      return true;
-    },
-    includeStatement: function(exp) {
-      this.workexpdisplay.push(exp);
+      this.languagesdisplay.push(exp);
+      this.add_remove = "remove";
       return true;
     },
 
