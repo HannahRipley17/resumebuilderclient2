@@ -99,9 +99,12 @@ var app= new Vue ({
           "blue",
           "green"
       ],
-      picked_color: "black",
-      color_brightness: 6,
-      accent: 0,
+      selected_color_main: "", 
+    selected_color_accent: "",
+    picked_color: "black",
+    pickingColor: false,
+    color_brightness: 6,
+    accent: 0,
       
     template: "malia",
     templateLabel: "Choose a Template",
@@ -138,16 +141,31 @@ var app= new Vue ({
       
   },
   created: function () {
-    new KellyColorPicker({
-      place : 'color-picker',
+
+    new KellyColorPicker({ //changed
+      place : 'color-picker-main',
       size : 150,
-      input : 'color',
+      input : 'colorMain',
       method: 'triangle',
       input_format: "rgba",
       alpha_slider: true,
-
+    });
+    new KellyColorPicker({ //changed
+      place : 'color-picker-accent',
+      size : 150,
+      input : 'colorAccent',
+      method: 'triangle',
+      input_format: "rgba",
+      alpha_slider: true,
+    });
+    addEventListener("click", function () { //changed
+      this.selected_color_main = document.getElementById("colorMain").style.backgroundColor;
+      console.log("Main Color: ", this.selected_color_main);
+      this.selected_color_accent = document.getElementById("colorAccent").style.backgroundColor;
+      console.log("Accent Color: ", this.selected_color_accent);
     });
   },
+
 
   methods: {
     addStatement: function(){
@@ -273,20 +291,40 @@ var app= new Vue ({
       return true;
     },
 
-    newKellyColorPicker: function () {
+    newKellyColorPickerMain: function () { //changed
       if (this.pickingColor == false) {
         new KellyColorPicker({
-          place : 'color-picker',
+          place : 'color-picker-main',
           size : 150,
-          input : 'color',
+          input : 'colorMain',
           method: 'triangle',
           input_format: "rgba",
           alpha_slider: true,
+          display: 'block',
         });
         this.pickingColor = true;
-      } else if (this.pickingColor == false) {
-      }
+      } else if (this.pickingColor == true) {
+        this.pickingColor = false;
+        x = document.getElementById("main");
+        x.style.setAttribute("style", "display: hidden;");
 
+      };
+    },
+    newKellyColorPickerAccent: function () { //changed
+      if (this.pickingColor == false) {
+        new KellyColorPicker({
+          place : 'color-picker-accent',
+          size : 150,
+          input : 'colorAccent',
+          method: 'triangle',
+          input_format: "rgba",
+          alpha_slider: true,
+          display: 'block',
+        });
+        this.pickingColor = true;
+      } else if (this.pickingColor == true) {
+        this.pickingColor = false;
+      };
     },
 
   },
