@@ -360,17 +360,26 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="workexp1">
                                         <v-card-text class="display-1">Work Experience</v-card-text>
+                                        <v-radio-group v-model="workexpEdit.position" row>
+                                            <span>Pick a position</span><br>
+                                            <v-radio label=" 1" value="1"></v-radio>
+                                            <v-radio label=" 2" value="2"></v-radio>
+                                            <v-radio label=" 3" value="3"></v-radio>
+                                            <v-radio label=" 4" value="4"></v-radio>
+                                            <v-radio label="5" value="5"></v-radio>
+                                        </v-radio-group>
                                         <div v-for="exp in workexplist">
                                             <v-layout>
                                                 <v-flex xs10>
-                                                    <v-card-text class="headline pa-1 ml-3">{{exp.work_company}}</v-card-text>
-                                                    <span class="title ml-4 pl-2">{{exp.work_title}}</span>
-                                                    <span class="font-weight-light">{{exp.work_startdate}} - {{exp.work_enddate}}</span>
-                                                    <v-card-text class="ml-4 pl-2">{{exp.work_description}}</v-card-text><br>
+                                                    <v-card-text class="headline pa-1 ml-3">{{exp.company}}</v-card-text>
+                                                    <span class="title ml-4 pl-2">{{exp.title}}</span>
+                                                    <span class="font-weight-light">{{exp.startdate}} - {{exp.enddate}}</span>
+                                                    <v-card-text class="ml-4 pl-2">{{exp.description}}</v-card-text><br>
                                                 </v-flex>
                                                 <v-flex xs2>
                                                     <v-btn fab flat @click="includeWork(exp)"><v-icon>add</v-icon></v-btn>
-                                                    <v-btn fab flat @click="excludeWork(exp)"><v-icon>remove</v-icon></v-btn>
+                                                    <!-- <v-btn fab flat @click="excludeWork(exp)"><v-icon>remove</v-icon></v-btn> -->
+                                                    <v-btn fab flat @click="priorityOne(exp)"><v-icon>gesture</v-icon></v-btn>
                                                 </v-flex>
                                             </v-layout>
                                             <v-divider></v-divider>
@@ -480,52 +489,48 @@
                     </div>
 
                 <div v-if="page == 'preview'">
-                    <v-toolbar id="template_tools"class="grey lighten-2" height="80%">
-                        <div class="text-xs-center">
-                            <v-menu offset-y>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn v-on="on"> {{templateLabel}} </v-btn>
-                                </template>
-                                <v-list>
-                                    <v-list-tile
-                                        v-for="(item, index) in templates"
-                                        :key="index"
-                                        @click="template = item.model, templateLabel = item.name"
-                                        >
-                                        <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-                                    </v-list-tile>
-                                    </v-list>
-                            </v-menu>
-                        </div>
-                        <v-btn fab @click="newKellyColorPicker()" id="color" value="#54aedb"></v-btn>
-                        <v-btn fab color="orange"></v-btn>
-                        <v-btn fab color="yellow"></v-btn>
-                        <v-btn fab color="green"></v-btn>
-                        <v-btn fab color="teal"></v-btn>
-                        <v-btn fab color="blue"></v-btn>
-                        <v-btn fab color="purple"></v-btn>
-                        <v-btn fab color="black"></v-btn>
-                               
-                    </v-toolbar>
-                    <v-container>
-                    <v-layout>
-                        <v-flex>
-                            <v-card>
-                                
-                                <canvas id="color-picker" width="150"
-                                 height="150" style="width: 150px; 
-                                 height: 150px;"></canvas>
-                            </v-card>
-                            <br>
-                            <!-- <v-toolbar>
-                                    <v-toolbar-title>Choose a color</v-toolbar-title>
-                                    <v-spacer></v-spacer>
-                                    <v-btn fab color="#B34544" @click="color='#B34544'"></v-btn>
-                                    <v-btn fab color="#A2959A" @click="color='#A2959A'"></v-btn>
-                                    <v-btn fab color="#FF7C7A" @click="color='#FF7C7A'"></v-btn>
-                                    <v-btn fab color="#32B3C9" @click="color='#32B359'"></v-btn>
-                                    <v-btn fab color="#FF0FD2" @click="color='#FF0FD2'"></v-btn>
-                            </v-toolbar> -->
+                        <v-toolbar id="template_tools"class="grey lighten-2" height="80%">
+                                <div class="text-xs-center">
+                                    <v-menu offset-y>
+                                        <template v-slot:activator="{ on }">
+                                            <v-btn v-on="on"> {{templateLabel}} </v-btn>
+                                        </template>
+                                        <v-list>
+                                            <v-list-tile
+                                                v-for="(item, index) in templates"
+                                                :key="index"
+                                                @click="template = item.model, templateLabel = item.name"
+                                                >
+                                                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                                            </v-list-tile>
+                                          </v-list>
+                                    </v-menu>
+                                </div> <!-- Changes start here-->
+                                                <v-spacer></v-spacer>
+                                <v-btn fab @click="newKellyColorPickerMain()" id="colorMain" value="#54aedb"></v-btn>
+                                                <v-toolbar-text>Main Color</v-toolbar-text>
+                                                <v-btn fab @click="newKellyColorPickerAccent()" id="colorAccent" value="#54aedb"></v-btn>
+                                                <v-toolbar-text>Accent Color</v-toolbar-text>
+                
+                                </v-toolbar>
+                                <v-container>
+                                    <v-layout>
+                                        <v-flex xs3 offset-xs9>
+                                            <v-card id="fixedPos" v-show="pickingColorMain">
+                                                                            <v-card-text>
+                                                <canvas id="color-picker-main" width="150" height="150" style="width: 150px; height: 150px;"></canvas>
+                                                                            </v-card-text>
+                                            </v-card>
+                
+                                                                        <v-card id="fixedPos" v-show="pickingColor">
+                                                                            <v-card-text>
+                                                <canvas id="color-picker-accent" width="150" height="150" style="width: 150px; height: 150px;"></canvas>
+                                                                            </v-card-text>
+                                            </v-card>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                                                <!-- Changes end here-->
                             <v-container>
                                     <v-container v-if="template == 'malia'">
                                             <v-layout justify-center row-wrap>
@@ -542,7 +547,9 @@
                                                                         </v-flex>
                                                                         <v-flex  xs8 offset-xs1 >
                                                                             <v-card>
-                                                                                <v-card-text>{{statementEdit.statement}}</v-card-text>
+                                                                                <v-card-text v-for="thing in statementdisplay">
+                                                                                    {{thing.statement}}
+                                                                                </v-card-text>
                                                                             </v-card>
                                                                     </v-flex>
                                                                     </v-layout>
@@ -557,7 +564,7 @@
                                                                                 </v-card>
                                                                                 <v-card tile>
                                                                                     <v-card-text>
-                                                                                        <h3>{{personalinfoEdit.job_title}}</h3>
+                                                                                        <h3>{{personalinfoEdit.professional_title}}</h3>
                                                                                     </v-card-text>
                                                                                 </v-card>
                                                                                 <v-card tile>
@@ -588,15 +595,14 @@
                                                                                 <v-card-text>
                                                                                     <h1>Work Experience</h1>
                                                                                     <v-layout row wrap>
-                                                                                    <div v-for="exp in workexplist">
+                                                                                    <div v-for="exp in workexpdisplay">
                                                                                         <v-flex xs12>
                                                                                             <v-card flat color="transparent">
-                                                                                                <v-card-text>
-                            
-                                                                                                            <h3>{{exp.work_company}}</h3>
-                                                                                                            <h3>{{exp.work_title}}</h3>
-                                                                                                            <h3>{{exp.work_startdate}} - {{exp.work_enddate}}</h3>
-                                                                                                            <p>{{exp.work_description}}</p>
+                                                                                                <v-card-text>s
+                                                                                                    <h3>{{exp.company}}</h3>
+                                                                                                    <h3>{{exp.title}}</h3>
+                                                                                                    <h3>{{exp.startdate}} - {{exp.enddate}}</h3>
+                                                                                                    <p>{{exp.description}}</p>
                                                                                                 </v-card-text>
                                                                                             </v-card>
                                                                                         </v-flex>
@@ -678,11 +684,65 @@
                                                 </v-flex>
                                               
                                             </v-layout>
-                                        </v-container>
+                                    </v-container>
 
-                                        </v-flex>
-                                    </v-layout>
-                                </v-container>
+                                    <v-container grid-list-lg fluid v-if="template == 'taft'">
+                                            <v-layout row wrap>
+                                                <v-flex>
+                                                    <v-card xs12 sm10>
+                                                        <v-responsive :aspect-ratio="8.5/11">
+                                                            <br>
+                                                            <v-layout>
+                                                                <v-flex xs4></v-flex>
+                                                                <v-flex xs8 height=15%>
+                                                                    <v-card class="blue lighten-2 ma-4 pa-4 text-xs-right" >
+                                                                        <v-card-text class="display-3 pa-1 white--text">{{personalinfoEdit.first_name}}{{personalinfoEdit.last_name}}</v-card-text>
+                                                                        <v-card-text class="display-1 pa-1 white--text">{{personalinfoEdit.email}}</v-card-text>
+                                                                        <v-card-text class="headline pa-1 white--text">{{personalinfoEdit.phone}}</v-card-text>
+                                                                    </v-card>
+                                                                </v-flex>
+                                                            </v-layout>
+                    
+                                                            <v-layout>
+                                                                <v-flex xs8 offset-xs1 class="pa-1 ma-4">
+                                                                    <v-card class="pa-3 ma-3 transparent blue" flat>
+                                                                        <v-card-text>{{position1}}</v-card-text>
+                                                                    </v-card>
+                                                                    <v-card class="pa-3 ma-3 transparent red" flat>
+                                                                        
+                                                                    </v-card>
+                                                                    <v-card class="pa-3 ma-3 transparent green" flat>
+                                                                        
+                                                                    </v-card>
+                                                                </v-flex>
+                                                            <!-- </v-layout>
+                    
+                                                            <v-layout> -->
+                                                                <v-flex xs3 class="pa-1">
+                                                                    <v-container grid-list-lg fluid>
+                                                                        <v-layout column>
+                                                                            <v-flex xs12>
+                                                                                <v-card class="blue lighten-4 pa-2" height=600 flat>
+                                                                                    <v-card-text class="headline">Skills
+                                                                                    </v-card-text>
+                                                                                    
+                                                                                </v-card>
+                                                                            </v-flex>
+                                                                        </v-layout>
+                                                                    </v-container>
+                                                                </v-flex>
+                                                            </v-layout>
+                                                        </v-responsive>
+                                                    </v-card>
+                                                </v-flex>
+                                              
+                                            </v-layout>
+                                    </v-container>
+                            </v-container>
+
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
                 </div>
 			</v-content>
 		</v-app>
