@@ -37,30 +37,26 @@ var app= new Vue ({
             professional_title: "",
             linkedin: "",
         },
-
         statementEdit: {
           statement: "",
         },
-
         workexpEdit: {
-            work_company: "",
-            work_title: "",
-            work_startdate: new Date().toISOString().substr(0, 10),
-            work_enddate: new Date().toISOString().substr(0, 10),
-            work_description: "",
+            company: "",
+            title: "",
+            startdate: new Date().toISOString().substr(0, 10),
+            enddate: new Date().toISOString().substr(0, 10),
+            description: "",
             start_menu: false,
             end_menu: false,
             position: 0, // for each v-card in a template, do for loop through all categories and see which has the desired position
 
         },
-
         educationEdit: {
           college: "",
           degree: "",
           gradyear: new Date().toISOString().substr(0, 10),
           menu: false
         },
-        
         accomplishmentEdit: {
           title: "",
           description: "",
@@ -144,6 +140,23 @@ var app= new Vue ({
 
       workexpposition: "",
       position1: {},
+
+      zone1: [],
+      zone2: [],
+      zone3: [],
+      zone4: [],
+      zone5: [],
+      zone6: [],
+      zone7: [],
+
+      zone1_type: "",
+      zone2_type: "",
+      zone3_type: "",
+      zone4_type: "",
+      zone5_type: "",
+      zone6_type: "",
+      zone7_type: "",
+
         
     },
     created: function () {
@@ -296,7 +309,37 @@ var app= new Vue ({
         this.priority1.push(exp);
       },
 
-      newKellyColorPickerMain: function () { //changed
+
+      apply1: function (type) {
+        this.zone1 = this.workexpdisplay;
+        this.zone1_type = type;
+      },
+      apply2: function (type) {
+        this.zone2 = this.workexpdisplay;
+        this.zone2_type = type;
+      },
+      apply3: function (type) {
+        this.zone3 = this.workexpdisplay;
+        this.zone3_type = type;
+      },
+      apply4: function (type) {
+        this.zone4 = this.workexpdisplay;
+        this.zone4_type = type;
+      },
+      apply5: function (type) {
+        this.zone5 = this.workexpdisplay;
+        this.zone1_type = type;
+      },
+      apply6: function (type) {
+        this.zone6 = this.workexpdisplay;
+        this.zone6_type = type;
+      },
+      apply7: function (type) {
+        this.zone7 = this.workexpdisplay;
+        this.zone7_type = type;
+      },
+
+      newKellyColorPickerMain: function () { 
         if (this.pickingColorMain == false) {
           new KellyColorPicker({
             place : 'color-picker-main',
@@ -312,7 +355,7 @@ var app= new Vue ({
           this.pickingColorMain = false;
         };
       },
-      newKellyColorPickerAccent: function () { //changed
+      newKellyColorPickerAccent: function () { 
         if (this.pickingColor == false) {
           new KellyColorPicker({
             place : 'color-picker-accent',
@@ -379,6 +422,35 @@ var app= new Vue ({
             });
           });
         },
+
+        submitNewWorkexp: function (){
+
+          console.log(app.workexpEdit)
+          fetch(`${url}/workexp`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(app.workexpEdit)
+        }).then(function (response) {
+          response.json().then((data)=>{console.log(data.msg)})
+
+          app.workexpEdit={
+            company: "",
+            title: "",
+            startdate: new Date().toISOString().substr(0, 10),
+            enddate: new Date().toISOString().substr(0, 10),
+            description: "",
+            start_menu: false,
+            end_menu: false,
+            position: 0,
+          }
+          app.getData("workexp");
+
+        });
+
+
+          },
 
     },
 
