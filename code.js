@@ -1,11 +1,12 @@
 //var url = "http://localhost:3000";
 var url = "https://createresume.herokuapp.com";
 
-
 var app= new Vue ({
     el: "#app1",
 
     data: {
+      username: "", 
+      password: "", 
       menu:false,
       modal: false,
       page: "form",
@@ -176,15 +177,6 @@ var app= new Vue ({
     },
     created: function () {
 
-      this.getData("statement")
-      this.getData("workexp")
-      this.getData("education")
-      this.getData("accomplishment")
-      this.getData("extracurricular")
-      this.getData("language")
-      this.getData("program")
-      this.getData("softskill")
-      this.getData("award")
 
       addEventListener("click", function () { //changed
         app.selected_color_main = document.getElementById("colorMain").style.backgroundColor;
@@ -194,88 +186,67 @@ var app= new Vue ({
   
 
     methods: {
+      register: function() { //ADDED by TAFT
+  			fetch(`${url}/users/register`, {
+  				method: "POST",
+  				credentials: "include",
+  				headers: {
+  					"Content-type": "application/json"
+  				},
+  				body: JSON.stringify({
+  					username: this.username,
+  					password: this.password
+  				})
+  			}).then(function(response) {
+  				if (response.status == 422 || response.status == 400) {
+  					response.json().then(function(data) {
+  						alert(data.msg);
+  					})
+  				} else if (response.status == 201) {
+  					console.log("registered");
+  				}
+  			});
+  		},
+
+  		login: function() { //ADDED by TAFT
+        console.log(this.username);
+  			fetch(`${url}/users/login`, {
+  				method: "POST",
+  				credentials: "include",
+  				headers: {
+  					"Content-type": "application/json"
+  				},
+  				body: JSON.stringify({
+  					username: this.username,
+  					password: this.password
+  				})
+  			}).then(function(response) {
+  				if (response.status == 403) {
+  					response.json().then(function(data) {
+  						alert(data.msg);
+  					})
+  				}else if(response.status == 200){
+            alert("logged in");
+            app.page = "form";
+            app.getData("statement")
+            app.getData("workexp")
+            app.getData("education")
+            app.getData("accomplishment")
+            app.getData("extracurricular")
+            app.getData("language")
+            app.getData("program")
+            app.getData("softskill")
+            app.getData("award")
+
+          }
+  			});
+  		},
+
       phoneNum: function () { //changed
         var x = this.personalinfoEdit.phone.replace(/\D/g, '').match(`(\d{0,3})(\d{0,3})(\d{0,4})`);
         return (
           x = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '')
         );
-      },
-
-      addStatement: function(){
-        this.statementlist.push(this.statementEdit)
-  
-        this.statementEdit= {
-          statement: "",
-        }
-      },
-      addWork: function(){
-        this.workexplist.push(this.workexpEdit)
-        this.workexpEdit={
-          work1company: "",
-          work1title: "",
-          work1startdate: "",
-          work1enddate: "",
-          work1description: "",
-          
-        }
-      },
-      addEducation: function(){
-          this.educationlist.push(this.educationEdit)
-
-          this.educationEdit= {
-            college: "",
-            degree: "",
-            gradyear: "",
-            menu: false
-          }
-        
-      },
-      addAccomplishment: function(){
-        this.accomplishmentlist.push(this.accomplishmentEdit)
-
-        this.accomplishmentEdit= {
-          title: "",
-          description: "",
-        }
-
-      },
-      addLanguage: function(){
-        this.languageslist.push(this.languagesEdit)
-
-        this.languagesEdit= {
-          title: "",
-          proficiency:  "",
-        }
-
-
-      },
-      addSkill: function(){
-        this.programslist.push(this.programsEdit)
-
-        this.programsEdit= {
-          title: "",
-          proficiency:  "",
-        }
-
-
-      },
-      addAward: function(){
-        this.awardslist.push(this.awardsEdit)
-
-        this.awardsEdit= {
-          title: "",
-          receivedfrom:  "",
-          date: "",
-          description: "",
-        }
-      },
-      addExtracurricular: function(){
-        this.extracurricularlist.push(this.extracurricularEdit)
-  
-        this.extracurricularEdit= {
-          title: "",
-          proficiency:  "",
-        }
       },
 
       includeStatement: function(exp) {
@@ -625,7 +596,9 @@ var app= new Vue ({
   
 
       getData: function(want) {
-        fetch(`${url}/${want}`).then(function (response) { //then executes when browser has received response from browser
+        fetch(`${url}/${want}`,{
+          credentials: "include"
+        }).then(function (response) { //then executes when browser has received response from browser
           response.json().then(function (data) {
   
             if(want=="statement"){
@@ -660,9 +633,28 @@ var app= new Vue ({
           });
         },
 
-        submitNewWorkexp: function (){
+        submitStatement: function (){ //ADDED BY TAFT
+          fetch(`${url}/statement`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(app.statementEdit)
+        }).then(function (response) {
+          //response.json().then((data)=>{console.log(data.msg)})
 
-          console.log(app.workexpEdit)
+          app.statementEdit=
+           {
+            statement: ""
+          }
+          app.getData("statement");
+
+        });
+
+
+        },
+
+        submitNewWorkexp: function (){
           fetch(`${url}/workexp`, {
           method:"POST",
           headers:{
@@ -670,7 +662,7 @@ var app= new Vue ({
           },
           body: JSON.stringify(app.workexpEdit)
         }).then(function (response) {
-          response.json().then((data)=>{console.log(data.msg)})
+          //response.json().then((data)=>{console.log(data.msg)})
 
           app.workexpEdit={
             company: "",
@@ -687,7 +679,185 @@ var app= new Vue ({
         });
 
 
+        },
+
+        submitEducation: function (){ //ADDED BY TAFT
+          fetch(`${url}/education`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
           },
+          body: JSON.stringify(app.educationEdit)
+        }).then(function (response) {
+          //response.json().then((data)=>{console.log(data.msg)})
+
+          app.educationEdit=
+           {
+            college: "",
+            degree: "",
+            gradyear: new Date().toISOString().substr(0, 10),
+            menu: false
+          }
+          app.getData("education");
+
+        });
+
+
+        },
+
+        submitAccomplishment: function (){ //ADDED BY TAFT
+          fetch(`${url}/accomplishment`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(app.accomplishmentEdit)
+        }).then(function (response) {
+          //response.json().then((data)=>{console.log(data.msg)})
+
+          app.accomplishmentEdit=
+           {
+            title: "",
+            description: "",
+          }
+          app.getData("accomplishment");
+
+        });
+
+
+        },
+
+        submitLanguage: function (){ //ADDED BY TAFT
+          fetch(`${url}/language`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(app.languagesEdit)
+        }).then(function (response) {
+          //response.json().then((data)=>{console.log(data.msg)})
+
+          app.languagesEdit=
+           {
+              title: "",
+              proficiency:  "",
+            }
+          app.getData("language");
+
+        });
+
+
+        },
+
+        submitProgram: function (){ //ADDED BY TAFT
+          fetch(`${url}/program`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(app.programsEdit)
+        }).then(function (response) {
+          //response.json().then((data)=>{console.log(data.msg)})
+
+          app.programsEdit=
+           {
+              title: "",
+              proficiency:  "",
+            }
+          app.getData("program");
+
+        });
+
+
+        },
+        submitAward: function (){ //ADDED BY TAFT
+          fetch(`${url}/award`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(app.awardsEdit)
+        }).then(function (response) {
+          //response.json().then((data)=>{console.log(data.msg)})
+
+          app.awardsEdit=
+           {
+            title: "",
+            receivedfrom:  "",
+            date: new Date().toISOString().substr(0, 10),
+            description: "",
+            menu:false
+          }
+          app.getData("award");
+
+        });
+
+
+        },
+
+        submitExtracurricular: function (){ //ADDED BY TAFT
+          fetch(`${url}/extracurricular`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(app.extracurricularEdit)
+        }).then(function (response) {
+          //response.json().then((data)=>{console.log(data.msg)})
+
+          app.extracurricularEdit=
+           {
+            title: "",
+            description: "",
+            date: "",
+          }
+          app.getData("extracurricular");
+
+        });
+
+
+        },
+        submitSoftskill: function (){ //ADDED BY TAFT
+          fetch(`${url}/softskill`, {
+          method:"POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(app.softskillsEdit)
+        }).then(function (response) {
+          //response.json().then((data)=>{console.log(data.msg)})
+
+          app.softskillsEdit=
+           {
+            title: "",
+          }
+          app.getData("softskill");
+
+        });
+
+        },
+
+        deleteItem:  function(thing,item){
+          console.log("Trying to deletes")
+          fetch(`${url}/${thing}/${item._id}`,
+          {
+            credentials: "include"
+          }, 
+          {
+            method: "DELETE"
+          }).then(function(response){
+            if (response.status == 204){
+              console.log("Deleted Item")
+              app.getData(thing);
+            } else if(response.status == 400){
+              response.json().then(function(data){
+                alert(data.msg)
+              })
+            }
+
+          });
+
+        },
 
     },
 
