@@ -340,6 +340,16 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="statement">
                                             <v-card-text class="display-1">Personal Branding Statement</v-card-text>
+                                            <v-radio-group v-model="statementposition" row>
+                                                <span>Pick a position</span><br>
+                                                <v-radio label=" 1" value="1"></v-radio>
+                                                <v-radio label=" 2" value="2"></v-radio>
+                                                <v-radio label=" 3" value="3"></v-radio>
+                                                <v-radio label=" 4" value="4"></v-radio>
+                                                <v-radio label="5" value="5"></v-radio>
+                                                <v-radio label="6" value="6"></v-radio>
+                                                <v-radio label="7" value="7"></v-radio>
+                                            </v-radio-group>
                                             <div v-for="exp in statementlist">
                                                 <v-layout>
                                                     <v-flex xs9>
@@ -354,13 +364,15 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="workexp1">
                                         <v-card-text class="display-1">Work Experience</v-card-text>
-                                        <v-radio-group v-model="workexpEdit.position" row>
+                                        <v-radio-group v-model="workexpposition" row>
                                             <span>Pick a position</span><br>
                                             <v-radio label=" 1" value="1"></v-radio>
                                             <v-radio label=" 2" value="2"></v-radio>
                                             <v-radio label=" 3" value="3"></v-radio>
                                             <v-radio label=" 4" value="4"></v-radio>
                                             <v-radio label="5" value="5"></v-radio>
+                                            <v-radio label="6" value="6"></v-radio>
+                                            <v-radio label="7" value="7"></v-radio>
                                         </v-radio-group>
                                         <div v-for="exp in workexplist">
                                             <v-layout>
@@ -373,15 +385,25 @@
                                                 <v-flex xs2>
                                                     <v-btn fab flat @click="includeWork(exp)"><v-icon>add</v-icon></v-btn>
                                                     <!-- <v-btn fab flat @click="excludeWork(exp)"><v-icon>remove</v-icon></v-btn> -->
-                                                    <v-btn fab flat @click="priorityOne(exp)"><v-icon>gesture</v-icon></v-btn>
+                                                    
                                                 </v-flex>
                                             </v-layout>
                                             <v-divider></v-divider>
                                         </div>
-                                        <v-btn @click="apply('work')">Apply Changes</v-btn>
+                                        <v-btn @click="apply('workexp')">Apply Changes</v-btn>
                                     </v-card>
                                     <v-card class="ma-3 pa-3" id="education1">
                                         <v-card-text class="display-1">Education</v-card-text>
+                                        <v-radio-group v-model="educationposition" row>
+                                            <span>Pick a position</span><br>
+                                            <v-radio label=" 1" value="1"></v-radio>
+                                            <v-radio label=" 2" value="2"></v-radio>
+                                            <v-radio label=" 3" value="3"></v-radio>
+                                            <v-radio label=" 4" value="4"></v-radio>
+                                            <v-radio label="5" value="5"></v-radio>
+                                            <v-radio label="6" value="6"></v-radio>
+                                            <v-radio label="7" value="7"></v-radio>
+                                        </v-radio-group>
                                         <div v-for="exp in educationlist">
                                             <v-layout>
                                                 <v-flex xs9>
@@ -395,8 +417,18 @@
                                         </div>
                                         <v-btn @click="apply('education')">Apply Changes</v-btn>
                                         </v-card>
-                                    <v-card class="ma-3 pa-3" id="accomplistments1">
+                                    <v-card class="ma-3 pa-3" id="accomplishments1">
                                         <v-card-text class="display-1">Accomplishments</v-card-text>
+                                        <v-radio-group v-model="accomplishmentposition" row>
+                                            <span>Pick a position</span><br>
+                                            <v-radio label=" 1" value="1"></v-radio>
+                                            <v-radio label=" 2" value="2"></v-radio>
+                                            <v-radio label=" 3" value="3"></v-radio>
+                                            <v-radio label=" 4" value="4"></v-radio>
+                                            <v-radio label="5" value="5"></v-radio>
+                                            <v-radio label="6" value="6"></v-radio>
+                                            <v-radio label="7" value="7"></v-radio>
+                                        </v-radio-group>
                                         <div v-for="exp in accomplishmentlist">
                                             <v-layout>
                                                 <v-flex xs9>
@@ -413,6 +445,16 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="awards1">
                                         <v-card-text class="display-1">Awards</v-card-text>
+                                        <v-radio-group v-model="awardsposition" row>
+                                            <span>Pick a position</span><br>
+                                            <v-radio label=" 1" value="1"></v-radio>
+                                            <v-radio label=" 2" value="2"></v-radio>
+                                            <v-radio label=" 3" value="3"></v-radio>
+                                            <v-radio label=" 4" value="4"></v-radio>
+                                            <v-radio label="5" value="5"></v-radio>
+                                            <v-radio label="6" value="6"></v-radio>
+                                            <v-radio label="7" value="7"></v-radio>
+                                        </v-radio-group>
                                         <div v-for="exp in awardslist">
                                             <v-layout>
                                                 <v-flex xs9>
@@ -429,6 +471,16 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="languages">
                                         <v-card-text class="display-1">Languages</v-card-text>
+                                        <v-radio-group v-model="languagesposition" row>
+                                            <span>Pick a position</span><br>
+                                            <v-radio label=" 1" value="1"></v-radio>
+                                            <v-radio label=" 2" value="2"></v-radio>
+                                            <v-radio label=" 3" value="3"></v-radio>
+                                            <v-radio label=" 4" value="4"></v-radio>
+                                            <v-radio label="5" value="5"></v-radio>
+                                            <v-radio label="6" value="6"></v-radio>
+                                            <v-radio label="7" value="7"></v-radio>
+                                        </v-radio-group>
                                         <div v-for="exp in languageslist">
                                             <v-layout>
                                                 <v-flex xs9>
@@ -443,6 +495,16 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="extracurricular">
                                         <v-card-text class="display-1">Extracurriculars</v-card-text>
+                                        <v-radio-group v-model="extracurricularposition" row>
+                                            <span>Pick a position</span><br>
+                                            <v-radio label=" 1" value="1"></v-radio>
+                                            <v-radio label=" 2" value="2"></v-radio>
+                                            <v-radio label=" 3" value="3"></v-radio>
+                                            <v-radio label=" 4" value="4"></v-radio>
+                                            <v-radio label="5" value="5"></v-radio>
+                                            <v-radio label="6" value="6"></v-radio>
+                                            <v-radio label="7" value="7"></v-radio>
+                                        </v-radio-group>
                                         <div v-for="exp in extracurricularlist">
                                             <v-layout>
                                                 <v-flex xs9>
@@ -458,6 +520,16 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="programs">
                                         <v-card-text class="display-1">Programs</v-card-text>
+                                        <v-radio-group v-model="programsposition" row>
+                                            <span>Pick a position</span><br>
+                                            <v-radio label=" 1" value="1"></v-radio>
+                                            <v-radio label=" 2" value="2"></v-radio>
+                                            <v-radio label=" 3" value="3"></v-radio>
+                                            <v-radio label=" 4" value="4"></v-radio>
+                                            <v-radio label="5" value="5"></v-radio>
+                                            <v-radio label="6" value="6"></v-radio>
+                                            <v-radio label="7" value="7"></v-radio>
+                                        </v-radio-group>
                                         <div v-for="exp in programslist">
                                             <v-layout>
                                                 <v-flex xs9>
@@ -472,6 +544,16 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="skills">
                                         <v-card-text class="display-1">Soft Skills</v-card-text>
+                                        <v-radio-group v-model="softskillsposition" row>
+                                            <span>Pick a position</span><br>
+                                            <v-radio label=" 1" value="1"></v-radio>
+                                            <v-radio label=" 2" value="2"></v-radio>
+                                            <v-radio label=" 3" value="3"></v-radio>
+                                            <v-radio label=" 4" value="4"></v-radio>
+                                            <v-radio label="5" value="5"></v-radio>
+                                            <v-radio label="6" value="6"></v-radio>
+                                            <v-radio label="7" value="7"></v-radio>
+                                        </v-radio-group>
                                         <div v-for="exp in softskillslist">
                                             <v-layout>
                                                 <v-flex xs9>
@@ -531,7 +613,6 @@
                                         </v-flex>
                                     </v-layout>
                                 </v-container>
-                                                <!-- Changes end here-->
                             <v-container>
                                     <v-container v-if="template == 'malia'">
                                             <v-layout justify-center row-wrap>
@@ -693,6 +774,7 @@
                                                     <v-card xs12 sm10>
                                                         <v-responsive :aspect-ratio="8.5/11">
                                                             <div v-for="item in zone1">
+                                                                zone 1
                                                                 <v-card v-if="zone1_type == 'statement'">
                                                                     <v-card-text>{{item.statement}}</v-card-text>
                                                                 </v-card>
@@ -717,7 +799,7 @@
                                                                     <v-card-text>{{item.description}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone1_type == 'languages'">
+                                                                <v-card v-if="zone1_type == 'language'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
@@ -725,10 +807,10 @@
                                                                         <v-card-text>{{item.title}}</v-card-text>
                                                                         <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone1_type == 'softskills'">
+                                                                <v-card v-if="zone1_type == 'skills'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone1_type == 'awards'">
+                                                                <v-card v-if="zone1_type == 'award'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.receivedfrom}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
@@ -736,6 +818,7 @@
                                                                 </v-card>
                                                             </div>
                                                             <div v-for="item in zone2">
+                                                                zone 2
                                                                 <v-card v-if="zone2_type == 'statement'">
                                                                     <v-card-text>{{item.statement}}</v-card-text>
                                                                 </v-card>
@@ -760,7 +843,7 @@
                                                                     <v-card-text>{{item.description}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone2_type == 'languages'">
+                                                                <v-card v-if="zone2_type == 'language'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
@@ -768,10 +851,10 @@
                                                                         <v-card-text>{{item.title}}</v-card-text>
                                                                         <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone2_type == 'softskills'">
+                                                                <v-card v-if="zone2_type == 'skills'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone2_type == 'awards'">
+                                                                <v-card v-if="zone2_type == 'award'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.receivedfrom}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
@@ -803,7 +886,7 @@
                                                                     <v-card-text>{{item.description}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone3_type == 'languages'">
+                                                                <v-card v-if="zone3_type == 'language'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
@@ -811,10 +894,10 @@
                                                                         <v-card-text>{{item.title}}</v-card-text>
                                                                         <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone3_type == 'softskills'">
+                                                                <v-card v-if="zone3_type == 'skills'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone3_type == 'awards'">
+                                                                <v-card v-if="zone3_type == 'award'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.receivedfrom}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
@@ -846,7 +929,7 @@
                                                                     <v-card-text>{{item.description}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone4_type == 'languages'">
+                                                                <v-card v-if="zone4_type == 'language'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
@@ -854,10 +937,10 @@
                                                                         <v-card-text>{{item.title}}</v-card-text>
                                                                         <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone4_type == 'softskills'">
+                                                                <v-card v-if="zone4_type == 'skills'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone4_type == 'awards'">
+                                                                <v-card v-if="zone4_type == 'award'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.receivedfrom}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
@@ -889,7 +972,7 @@
                                                                     <v-card-text>{{item.description}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone5_type == 'languages'">
+                                                                <v-card v-if="zone5_type == 'language'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
@@ -897,10 +980,10 @@
                                                                         <v-card-text>{{item.title}}</v-card-text>
                                                                         <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone5_type == 'softskills'">
+                                                                <v-card v-if="zone5_type == 'skills'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone5_type == 'awards'">
+                                                                <v-card v-if="zone5_type == 'award'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.receivedfrom}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
@@ -932,7 +1015,7 @@
                                                                     <v-card-text>{{item.description}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone6_type == 'languages'">
+                                                                <v-card v-if="zone6_type == 'language'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
@@ -940,10 +1023,10 @@
                                                                         <v-card-text>{{item.title}}</v-card-text>
                                                                         <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone6_type == 'softskills'">
+                                                                <v-card v-if="zone6_type == 'skills'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone6_type == 'awards'">
+                                                                <v-card v-if="zone6_type == 'award'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.receivedfrom}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
@@ -975,7 +1058,7 @@
                                                                     <v-card-text>{{item.description}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone7_type == 'languages'">
+                                                                <v-card v-if="zone7_type == 'language'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
@@ -983,10 +1066,10 @@
                                                                         <v-card-text>{{item.title}}</v-card-text>
                                                                         <v-card-text>{{item.proficiency}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone7_type == 'softskills'">
+                                                                <v-card v-if="zone7_type == 'skills'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                 </v-card>
-                                                                <v-card v-if="zone7_type == 'awards'">
+                                                                <v-card v-if="zone7_type == 'award'">
                                                                     <v-card-text>{{item.title}}</v-card-text>
                                                                     <v-card-text>{{item.receivedfrom}}</v-card-text>
                                                                     <v-card-text>{{item.date}}</v-card-text>
