@@ -841,9 +841,7 @@ var app= new Vue ({
           console.log("Trying to deletes")
           fetch(`${url}/${thing}/${item._id}`,
           {
-            credentials: "include"
-          }, 
-          {
+            credentials: "include",
             method: "DELETE"
           }).then(function(response){
             if (response.status == 204){
