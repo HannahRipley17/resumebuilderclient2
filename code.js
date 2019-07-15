@@ -166,7 +166,13 @@ var app= new Vue ({
       zone6_type: "",
       zone7_type: "",
 
-        
+      emailRules: [ //changed
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid'
+      ],
+      fieldRules: [ //changed
+        v => !!v || 'This field is required',
+      ],
     },
     created: function () {
 
@@ -180,16 +186,21 @@ var app= new Vue ({
       this.getData("softskill")
       this.getData("award")
 
-      addEventListener("click", function () {
+      addEventListener("click", function () { //changed
         app.selected_color_main = document.getElementById("colorMain").style.backgroundColor;
-        console.log("Main Color: ", app.selected_color_main);
         app.selected_color_accent = document.getElementById("colorAccent").style.backgroundColor;
-        console.log("Accent Color: ", app.selected_color_accent);
-      });
+      }, {passive: true});
     },
   
 
     methods: {
+      phoneNum: function () { //changed
+        var x = this.personalinfoEdit.phone.replace(/\D/g, '').match(`(\d{0,3})(\d{0,3})(\d{0,4})`);
+        return (
+          x = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '')
+        );
+      },
+
       addStatement: function(){
         this.statementlist.push(this.statementEdit)
   
@@ -681,22 +692,6 @@ var app= new Vue ({
     },
 
     computed: {
-        computedColorClass: function () {
-          return {
-            "lighten-5": this.color_brightness == 1,
-            "lighten-4": this.color_brightness == 2,
-            "lighten-3": this.color_brightness == 3,
-            "lighten-2": this.color_brightness == 4,
-            "lighten-1": this.color_brightness == 5,
-            "darken-1": this.color_brightness == 7,
-            "darken-2": this.color_brightness == 8,
-            "darken-3": this.color_brightness == 9,
-            "darken-4": this.color_brightness == 10,
-            "accent-1": this.accent == 11,
-            "accent-2": this.accent == 12,
-            "accent-3": this.accent == 13,
-            "accent-4": this.accent == 14,
-          }
-        },
+        
       },
 })
