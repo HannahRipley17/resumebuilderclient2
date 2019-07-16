@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="hannahstyle1.css">
-		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
         <meta charset="utf-8">
 	</head>
 	<div id="app1" v-cloak>
 		<v-app>
-			<v-content>
+			<v-content id="body">
                 <v-toolbar height=80>
                     <v-btn flat class="text-capitalize" @click="page = 'home' ">
                         <v-toolbar-title>Resume<span class="font-weight-light">Builder</span> </v-toolbar-title>
                                 </v-btn>
                         <v-spacer></v-spacer>
                         <v-toolbar-items>
-                            <v-btn flat @click="page = 'form' ">Input Form</v-btn>
-                            <v-btn flat @click="page = 'savedinfo' ">Your Info</v-btn>
-                            <v-btn flat @click="page = 'preview' ">Preview</v-btn>
-                            <v-btn flat @click="page = 'login' ">Login</v-btn>
+                                <v-btn flat @click="page = 'form' ">Input Form</v-btn>
+                                <v-btn flat @click="page = 'savedinfo'; loadlists() ">Your Info</v-btn>
+                                <v-btn flat @click="page = 'preview'; loadlists() ">Preview</v-btn>
+                                <v-btn flat @click="page = 'login' ">Login</v-btn>
                         </v-toolbar-items>
                 </v-toolbar>
 
@@ -84,24 +85,24 @@
                 </div>
 
                 <div v-show="page == 'home'">
-                    <v-container>
-                        <v-layout>
-                            <v-flex xs12 lg10 offset-lg1> <!-- changed -->
-                                <v-card class="pa-4">
-                                    
-                                </v-card>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </div>
+                        <v-container>
+                            <v-layout>
+                                <v-flex xs12 lg10 offset-lg1> 
+                                    <v-card  elevation=5 flat class="pa-4"> 
+    
+                                    </v-card>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </div>
 
                 <div v-show="page == 'form'">
                     <v-container>
                             <v-layout>
                                <v-flex xs12 lg10 offset-lg1>
-                                    <v-card class="pa-3">
+                                    <v-card class="pa-3" elevation=5>
                                         <v-card-text class="headline">Welcome to the ResumeBuilder!</v-card-text>
-                                        <v-card-text class="subheading">Enter in as much information as you can, but remember everything is optional. When you are done, go to the Your Info page to select which information you want included on your resume, then go to Preview to edit and customize your resume!</v-card-text>
+                                        <v-card-text class="subheading">Enter in as much information as you can, but remember everything is optional. To personalize what information will display on your resume, and to choose the arrangement of the information on your page, go to the <v-btn color="rgba(234, 238, 242, 1)" class="subheading text-capitalize pa-0 ma-1" @click="page = 'savedinfo'">Your Info</v-btn> tab.</v-card-text>
                                     </v-card>
                                 </v-flex>
                             </v-layout>
@@ -109,8 +110,8 @@
                     <v-container>
                     <v-container>
                         <v-layout>
-                                <v-flex xs12 lg10 offset-lg1>
-                                <v-card>
+                            <v-flex xs12 lg10 offset-lg1>
+                                <v-card elevation=10>
                                     <v-expansion-panel expand>
                                             <v-expansion-panel-content id="personalinformation">
                                                     <template v-slot:header> <v-card-text class="display-1">Personal Information</v-card-text></template>
@@ -682,12 +683,12 @@
                                             </v-list-tile>
                                           </v-list>
                                     </v-menu>
-                                </div> <!-- Changes start here-->
-                                                <v-spacer></v-spacer>
-                                <v-btn fab @click="newKellyColorPickerMain()" id="colorMain" value="#54aedb"></v-btn>
-                                                <v-toolbar-text>Main Color</v-toolbar-text>
-                                                <v-btn fab @click="newKellyColorPickerAccent()" id="colorAccent" value="#54aedb"></v-btn>
-                                                <v-toolbar-text>Accent Color</v-toolbar-text>
+                                </div> 
+                                <v-spacer></v-spacer>
+                                <v-btn fab @click="newKellyColorPickerMain()" id="colorMain" value="rgb(84, 174, 219)"></v-btn>
+                                <v-toolbar-title class="text-uppercase font-weight-thin pr-3">Main Color</v-toolbar-title>
+                                <v-btn fab @click="newKellyColorPickerAccent()" id="colorAccent" value="rgb(84, 174, 219)"></v-btn>
+                                <v-toolbar-title class="text-uppercase font-weight-thin pr-3">Accent Color</v-toolbar-title>
                 
                             </v-toolbar>
                             <v-container>
@@ -708,7 +709,7 @@
                                 </v-layout>
                             </v-container>
                             <v-container>
-                                <v-container v-if="template == 'malia'">
+                                <v-container grid-list-lg v-if="template == 'malia'">
                                         <v-layout justify-center row-wrap>
                                                 <v-flex xs12 sm10>
                                                     <v-card>
@@ -1149,5 +1150,5 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
     <script src="html5kellycolorpicker.js"></script>
-	<script src="hannahcode1.js"></script>
+	<script src="code.js"></script>
 </html>
