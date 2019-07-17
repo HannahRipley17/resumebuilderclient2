@@ -10,7 +10,7 @@ var app= new Vue ({
       userID: "",
       menu:false,
       modal: false,
-      page: "form",
+      page: "home",
       color: "",
 
         educationlist:[],
@@ -109,8 +109,8 @@ var app= new Vue ({
             "blue",
             "green"
         ],
-        selected_color_main: "",
-        selected_color_accent: "",
+        selected_color_main: "rgb(84, 174, 219)",
+        selected_color_accent: "rgb(84, 174, 219)",
         pickingColorMain: false,
         pickingColor: false,
         color_brightness: 6,
@@ -187,14 +187,24 @@ var app= new Vue ({
       ],
     },
     created: function () {
-      addEventListener("click", function () {
-        app.selected_color_main = document.getElementById("colorMain").style.backgroundColor;
-        app.selected_color_accent = document.getElementById("colorAccent").style.backgroundColor;
-      }, {passive: true});
+      
     },
   
 
     methods: {
+      toPrint: function(divID) { //changed
+        var divElements = document.getElementById(divID).innerHTML;
+        var oldPage = document.body.innerHTML;
+
+        document.body.innerHTML =
+          "<html><head><title></title></head><body>" +
+          divElements + "</body>";
+
+        window.print();
+
+        document.location.reload(true);
+  },
+
       loadlists: function() {
         app.checklogin();
         app.getData("statement");
@@ -566,6 +576,9 @@ var app= new Vue ({
       
 
       newKellyColorPickerMain: function () {
+        addEventListener("click", function () { //changed
+            app.selected_color_main = document.getElementById("colorMain").style.backgroundColor;
+        }, {passive: true});
         if (this.pickingColorMain == false) {
           new KellyColorPicker({
             place : 'color-picker-main',
@@ -577,12 +590,14 @@ var app= new Vue ({
             display: 'block',
           });
           this.pickingColorMain = true;
-        } else if (this.pickingColorMain == true || this.pickingColor == true) {
+        } else if (this.pickingColorMain == true) {
           this.pickingColorMain = false;
-          this.pickingColor = false;
         };
       },
       newKellyColorPickerAccent: function () {
+        addEventListener("click", function () { //changed
+            app.selected_color_accent = document.getElementById("colorAccent").style.backgroundColor;
+        }, {passive: true});
         if (this.pickingColor == false) {
           new KellyColorPicker({
             place : 'color-picker-accent',
@@ -594,8 +609,7 @@ var app= new Vue ({
             display: 'block',
           });
           this.pickingColor = true;
-        } else if (this.pickingColorMain == true || this.pickingColor == true) {
-          this.pickingColorMain = false;
+        } else if (this.pickingColor == true) {
           this.pickingColor = false;
         };
       },
@@ -675,6 +689,45 @@ var app= new Vue ({
             });
           });
         },
+
+        removeFromList: function (itemlist,objid){// ADDED BY TAFT
+          var filtered = itemlist.filter(function(item){
+            return item._id != objid
+        });
+          return filtered
+
+      },
+
+      removeFromDisplay: function (whatlist,objid){// ADDED BY TAFT
+        if(whatlist="workexp"){
+          app.workexpdisplay= app.removeFromList(app.workexpdisplay,objid)
+        }
+        if(whatlist="statement"){
+          app.statementdisplay= app.removeFromList(app.statementdisplay,objid)
+        }
+        if(whatlist="education"){
+          app.educationdisplay= app.removeFromList(app.educationdisplay,objid)
+        }
+        if(whatlist="accomplishment"){
+          app.accomplishmentdisplay= app.removeFromList(app.accomplishmentdisplay,objid)
+        }
+        if(whatlist="extracurricular"){
+          app.extracurriculardisplay= app.removeFromList(app.extracurriculardisplay,objid)
+        }
+        if(whatlist="language"){
+          app.languagesdisplay= app.removeFromList(app.languagesdisplay,objid)
+        }
+        if(whatlist="program"){
+          app.programsdisplay= app.removeFromList(app.programsdisplay,objid)
+        }
+        if(whatlist="softskill"){
+          app.softskillsdisplay= app.removeFromList(app.softskillsdisplay,objid)
+        }
+        if(whatlist="award"){
+          app.awardsdisplay= app.removeFromList(app.awardsdisplay,objid)
+        }
+
+      },
 
         submitStatement: function (){ //ADDED BY TAFT
           app.statementEdit.user_id = app.userID

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="hannahstyle1.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
@@ -11,91 +11,105 @@
 	<div id="app1" v-cloak>
 		<v-app>
 			<v-content id="body">
-                <v-toolbar height=80>
-                    <v-btn flat class="text-capitalize" @click="page = 'home' ">
+                <v-toolbar v-show="page !='home'" height=80 flat color="rgba(85, 82, 89, 0)"> <!-- changed, beginning of changes to toolbar -->
+                    <v-btn flat class="text-capitalize title white--text" @click="page = 'home' ">
                         <v-toolbar-title>Resume<span class="font-weight-light">Builder</span> </v-toolbar-title>
-                                </v-btn>
+                    </v-btn>
                         <v-spacer></v-spacer>
                         <v-toolbar-items>
-                                <v-btn flat @click="page = 'form'; checklogin() ">Input Form</v-btn>
-                                <v-btn flat @click="page = 'savedinfo'; loadlists() ">Your Info</v-btn>
-                                <v-btn flat @click="page = 'preview'; loadlists() ">Preview</v-btn>
-                                <v-btn flat @click="page = 'login' ">Login</v-btn>
+                            <v-btn flat @click="page = 'form'" class=" subheading">Input Form</v-btn>
+                            <v-btn flat @click="page = 'savedinfo'; loadlists()" class="subheading">Your Info</v-btn>
+                            <v-btn flat @click="page = 'preview'; loadlists()" class=" subheading">Preview</v-btn>
+                            <v-btn flat @click="page = 'login'" class="subheading">Login</v-btn>
                         </v-toolbar-items>
                 </v-toolbar>
+                <v-toolbar v-show="page =='home'" height=80 flat color="rgba(85, 82, 89, 0)" class="">
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                            <v-btn flat @click="page = 'form'" class=" subheading">Input Form</v-btn>
+                            <v-btn flat @click="page = 'savedinfo'; loadlists()" class="subheading">Your Info</v-btn>
+                            <v-btn flat @click="page = 'preview'; loadlists()" class=" subheading">Preview</v-btn>
+                            <v-btn flat @click="page = 'login'" class="subheading">Login</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
 
-                <div v-show="page == 'login'"> 
-                    <v-card-text style="padding-top: 10px"class="text-xs-center">Welcome to Resume<span class="font-weight-light">Builder</span></v-card-text>
-                    <h1 style="padding-top: 10px"class="text-xs-center" color="blue lighten-4">Login</h1>
+                <div v-show="page == 'login'">
+					<v-card class="mt-5 white--text display-1" color="rgba(85, 82, 89, 0.8)">
+						<v-card-text class="text-xs-center">Welcome to Resume<span class="font-weight-light">Builder</span></v-card-text>
+					</v-card>
                     <v-container>
                         <v-layout>
-                            <v-flex xs0 md3 >
-                            </v-flex>
-                            <v-flex xs12 md6 class="blue lighten-4">
-
-                                <v-container style="position: relative" class="text-xs-center">
-                                        <v-card-text>
-                                    <v-card flat >
-                                    <v-card-title primary-title>
-                                        <v-card-text>Login</v-card-text>
-                                    </v-card-title>
-                                    <v-form>
-                                    <v-text-field  prepend-icon="person" name="Username" label="Username" v-model="username"></v-text-field>
-                                    <v-text-field  prepend-icon="lock" name="Password" label="Password" type="password" v-model="password"></v-text-field>
-                                    <v-card-actions>
-                                        <v-btn primary @click= "login()" large block>Login</v-btn>
-                                    </v-card-actions>
-                                    </v-form>
-                                    </v-card>
-                                    <p class="text-xs-center" style="padding-top: 10px">Don't have an account?</p>
-                                <v-spacer></v-spacer>
-                                <v-hover><v-btn outline @click="page = 'register'" color="#2C3CE8" >Register</v-btn></v-hover>
-                            </v-card-text>
+                            <v-flex xs12 sm10 md8 lg6 offset-sm1 offset-md2 offset-lg3>
+                                <v-container class="text-xs-center">
+									<v-card class="mt-3 pt-3 white--text display-1" color="rgba(85, 82, 89, 0.8)">
+                                        <v-card class="ma-3 pa-3">
+                                            <v-card-title primary-title class="display-1 text-uppercase font-weight-light">
+                                                <v-card-text>Login</v-card-text>
+                                            </v-card-title>
+                                                <v-form>
+                                                    <v-text-field  prepend-icon="person" name="Username" label="Username" v-model="username"></v-text-field>
+                                                    <v-text-field  prepend-icon="lock" name="Password" label="Password" type="password" v-model="password"></v-text-field>
+                                                    <v-card-actions>
+                                                        <v-btn primary @click= "login()" large block>Login</v-btn>
+                                                    </v-card-actions>
+                                                </v-form>
+                                        </v-card>
+                                            <p class="text-xs-center subheading mb-1">Don't have an account?</p>
+	                                        <v-hover><v-btn outline @click="page = 'register'" color="#FFF" class="pb-3 mb-4" >Register</v-btn></v-hover>
+		                                </v-card-text>
+						            </v-card>
                                 </v-container>
-
-                            </v-flex>
-                            <v-flex xs0 md3 >
                             </v-flex>
                         </v-layout>
                     </v-container>
                 </div>
 				<div v-show="page == 'register'">
-                        <v-card-text style="padding-top: 10px"class="text-xs-center">Welcome to Resume<span class="font-weight-light">Builder</span></v-card-text>
-                        <h1 style="padding-top: 10px"class="text-xs-center">Register</h1>
-                        <v-container>
-                            <v-layout>
-                                <v-flex xs0 md3 >
-                                </v-flex>
-                                <v-flex xs12 md6 class="blue lighten-4">
-                                    <v-card-text>
-                                    <v-container style="position: relative" class="text-xs-center">
-                                        <v-card flat>
-                                                <v-text-field  prepend-icon="person" name="Username" label="Username" v-model="username"></v-text-field>
-                                                <v-text-field  prepend-icon="lock" name="Password" label="Password" type="password" v-model="password"></v-text-field>
-                                        </v-card>
-                                    <v-spacer></v-spacer>
-                                    <v-btn outline @click="register()" color="#2C3CE8" >SIGN UP</v-btn>
-                                    </v-container>
-                                </v-card-text>
-                                </v-flex>
-                                <v-flex xs0 md3 >
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
+                    <v-card class="mt-5 py-3 white--text display-1" color="rgba(85, 82, 89, 0.8)">
+                        <v-card-text class="text-xs-center"> Register here for your free <span class="font-weight-medium">Resume</span><span class="font-weight-light">Builder</span> account!
+                        <p class="ma-0 pt-1 subheading white--text text-xs-center"> With a new account, information, templates, and resumes can be saved for future use and editing.</p> </v-card-text>
+                    </v-card>
+                    <v-container>
+                        <v-layout>
+                            <v-flex xs12 sm10 md8 lg6 offset-sm1 offset-md2 offset-lg3>
+                                <v-container class="text-xs-center">
+                                                            <v-card class="mt-3 pt-3 pb-2 white--text display-1" color="rgba(85, 82, 89, 0.8)">
+                                    <v-card class="ma-3 pa-3">
+                                        <v-card-title primary-title class="display-1 text-uppercase font-weight-light">
+                                    <v-card-text>Register</v-card-text>
+                                        </v-card-title>
+                                        <v-form>
+                                            <p class="subheading text-xs-left mb-2">Enter a new username for the account:</p>
+                                            <v-text-field  prepend-icon="person" name="Username" label="Username" v-model="username" class="mb-4 mx-2"></v-text-field>
+                                            <p class="subheading text-xs-left mb-2">Enter a secure password for the account: </p>
+                                            <v-text-field  prepend-icon="lock" name="Password" label="Password" type="password" v-model="password" class="mb-4 mx-2"></v-text-field>
+                                            <v-card-actions align="center">
+                                                <v-btn @click="register()" color="color: rgba(234, 238, 242, 1)" class="mx-auto">SIGN UP</v-btn>
+                                            </v-card-actions>
+                                        </v-form>
+                                    </v-card>
+                                        </v-card-text>
+                                                            </v-card>
+                                </v-container>
+                            </v-flex>
+                        </v-layout>
+                    </v-container> <!-- changed, end of changes to register -->
                 </div>
 
                 <div v-show="page == 'home'">
-                        <v-container>
-                            <v-layout>
-                                <v-flex xs12 lg10 offset-lg1> 
-                                    <v-card  elevation=5 flat class="pa-4"> 
-    
-                                    </v-card>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </div>
-
+                    <v-card id="hero" flat color="rgba(85, 82, 89, 0.6)" class="pa-3">
+                        <h1 class="display-3 pa-3 white--text text-xs-center"> Resume<span class="font-weight-light">Builder</span></h1>
+                        <p class="headline pa-3 white--text text-xs-center">Leading tech in creating seamless, custom, proffessional-level resumes in minutes.</p>
+                    </v-card>
+                    <v-container>
+                        <v-layout>
+                            <v-flex xs12 lg10 offset-lg1>
+        
+        
+                                </v-card>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </div>
                 <div v-show="page == 'form'">
                     <v-container>
                             <v-layout>
@@ -234,12 +248,7 @@
                             <v-expansion-panel-content id="education">
                                     <template v-slot:header> <v-card-text class="display-1">Education</v-card-text></template>
                                     <v-card class="ma-2 pa-4">
-                                        <v-card  flat v-for="school in educationlist">
-                                                <v-card-title>{{school.college}}, {{school.degree}} - {{school.gradyear}}</v-card-title>
-                        
-                                                <v-btn icon><v-icon color="grey">delete</v-icon></v-btn>
-                                                <v-btn icon><v-icon color="grey">edit</v-icon></v-btn>
-                                            </v-card>
+                                        
                                         <v-text-field box label="School attended" v-model="educationEdit.college"></v-text-field>
                                         <v-text-field box label="Degree" v-model="educationEdit.degree"></v-text-field>
                                         <template v-slot:activator="{ on }">
@@ -437,6 +446,7 @@
                                                     </v-flex>
                                                     <v-flex xs3>
                                                         <v-btn fab flat @click="includeStatement(exp)"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('statement',exp._id)"><v-icon>remove</v-icon></v-btn>
                                                         <v-btn @click="deleteItem('statement',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                     </v-flex>
@@ -466,6 +476,7 @@
                                                 </v-flex>
                                                 <v-flex xs2>
                                                     <v-btn fab flat @click="includeWork(exp)"><v-icon>add</v-icon></v-btn>
+                                                    <v-btn fab flat @click="removeFromDisplay('workexp',exp._id)"><v-icon>remove</v-icon></v-btn>
                                                     <v-btn @click="deleteItem('workexp',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
                                                     
                                                 </v-flex>
@@ -493,9 +504,9 @@
                                                     <v-card-text class="title ml-4 pl-2">{{exp.degree}} | <span class="title font-weight-light">{{exp.gradyear}}</span></v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-btn fab flat @click="includeEducation(exp)"><v-icon>add</v-icon></v-btn>
-                                                        <v-btn @click="deleteItem('education',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
-
+                                                    <v-btn fab flat @click="includeEducation(exp)"><v-icon>add</v-icon></v-btn>
+                                                    <v-btn fab flat @click="removeFromDisplay('education',exp._id)"><v-icon>remove</v-icon></v-btn>
+                                                    <v-btn @click="deleteItem('education',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
                                                 </v-flex>
                                             </v-layout>
                                         </div>
@@ -522,6 +533,7 @@
                                                 </v-flex>
                                                 <v-flex xs3>
                                                         <v-btn fab flat @click="includeAccomplishment(exp)"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('accomplishment',exp._id)"><v-icon>remove</v-icon></v-btn>
                                                         <v-btn @click="deleteItem('accomplishment',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
@@ -550,6 +562,7 @@
                                                 </v-flex>
                                                 <v-flex xs3>
                                                         <v-btn fab flat @click="includeAward(exp)"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('award',exp._id)"><v-icon>remove</v-icon></v-btn>
                                                         <v-btn @click="deleteItem('award',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
@@ -576,6 +589,7 @@
                                                 </v-flex>
                                                 <v-flex xs3>
                                                         <v-btn fab flat @click="includeLanguage(exp)"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('language',exp._id)"><v-icon>remove</v-icon></v-btn>
                                                         <v-btn @click="deleteItem('language',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
@@ -603,6 +617,7 @@
                                                 </v-flex>
                                                 <v-flex xs3>
                                                         <v-btn fab flat @click="includeExtracurricular(exp)"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('extracurricular',exp._id)"><v-icon>remove</v-icon></v-btn>
                                                         <v-btn @click="deleteItem('extracurricular',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
@@ -629,6 +644,7 @@
                                                 </v-flex>
                                                 <v-flex xs3>
                                                         <v-btn fab flat @click="includeProgram(exp)"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('program',exp._id)"><v-icon>remove</v-icon></v-btn>
                                                         <v-btn @click="deleteItem('program',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
@@ -655,6 +671,7 @@
                                                 </v-flex>
                                                 <v-flex xs3>
                                                         <v-btn fab flat @click="includeSkill(exp)"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('softskill',exp._id)"><v-icon>remove</v-icon></v-btn>
                                                         <v-btn @click="deleteItem('softskill',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
@@ -714,85 +731,87 @@
                                 <v-layout justify-center row-wrap>
                                         <v-flex xs12 sm10>
                                             <v-card>
-                                                <v-responsive :aspect-ratio="8.5/11">
-                                                    <v-card id="padding" align-center justify-center flat :color="selected_color_main" height="20%">
-                                                        <v-layout>
-                                                            <v-flex xs3>
-                                                                <div>
-                                                                    <v-img>
-                                                                    </v-img>
-                                                                </div>
+                                                <div id="printPDF">
+                                                    <v-responsive :aspect-ratio="8.5/11">
+                                                        <v-card id="padding" align-center justify-center flat :color="selected_color_main" height="20%">
+                                                            <v-layout>
+                                                                <v-flex xs3>
+                                                                    <div>
+                                                                        <v-img>
+                                                                        </v-img>
+                                                                    </div>
+                                                                </v-flex>
+                                                                <v-flex  xs8 offset-xs1 >
+                                                                    <v-card>
+                                                                        <v-card-text v-for="thing in statementdisplay">
+                                                                            {{thing.statement}}
+                                                                        </v-card-text>
+                                                                    </v-card>
                                                             </v-flex>
-                                                            <v-flex  xs8 offset-xs1 >
-                                                                <v-card>
-                                                                    <v-card-text v-for="thing in statementdisplay">
-                                                                        {{thing.statement}}
-                                                                    </v-card-text>
-                                                                </v-card>
-                                                        </v-flex>
-                                                        </v-layout>
-                                                    </v-card>
-                                                        <v-layout>
-                                                            <v-flex xs4 class="text-xs-center">
-                                                                    <v-card :color="selected_color_accent" height="500%">
-                                                                    <v-card tile height="4%">
-                                                                        <v-card-text>
-                                                                            <h1 :class="{'headline': $vuetify.breakpoint.xsOnly, 'display-1': $vuetify.breakpoint.smOnly}">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}}</h1>
-                                                                        </v-card-text>
+                                                            </v-layout>
+                                                        </v-card>
+                                                            <v-layout>
+                                                                <v-flex xs4 class="text-xs-center">
+                                                                        <v-card :color="selected_color_accent" height="500%">
+                                                                        <v-card tile height="4%">
+                                                                            <v-card-text>
+                                                                                <h1 :class="{'headline': $vuetify.breakpoint.xsOnly, 'display-1': $vuetify.breakpoint.smOnly}">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}}</h1>
+                                                                            </v-card-text>
+                                                                        </v-card>
+                                                                        <v-card tile>
+                                                                            <v-card-text>
+                                                                                <h3>{{personalinfoEdit.professional_title}}</h3>
+                                                                            </v-card-text>
+                                                                        </v-card>
+                                                                        <v-card tile>
+                                                                            <v-card-text>
+                                                                                <h4>{{personalinfoEdit.email}}</h4>
+                                                                            </v-card-text>
+                                                                        </v-card>
+                                                                        <v-card tile>
+                                                                            <v-card-text>
+                                                                                <h4>{{personalinfoEdit.phone}}</h4>
+                                                                            </v-card-text>
+                                                                        </v-card>
+                                                                        <v-card tile class="text-xs-left">
+                                                                            <v-card-text>
+                                                                                <h4 class="smol">{{personalinfoEdit.address}}, <br> {{personalinfoEdit.city}}, {{personalinfoEdit.state}}, {{personalinfoEdit.country}}<br> {{personalinfoEdit.zip}} </h4>
+                                                                            </v-card-text>
+                                                                        </v-card>
+                                                                        <v-card flat color="transparent">
+                                                                            <v-card-text>
+                        
+                                                                            </v-card-text>
+                                                                        </v-card>
                                                                     </v-card>
-                                                                    <v-card tile>
-                                                                        <v-card-text>
-                                                                            <h3>{{personalinfoEdit.professional_title}}</h3>
-                                                                        </v-card-text>
-                                                                    </v-card>
-                                                                    <v-card tile>
-                                                                        <v-card-text>
-                                                                            <h4>{{personalinfoEdit.email}}</h4>
-                                                                        </v-card-text>
-                                                                    </v-card>
-                                                                    <v-card tile>
-                                                                        <v-card-text>
-                                                                            <h4>{{personalinfoEdit.phone}}</h4>
-                                                                        </v-card-text>
-                                                                    </v-card>
-                                                                    <v-card tile class="text-xs-left">
-                                                                        <v-card-text>
-                                                                            <h4 class="smol">{{personalinfoEdit.address}}, <br> {{personalinfoEdit.city}}, {{personalinfoEdit.state}}, {{personalinfoEdit.country}}<br> {{personalinfoEdit.zip}} </h4>
-                                                                        </v-card-text>
-                                                                    </v-card>
-                                                                    <v-card flat color="transparent">
-                                                                        <v-card-text>
+                                                                </v-flex>
                     
+                                                                    <v-flex xs-8>
+                                                                    <v-card>
+                                                                        <v-card-text>
+                                                                            <h1>Work Experience</h1>
+                                                                            <v-layout row wrap>
+                                                                            <div v-for="exp in workexpdisplay">
+                                                                                <v-flex xs12>
+                                                                                    <v-card flat color="transparent">
+                                                                                        <v-card-text>s
+                                                                                            <h3>{{exp.company}}</h3>
+                                                                                            <h3>{{exp.title}}</h3>
+                                                                                            <h3>{{exp.startdate}} - {{exp.enddate}}</h3>
+                                                                                            <p>{{exp.description}}</p>
+                                                                                        </v-card-text>
+                                                                                    </v-card>
+                                                                                </v-flex>
+                                                                            </div>
+                                                                            </v-layout>
                                                                         </v-card-text>
-                                                                    </v-card>
                                                                 </v-card>
-                                                            </v-flex>
-                
-                                                                <v-flex xs-8>
-                                                                <v-card>
-                                                                    <v-card-text>
-                                                                        <h1>Work Experience</h1>
-                                                                        <v-layout row wrap>
-                                                                        <div v-for="exp in workexpdisplay">
-                                                                            <v-flex xs12>
-                                                                                <v-card flat color="transparent">
-                                                                                    <v-card-text>s
-                                                                                        <h3>{{exp.company}}</h3>
-                                                                                        <h3>{{exp.title}}</h3>
-                                                                                        <h3>{{exp.startdate}} - {{exp.enddate}}</h3>
-                                                                                        <p>{{exp.description}}</p>
-                                                                                    </v-card-text>
-                                                                                </v-card>
-                                                                            </v-flex>
-                                                                        </div>
-                                                                        </v-layout>
-                                                                    </v-card-text>
-                                                            </v-card>
-                                                            </v-flex>
-                
-                
-                                                        </v-layout>
-                                                </v-responsive>
+                                                                </v-flex>
+                    
+                    
+                                                            </v-layout>
+                                                    </v-responsive>
+                                                </div>
                                             </v-card>
                 
                                     </v-flex>
@@ -802,62 +821,64 @@
                                 <v-layout row wrap>
                                     <v-flex>
                                         <v-card xs12 sm10>
-                                            <v-responsive :aspect-ratio="8.5/11">
-                                                <br>
-                                                <v-layout>
-                                                    <v-flex xs4></v-flex>
-                                                    <v-flex xs8 height=15%>
-                                                            <v-card class="ma-4 pa-4 text-xs-right" :color="selected_color_main" >
-                                                            <v-card-text class="display-3 pa-1 white--text">{{personalinfoEdit.first_name}}{{personalinfoEdit.last_name}}</v-card-text>
-                                                            <v-card-text class="display-1 pa-1 white--text">{{personalinfoEdit.email}}</v-card-text>
-                                                            <v-card-text class="headline pa-1 white--text">{{personalinfoEdit.phone}}</v-card-text>
-                                                        </v-card>
-                                                    </v-flex>
-                                                </v-layout>
-        
-                                                <v-layout>
-                                                    <v-flex xs8 offset-xs1 class="pa-1 ma-4">
-                                                        <v-card class="pa-3 ma-3 transparent" flat>
-                                                            <v-card-title class="pa-1 display-1">Work Experience</v-card-title>
-                                                            <v-card-text class="pa-1">{{workexpEdit.work_company}}</v-card-text>
-                                                            <v-card-text class="pa-1">{{workexpEdit.work_title}}</v-card-text>
-                                                            <v-card-text class="pa-1">{{workexpEdit.work_startdate}}</v-card-text>
-                                                            <v-card-text class="pa-1">{{workexpEdit.work_enddate}}</v-card-text>
-                                                            <v-card-text class="pa-1">{{workexpEdit.work_description}}</v-card-text>
-                                                        </v-card>
-                                                        <v-card class="pa-3 ma-3 transparent" flat>
-                                                            <v-card-title class="pa-1 display-1">Education</v-card-title>
-                                                            <v-card-text class="pa-1">{{educationEdit.college}}</v-card-text>
-                                                            <v-card-text class="pa-1">{{educationEdit.degree}}</v-card-text>
-                                                            <v-card-text class="pa-1">{{educationEdit.gradyear}}</v-card-text>
-                                                        </v-card>
-                                                        <v-card class="pa-3 ma-3 transparent" flat>
-                                                            <v-card-title class="pa-1 display-1">Awards</v-card-title>
-                                                            <v-card-text class="pa-1">I have awards but none that mean anything to me</v-card-text>
-                                                            <v-card-text class="pa-1">{{awardsEdit.title}}</v-card-text>
-                                                            <v-card-text class="pa-1">{{awardsEdit.receivedfrom}}{{awardsEdit.date}}</v-card-text>
-                                                            
-                                                            <v-card-text class="pa-1">{{awardsEdit.description}}</v-card-text>
-                                                        </v-card>
-                                                    </v-flex>
-                                                <!-- </v-layout>
-        
-                                                <v-layout> -->
-                                                    <v-flex xs3 class="pa-1">
-                                                        <v-container grid-list-lg fluid>
-                                                            <v-layout column>
-                                                                <v-flex xs12>
-                                                                        <v-card class="pa-2" :color="selected_color_accent" height=600 flat>
-                                                                        <v-card-text class="headline">Skills
-                                                                        </v-card-text>
-                                                                        <v-card-text class="">{{softskillsEdit.title}}</v-card-text>
-                                                                    </v-card>
-                                                                </v-flex>
-                                                            </v-layout>
-                                                        </v-container>
-                                                    </v-flex>
-                                                </v-layout>
-                                            </v-responsive>
+                                            <div id="printPDF">
+                                                <v-responsive :aspect-ratio="8.5/11">
+                                                    <br>
+                                                    <v-layout>
+                                                        <v-flex xs4></v-flex>
+                                                        <v-flex xs8 height=15%>
+                                                                <v-card class="ma-4 pa-4 text-xs-right" :color="selected_color_main" >
+                                                                <v-card-text class="display-3 pa-1 white--text">{{personalinfoEdit.first_name}}{{personalinfoEdit.last_name}}</v-card-text>
+                                                                <v-card-text class="display-1 pa-1 white--text">{{personalinfoEdit.email}}</v-card-text>
+                                                                <v-card-text class="headline pa-1 white--text">{{personalinfoEdit.phone}}</v-card-text>
+                                                            </v-card>
+                                                        </v-flex>
+                                                    </v-layout>
+            
+                                                    <v-layout>
+                                                        <v-flex xs8 offset-xs1 class="pa-1 ma-4">
+                                                            <v-card class="pa-3 ma-3 transparent" flat>
+                                                                <v-card-title class="pa-1 display-1">Work Experience</v-card-title>
+                                                                <v-card-text class="pa-1">{{workexpEdit.work_company}}</v-card-text>
+                                                                <v-card-text class="pa-1">{{workexpEdit.work_title}}</v-card-text>
+                                                                <v-card-text class="pa-1">{{workexpEdit.work_startdate}}</v-card-text>
+                                                                <v-card-text class="pa-1">{{workexpEdit.work_enddate}}</v-card-text>
+                                                                <v-card-text class="pa-1">{{workexpEdit.work_description}}</v-card-text>
+                                                            </v-card>
+                                                            <v-card class="pa-3 ma-3 transparent" flat>
+                                                                <v-card-title class="pa-1 display-1">Education</v-card-title>
+                                                                <v-card-text class="pa-1">{{educationEdit.college}}</v-card-text>
+                                                                <v-card-text class="pa-1">{{educationEdit.degree}}</v-card-text>
+                                                                <v-card-text class="pa-1">{{educationEdit.gradyear}}</v-card-text>
+                                                            </v-card>
+                                                            <v-card class="pa-3 ma-3 transparent" flat>
+                                                                <v-card-title class="pa-1 display-1">Awards</v-card-title>
+                                                                <v-card-text class="pa-1">I have awards but none that mean anything to me</v-card-text>
+                                                                <v-card-text class="pa-1">{{awardsEdit.title}}</v-card-text>
+                                                                <v-card-text class="pa-1">{{awardsEdit.receivedfrom}}{{awardsEdit.date}}</v-card-text>
+                                                                
+                                                                <v-card-text class="pa-1">{{awardsEdit.description}}</v-card-text>
+                                                            </v-card>
+                                                        </v-flex>
+                                                    <!-- </v-layout>
+            
+                                                    <v-layout> -->
+                                                        <v-flex xs3 class="pa-1">
+                                                            <v-container grid-list-lg fluid>
+                                                                <v-layout column>
+                                                                    <v-flex xs12>
+                                                                            <v-card class="pa-2" :color="selected_color_accent" height=600 flat>
+                                                                            <v-card-text class="headline">Skills
+                                                                            </v-card-text>
+                                                                            <v-card-text class="">{{softskillsEdit.title}}</v-card-text>
+                                                                        </v-card>
+                                                                    </v-flex>
+                                                                </v-layout>
+                                                            </v-container>
+                                                        </v-flex>
+                                                    </v-layout>
+                                                </v-responsive>
+                                            </div>
                                         </v-card>
                                     </v-flex>
                                     
@@ -868,442 +889,444 @@
                             <v-layout row wrap class="justify-center">
                                 <v-flex>
                                     <v-card height=1061 width=820 elevation=15>
-                                        <v-layout id="zone0" class="pa-0">
-                                            <v-flex xs5></v-flex>
-                                            <v-flex xs7>
-                                                <v-card class="mt-4 mr-4 ml-4 pa-3 text-xs-right" flat :color="selected_color_main" >
-                                                    <v-card-text class="display-1 pa-1 ">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}} | <span class="headline">{{personalinfoEdit.professional_title}}</span> </v-card-text>
-                                                    <v-card-text class="headline pa-1 ">{{personalinfoEdit.email}}</v-card-text>
-                                                    <v-card-text class="headline pa-1 ">{{personalinfoEdit.phone}}</v-card-text>
+                                        <div id="printPDF">
+                                            <v-layout id="zone0" class="pa-0">
+                                                <v-flex xs5></v-flex>
+                                                <v-flex xs7>
+                                                    <v-card class="mt-4 mr-4 ml-4 pa-3 text-xs-right" flat :color="selected_color_main" >
+                                                        <v-card-text class="display-1 pa-1 ">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}} | <span class="headline">{{personalinfoEdit.professional_title}}</span> </v-card-text>
+                                                        <v-card-text class="headline pa-1 ">{{personalinfoEdit.email}}</v-card-text>
+                                                        <v-card-text class="headline pa-1 ">{{personalinfoEdit.phone}}</v-card-text>
+                                                    </v-card>
+                                                </v-flex>
+                                            </v-layout>
+                                            <div id="zone1" class="mb-3">
+                                                <v-card v-if="zone1_type == 'statement'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <div v-for="item in zone1" class="pa-2">
+                                                        <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
+                                                    </div>
                                                 </v-card>
-                                            </v-flex>
-                                        </v-layout>
-                                        <div id="zone1" class="mb-3">
-                                            <v-card v-if="zone1_type == 'statement'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <div v-for="item in zone1" class="pa-2">
-                                                    <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone1_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Work Experience</v-card-text>
-                                                <div v-for="item in zone1" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone1_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Education</v-card-text>
-                                                <div v-for="item in zone1" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone1_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Accomplishments</v-card-text>
-                                                <div v-for="item in zone1" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone1_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
-                                                <div v-for="item in zone1" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone1_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Languages</v-card-text>
-                                                <div v-for="item in zone1" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone1_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Programs</v-card-text>
-                                                <div v-for="item in zone1" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone1_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Skills</v-card-text>
-                                                <div v-for="item in zone1" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone1_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Awards</v-card-text>
-                                                <div v-for="item in zone1" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                        </div>
-                                        <div id="zone2" class="mb-3">
-                                            <v-card v-if="zone2_type == 'statement'" flat class="ml-3 mr-3 pa-4">
-                                                <div v-for="item in zone2" class="pa-2">
-                                                    <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone2_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Work Experience</v-card-text>
-                                                <div v-for="item in zone2" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone2_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Education</v-card-text>
-                                                <div v-for="item in zone2" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone2_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Accomplishments</v-card-text>
-                                                <div v-for="item in zone2" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone2_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
-                                                <div v-for="item in zone2" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone2_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Languages</v-card-text>
-                                                <div v-for="item in zone2" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone2_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Programs</v-card-text>
-                                                <div v-for="item in zone2" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone2_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Skills</v-card-text>
-                                                <div v-for="item in zone2" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone2_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Awards</v-card-text>
-                                                <div v-for="item in zone2" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                        </div>
-                                        <div id="zone3" class="mb-3">
-                                            <v-card v-if="zone3_type == 'statement'" flat class="ml-3 mr-3 pa-4">
-                                                <div v-for="item in zone3" class="pa-2">
-                                                    <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone3_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Work Experience</v-card-text>
-                                                <div v-for="item in zone3" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone3_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Education</v-card-text>
-                                                <div v-for="item in zone3" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone3_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Accomplishments</v-card-text>
-                                                <div v-for="item in zone3" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone3_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
-                                                <div v-for="item in zone3" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone3_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Languages</v-card-text>
-                                                <div v-for="item in zone3" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone3_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Programs</v-card-text>
-                                                <div v-for="item in zone3" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone3_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Skills</v-card-text>
-                                                <div v-for="item in zone3" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone3_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Awards</v-card-text>
-                                                <div v-for="item in zone3" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                        </div>
-                                        <div id="zone4" class="mb-3">
-                                            <v-card v-if="zone4_type == 'statement'" flat class="ml-3 mr-3 pa-4">
-                                                <div v-for="item in zone4" class="pa-2">
-                                                    <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone4_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Work Experience</v-card-text>
-                                                <div v-for="item in zone4" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone4_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Education</v-card-text>
-                                                <div v-for="item in zone4" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone4_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Accomplishments</v-card-text>
-                                                <div v-for="item in zone4" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone4_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
-                                                <div v-for="item in zone4" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone4_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Languages</v-card-text>
-                                                <div v-for="item in zone4" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone4_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Programs</v-card-text>
-                                                <div v-for="item in zone4" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone4_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Skills</v-card-text>
-                                                <div v-for="item in zone4" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone4_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Awards</v-card-text>
-                                                <div v-for="item in zone4" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                        </div>
-                                        <div id="zone5" class="mb-3">
-                                            <v-card v-if="zone5_type == 'statement'" flat class="ml-3 mr-3 pa-4">
-                                                <div v-for="item in zone5" class="pa-2">
-                                                    <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone5_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Work Experience</v-card-text>
-                                                <div v-for="item in zone5" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone5_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Education</v-card-text>
-                                                <div v-for="item in zone5" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone5_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Accomplishments</v-card-text>
-                                                <div v-for="item in zone5" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone5_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
-                                                <div v-for="item in zone5" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone5_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Languages</v-card-text>
-                                                <div v-for="item in zone5" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone5_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Programs</v-card-text>
-                                                <div v-for="item in zone5" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone5_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Skills</v-card-text>
-                                                <div v-for="item in zone5" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone5_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Awards</v-card-text>
-                                                <div v-for="item in zone5" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                        </div>
-                                        <div id="zone6" class="mb-3">
-                                            <v-card v-if="zone6_type == 'statement'" flat class="ml-3 mr-3 pa-4">
-                                                <div v-for="item in zone6" class="pa-2">
-                                                    <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone6_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Work Experience</v-card-text>
-                                                <div v-for="item in zone6" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone6_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Education</v-card-text>
-                                                <div v-for="item in zone6" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone6_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Accomplishments</v-card-text>
-                                                <div v-for="item in zone6" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone6_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
-                                                <div v-for="item in zone6" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone6_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Languages</v-card-text>
-                                                <div v-for="item in zone6" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone6_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Programs</v-card-text>
-                                                <div v-for="item in zone6" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone6_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Skills</v-card-text>
-                                                <div v-for="item in zone6" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone6_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Awards</v-card-text>
-                                                <div v-for="item in zone6" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                        </div>
-                                        <div id="zone7" class="mb-3">
-                                            <v-card v-if="zone7_type == 'statement'" flat class="ml-3 mr-3 pa-4">
-                                                <div v-for="item in zone7" class="pa-2">
-                                                    <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone7_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Work Experience</v-card-text>
-                                                <div v-for="item in zone7" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone7_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Education</v-card-text>
-                                                <div v-for="item in zone7" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone7_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text class="title pt-0">Accomplishments</v-card-text>
-                                                <div v-for="item in zone7" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone7_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
-                                                <div v-for="item in zone7" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone7_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Languages</v-card-text>
-                                                <div v-for="item in zone7" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone7_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Programs</v-card-text>
-                                                <div v-for="item in zone7" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone7_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Skills</v-card-text>
-                                                <div v-for="item in zone7" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
-                                                </div>
-                                            </v-card>
-                                            <v-card v-if="zone7_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
-                                                <v-card-text  class="title pt-0">Awards</v-card-text>
-                                                <div v-for="item in zone7" class="pl-2 pr-2">
-                                                    <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
-                                                    <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
-                                                    <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
-                                                </div>
-                                            </v-card>
+                                                <v-card v-if="zone1_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Work Experience</v-card-text>
+                                                    <div v-for="item in zone1" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone1_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Education</v-card-text>
+                                                    <div v-for="item in zone1" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone1_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Accomplishments</v-card-text>
+                                                    <div v-for="item in zone1" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone1_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
+                                                    <div v-for="item in zone1" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone1_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Languages</v-card-text>
+                                                    <div v-for="item in zone1" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone1_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Programs</v-card-text>
+                                                    <div v-for="item in zone1" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone1_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Skills</v-card-text>
+                                                    <div v-for="item in zone1" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone1_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Awards</v-card-text>
+                                                    <div v-for="item in zone1" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                            </div>
+                                            <div id="zone2" class="mb-3">
+                                                <v-card v-if="zone2_type == 'statement'" flat class="ml-3 mr-3 pa-4">
+                                                    <div v-for="item in zone2" class="pa-2">
+                                                        <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone2_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Work Experience</v-card-text>
+                                                    <div v-for="item in zone2" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone2_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Education</v-card-text>
+                                                    <div v-for="item in zone2" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone2_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Accomplishments</v-card-text>
+                                                    <div v-for="item in zone2" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone2_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
+                                                    <div v-for="item in zone2" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone2_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Languages</v-card-text>
+                                                    <div v-for="item in zone2" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone2_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Programs</v-card-text>
+                                                    <div v-for="item in zone2" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone2_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Skills</v-card-text>
+                                                    <div v-for="item in zone2" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone2_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Awards</v-card-text>
+                                                    <div v-for="item in zone2" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                            </div>
+                                            <div id="zone3" class="mb-3">
+                                                <v-card v-if="zone3_type == 'statement'" flat class="ml-3 mr-3 pa-4">
+                                                    <div v-for="item in zone3" class="pa-2">
+                                                        <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone3_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Work Experience</v-card-text>
+                                                    <div v-for="item in zone3" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone3_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Education</v-card-text>
+                                                    <div v-for="item in zone3" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone3_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Accomplishments</v-card-text>
+                                                    <div v-for="item in zone3" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone3_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
+                                                    <div v-for="item in zone3" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone3_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Languages</v-card-text>
+                                                    <div v-for="item in zone3" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone3_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Programs</v-card-text>
+                                                    <div v-for="item in zone3" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone3_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Skills</v-card-text>
+                                                    <div v-for="item in zone3" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone3_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Awards</v-card-text>
+                                                    <div v-for="item in zone3" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                            </div>
+                                            <div id="zone4" class="mb-3">
+                                                <v-card v-if="zone4_type == 'statement'" flat class="ml-3 mr-3 pa-4">
+                                                    <div v-for="item in zone4" class="pa-2">
+                                                        <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone4_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Work Experience</v-card-text>
+                                                    <div v-for="item in zone4" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone4_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Education</v-card-text>
+                                                    <div v-for="item in zone4" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone4_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Accomplishments</v-card-text>
+                                                    <div v-for="item in zone4" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone4_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
+                                                    <div v-for="item in zone4" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone4_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Languages</v-card-text>
+                                                    <div v-for="item in zone4" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone4_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Programs</v-card-text>
+                                                    <div v-for="item in zone4" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone4_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Skills</v-card-text>
+                                                    <div v-for="item in zone4" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone4_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Awards</v-card-text>
+                                                    <div v-for="item in zone4" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                            </div>
+                                            <div id="zone5" class="mb-3">
+                                                <v-card v-if="zone5_type == 'statement'" flat class="ml-3 mr-3 pa-4">
+                                                    <div v-for="item in zone5" class="pa-2">
+                                                        <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone5_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Work Experience</v-card-text>
+                                                    <div v-for="item in zone5" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone5_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Education</v-card-text>
+                                                    <div v-for="item in zone5" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone5_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Accomplishments</v-card-text>
+                                                    <div v-for="item in zone5" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone5_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
+                                                    <div v-for="item in zone5" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone5_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Languages</v-card-text>
+                                                    <div v-for="item in zone5" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone5_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Programs</v-card-text>
+                                                    <div v-for="item in zone5" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone5_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Skills</v-card-text>
+                                                    <div v-for="item in zone5" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone5_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Awards</v-card-text>
+                                                    <div v-for="item in zone5" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                            </div>
+                                            <div id="zone6" class="mb-3">
+                                                <v-card v-if="zone6_type == 'statement'" flat class="ml-3 mr-3 pa-4">
+                                                    <div v-for="item in zone6" class="pa-2">
+                                                        <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone6_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Work Experience</v-card-text>
+                                                    <div v-for="item in zone6" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone6_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Education</v-card-text>
+                                                    <div v-for="item in zone6" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone6_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Accomplishments</v-card-text>
+                                                    <div v-for="item in zone6" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone6_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
+                                                    <div v-for="item in zone6" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone6_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Languages</v-card-text>
+                                                    <div v-for="item in zone6" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone6_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Programs</v-card-text>
+                                                    <div v-for="item in zone6" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone6_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Skills</v-card-text>
+                                                    <div v-for="item in zone6" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone6_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Awards</v-card-text>
+                                                    <div v-for="item in zone6" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                            </div>
+                                            <div id="zone7" class="mb-3">
+                                                <v-card v-if="zone7_type == 'statement'" flat class="ml-3 mr-3 pa-4">
+                                                    <div v-for="item in zone7" class="pa-2">
+                                                        <v-card-text class="font-italic title">{{item.statement}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone7_type == 'workexp'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Work Experience</v-card-text>
+                                                    <div v-for="item in zone7" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.company}} | {{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone7_type == 'education'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Education</v-card-text>
+                                                    <div v-for="item in zone7" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.college}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.degree}} - <span class="body-2 grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone7_type == 'accomplishment'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text class="title pt-0">Accomplishments</v-card-text>
+                                                    <div v-for="item in zone7" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone7_type == 'extracurricular'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Extracurriculars</v-card-text>
+                                                    <div v-for="item in zone7" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone7_type == 'language'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Languages</v-card-text>
+                                                    <div v-for="item in zone7" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheading">{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone7_type == 'programs'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Programs</v-card-text>
+                                                    <div v-for="item in zone7" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading" >{{item.title}} | {{item.proficiency}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone7_type == 'skills'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Skills</v-card-text>
+                                                    <div v-for="item in zone7" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold subheading">{{item.title}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                                <v-card v-if="zone7_type == 'award'" flat class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                    <v-card-text  class="title pt-0">Awards</v-card-text>
+                                                    <div v-for="item in zone7" class="pl-2 pr-2">
+                                                        <v-card-text class="pa-1 pl-3 subheading">{{item.title}} - <span class="body-2 grey--text text--darken-2">{{item.date}}</span></v-card-text>
+                                                        <v-card-text class="pa-1 pl-3  font-weight-bold body-2">Received from {{item.receivedfrom}}</v-card-text>
+                                                        <v-card-text class="pa-1 pl-3 body-1">{{item.description}}</v-card-text>
+                                                    </div>
+                                                </v-card>
+                                            </div>
                                         </div>
                                     </v-card>
                                 </v-flex>
@@ -1320,5 +1343,5 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
     <script src="html5kellycolorpicker.js"></script>
-	<script src="hannahcode1.js"></script>
+	<script src="code.js"></script>
 </html>

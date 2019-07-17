@@ -34,7 +34,12 @@ z-index: 100;
    background-attachment: fixed;
    font-family: 'Nunito Sans', 'Roboto', sans-serif;
  }
-/*
+ #hero { /*changed*/
+   height: 60%;
+   margin: 14% 0;
+ }
+
+ /*
 .dark { color: rgba(85, 82, 89, 1); }
 .white { color: rgba(234, 238, 242, 1); }
 .yellow { color: rgba(242, 214, 162, 1); }
