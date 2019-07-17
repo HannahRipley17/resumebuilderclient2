@@ -177,6 +177,7 @@ var app= new Vue ({
       zone6_type: "",
       zone7_type: "",
 
+
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /.+@.+/.test(v) || 'E-mail must be valid'
@@ -460,26 +461,26 @@ var app= new Vue ({
           }
         }
         else if (type == "extracurricular") {
-          display = this.extracurricularndisplay;
-          if (this.extracurricularnposition == "1") {
+          display = this.extracurriculardisplay;
+          if (this.extracurricularposition == "1") {
             this.apply1(type, display);
           }
-          else if (this.extracurricularnposition == "2") {
+          else if (this.extracurricularposition == "2") {
             this.apply2(type, display);
           }
-          else if (this.extracurricularnposition == "3") {
+          else if (this.extracurricularposition == "3") {
             this.apply3(type, display);
           }
-          else if (this.extracurricularnposition == "4") {
+          else if (this.extracurricularposition == "4") {
             this.apply4(type, display);
           }
-          else if (this.extracurricularnposition == "5") {
+          else if (this.extracurricularposition == "5") {
             this.apply5(type, display);
           }
-          else if (this.extracurricularnposition == "6") {
+          else if (this.extracurricularposition == "6") {
             this.apply6(type, display);
           }
-          else if (this.extracurricularnposition == "7") {
+          else if (this.extracurricularposition == "7") {
             this.apply7(type, display);
           }
         }
@@ -535,8 +536,8 @@ var app= new Vue ({
 
 
       apply1: function (type, display) {
-          this.zone1 = display;
-          this.zone1_type = type;
+        this.zone1 = display;
+        this.zone1_type = type;
       },
       apply2: function (type, display) {
         this.zone2 = display;
@@ -923,6 +924,14 @@ var app= new Vue ({
     },
 
     computed: {
-        
+        category_title_font: function () {
+          return {
+            'subheading': this.$vuetify.breakpoint.xsOnly, 
+            'title': this.$vuetify.breakpoint.smOnly, 
+            'headline': this.$vuetify.breakpoint.mdOnly, 
+            'display-1': this.$vuetify.breakpoint.lgOnly
+          }
+
+        }
       },
 })
