@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="hannahstyle1.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
@@ -11,7 +11,7 @@
 	<div id="app1" v-cloak>
 		<v-app>
 			<v-content id="body">
-                <v-toolbar v-show="page !='home'" height=80 flat color="rgba(85, 82, 89, 0)"> <!-- changed, beginning of changes to toolbar -->
+                <v-toolbar v-show="page !='home'" height=80 flat color="rgba(85, 82, 89, 0)">
                     <v-btn flat class="text-capitalize title white--text" @click="page = 'home' ">
                         <v-toolbar-title>Resume<span class="font-weight-light">Builder</span> </v-toolbar-title>
                     </v-btn>
@@ -94,11 +94,10 @@
                         </v-layout>
                     </v-container> <!-- changed, end of changes to register -->
                 </div>
-
                 <div v-show="page == 'home'">
                     <v-card id="hero" flat color="rgba(85, 82, 89, 0.6)" class="pa-3">
                         <h1 class="display-3 pa-3 white--text text-xs-center"> Resume<span class="font-weight-light">Builder</span></h1>
-                        <p class="headline pa-3 white--text text-xs-center">Leading tech in creating seamless, custom, proffessional-level resumes in minutes.</p>
+                        <p class="headline pa-3 white--text text-xs-center">Leading tech in creating seamless, custom, professional-level resumes in minutes.</p>
                     </v-card>
                     <v-container>
                         <v-layout>
@@ -110,6 +109,7 @@
                         </v-layout>
                     </v-container>
                 </div>
+
                 <div v-show="page == 'form'">
                     <v-container>
                             <v-layout>
@@ -445,10 +445,9 @@
                                                         <v-card-text class="headline pa-1 ml-3">{{exp.statement}}</v-card-text>
                                                     </v-flex>
                                                     <v-flex xs3>
-                                                        <v-btn fab flat @click="includeStatement(exp)"><v-icon>add</v-icon></v-btn>
-                                                        <v-btn fab flat @click="removeFromDisplay('statement',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                        <v-btn @click="deleteItem('statement',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
-
+                                                        <v-btn fab flat @click="includeStatement(exp); apply('statement')"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('statement',exp._id); apply('statement')"><v-icon>remove</v-icon></v-btn>
+                                                        <v-btn @click="deleteItem('statement',exp); apply('statement')" icon><v-icon color="grey">delete</v-icon></v-btn>
                                                     </v-flex>
                                                 </v-layout>
                                             </div>
@@ -466,6 +465,20 @@
                                             <v-radio label="6" value="6"></v-radio>
                                             <v-radio label="7" value="7"></v-radio>
                                         </v-radio-group>
+                                        <!-- <v-menu offset-y>
+                                                <template v-slot:activator="{ on }">
+                                                    <v-btn v-on="on"> Pick an area </v-btn>
+                                                </template>
+                                                <v-list>
+                                                    <v-list-tile
+                                                        v-for="(item, index) in templates"
+                                                        :key="index"
+                                                        @click="template = item.model, templateLabel = item.name"
+                                                        >
+                                                        <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                                                    </v-list-tile>
+                                                    </v-list>
+                                            </v-menu> -->
                                         <div v-for="exp in workexplist">
                                             <v-layout>
                                                 <v-flex xs10>
@@ -475,10 +488,15 @@
                                                     <v-card-text class="ml-4 pl-2">{{exp.description}}</v-card-text><br>
                                                 </v-flex>
                                                 <v-flex xs2>
-                                                    <v-btn fab flat @click="includeWork(exp)"><v-icon>add</v-icon></v-btn>
-                                                    <v-btn fab flat @click="removeFromDisplay('workexp',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                    <v-btn @click="deleteItem('workexp',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
-                                                    
+                                                    <v-btn fab flat @click="includeWork(exp); apply('statement'); exp.displayShow = !exp.displayShow " v-if="exp.displayShow">
+                                                        <v-icon big>check_box_outline_blank</v-icon>
+                                                    </v-btn>
+                                                    <v-btn fab flat @click="removeFromDisplay('workexp',exp._id); apply('statement'); exp.displayShow = !exp.displayShow" v-if="!exp.displayShow">
+                                                        <v-icon big>check_box</v-icon>
+                                                    </v-btn>
+                                                    <v-btn @click="deleteItem('workexp',exp); apply('statement')" icon>
+                                                        <v-icon big color="grey">delete</v-icon>
+                                                    </v-btn>
                                                 </v-flex>
                                             </v-layout>
                                             <v-divider></v-divider>
@@ -504,9 +522,9 @@
                                                     <v-card-text class="title ml-4 pl-2">{{exp.degree}} | <span class="title font-weight-light">{{exp.gradyear}}</span></v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                    <v-btn fab flat @click="includeEducation(exp)"><v-icon>add</v-icon></v-btn>
-                                                    <v-btn fab flat @click="removeFromDisplay('education',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                    <v-btn @click="deleteItem('education',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
+                                                    <v-btn fab flat @click="includeEducation(exp); apply('statement')"><v-icon>add</v-icon></v-btn>
+                                                    <v-btn fab flat @click="removeFromDisplay('education',exp._id); apply('statement')"><v-icon>remove</v-icon></v-btn>
+                                                    <v-btn @click="deleteItem('education',exp); apply('statement')" icon><v-icon color="grey">delete</v-icon></v-btn>
                                                 </v-flex>
                                             </v-layout>
                                         </div>
@@ -532,9 +550,9 @@
                                                     
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-btn fab flat @click="includeAccomplishment(exp)"><v-icon>add</v-icon></v-btn>
-                                                        <v-btn fab flat @click="removeFromDisplay('accomplishment',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                        <v-btn @click="deleteItem('accomplishment',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
+                                                        <v-btn fab flat @click="includeAccomplishment(exp); apply('statement')"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('accomplishment',exp._id); apply('statement')"><v-icon>remove</v-icon></v-btn>
+                                                        <v-btn @click="deleteItem('accomplishment',exp); apply('statement')" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
                                             </v-layout>
@@ -561,9 +579,9 @@
                                                     <v-card-text class="ml-4 pl-2">{{exp.description}}</v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-btn fab flat @click="includeAward(exp)"><v-icon>add</v-icon></v-btn>
-                                                        <v-btn fab flat @click="removeFromDisplay('award',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                        <v-btn @click="deleteItem('award',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
+                                                        <v-btn fab flat @click="includeAward(exp); apply('statement')"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('award',exp._id); apply('statement')"><v-icon>remove</v-icon></v-btn>
+                                                        <v-btn @click="deleteItem('award',exp); apply('statement')" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
                                             </v-layout>
@@ -588,9 +606,9 @@
                                                     <v-card-text class="headline pa-1 ml-3">{{exp.title}} | <span class="title font-weight-light">{{exp.proficiency}}</span></v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-btn fab flat @click="includeLanguage(exp)"><v-icon>add</v-icon></v-btn>
-                                                        <v-btn fab flat @click="removeFromDisplay('language',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                        <v-btn @click="deleteItem('language',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
+                                                        <v-btn fab flat @click="includeLanguage(exp); apply('statement')"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('language',exp._id); apply('statement')"><v-icon>remove</v-icon></v-btn>
+                                                        <v-btn @click="deleteItem('language',exp); apply('statement')" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
                                             </v-layout>
@@ -616,9 +634,9 @@
                                                     <v-card-text class="ml-4 pl-2">{{exp.description}}</v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-btn fab flat @click="includeExtracurricular(exp)"><v-icon>add</v-icon></v-btn>
-                                                        <v-btn fab flat @click="removeFromDisplay('extracurricular',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                        <v-btn @click="deleteItem('extracurricular',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
+                                                        <v-btn fab flat @click="includeExtracurricular(exp); apply('statement')"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('extracurricular',exp._id); apply('statement')"><v-icon>remove</v-icon></v-btn>
+                                                        <v-btn @click="deleteItem('extracurricular',exp); apply('statement')" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
                                             </v-layout>
@@ -643,9 +661,9 @@
                                                     <v-card-text class="headline pa-1 ml-3">{{exp.title}} | <span class="title font-weight-light">{{exp.proficiency}}</span></v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-btn fab flat @click="includeProgram(exp)"><v-icon>add</v-icon></v-btn>
-                                                        <v-btn fab flat @click="removeFromDisplay('program',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                        <v-btn @click="deleteItem('program',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
+                                                        <v-btn fab flat @click="includeProgram(exp); apply('statement')"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('program',exp._id); apply('statement')"><v-icon>remove</v-icon></v-btn>
+                                                        <v-btn @click="deleteItem('program',exp); apply('statement')" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
                                             </v-layout>
@@ -670,9 +688,9 @@
                                                     <v-card-text class="headline pa-1 ml-3">{{exp.title}}</v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-btn fab flat @click="includeSkill(exp)"><v-icon>add</v-icon></v-btn>
-                                                        <v-btn fab flat @click="removeFromDisplay('softskill',exp._id)"><v-icon>remove</v-icon></v-btn>
-                                                        <v-btn @click="deleteItem('softskill',exp)" icon><v-icon color="grey">delete</v-icon></v-btn>
+                                                        <v-btn fab flat @click="includeSkill(exp); apply('statement')"><v-icon>add</v-icon></v-btn>
+                                                        <v-btn fab flat @click="removeFromDisplay('softskill',exp._id); apply('statement')"><v-icon>remove</v-icon></v-btn>
+                                                        <v-btn @click="deleteItem('softskill',exp); apply('statement')" icon><v-icon color="grey">delete</v-icon></v-btn>
 
                                                 </v-flex>
                                             </v-layout>
@@ -897,6 +915,8 @@
                                                         <v-card-text class="display-1 pa-1 ">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}} | <span class="headline">{{personalinfoEdit.professional_title}}</span> </v-card-text>
                                                         <v-card-text class="headline pa-1 ">{{personalinfoEdit.email}}</v-card-text>
                                                         <v-card-text class="headline pa-1 ">{{personalinfoEdit.phone}}</v-card-text>
+                                                        <v-card-text class="body-2 pa-1 ">{{personalinfoEdit.address}}</v-card-text>
+                                                        <v-card-text class="body-2 pa-1 ">{{personalinfoEdit.city}}{{personalinfoEdit.state}}{{personalinfoEdit.zip}}</v-card-text>
                                                     </v-card>
                                                 </v-flex>
                                             </v-layout>
@@ -1343,5 +1363,5 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
     <script src="html5kellycolorpicker.js"></script>
-	<script src="code.js"></script>
+	<script src="hannahcode1.js"></script>
 </html>

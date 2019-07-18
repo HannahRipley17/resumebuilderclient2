@@ -177,6 +177,16 @@ var app= new Vue ({
       zone6_type: "",
       zone7_type: "",
 
+      workexpcheck: false,
+      educationcheck: false,
+      accomplishmentscheck: false,
+      extracurricularscheck: false,
+      languagescheck: false,
+      programscheck: false,
+      softskillscheck: false,
+      statementcheck: false,
+      awardscheck: false,
+
 
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -953,7 +963,8 @@ var app= new Vue ({
         },
 
         deleteItem:  function(thing,item){
-          console.log("Trying to deletes")
+          console.log("Trying to deletes");
+          app.removeFromDisplay(thing, item._id);
           fetch(`${url}/${thing}/${item._id}`,
           {
             credentials: "include",
@@ -967,6 +978,7 @@ var app= new Vue ({
                 alert(data.msg)
               })
             }
+
 
           });
 
