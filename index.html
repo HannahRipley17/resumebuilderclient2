@@ -317,13 +317,13 @@
                             <v-expansion-panel-content id="techskills">
                                     <template v-slot:header> <v-card-text class="display-1">Programs & Software</v-card-text></template>
                                     <v-card class="ma-2 pa-4">
-                                        <v-text-field box label="Program or Software" v-model="programsEdit.title"></v-text-field> <!-- changed -->
+                                        <v-text-field box label="Program or Software" v-model="programsEdit.title"></v-text-field>
                                         <v-overflow-btn
                                             :items="proficiencylist"
                                             label="Level of Proficiency"
                                             item-value=""
                                             v-model="programsEdit.proficiency">
-                                        </v-overflow-btn> <!-- changed button label -->
+                                        </v-overflow-btn>
                                         <v-btn @click="submitProgram()">Add Skill</v-btn>
 
                                     </v-card>
@@ -378,7 +378,7 @@
                                         transition="scale-transition"
                                         offset-y
                                         full-width
-                                        min-width="290px"> <!-- changed v-model -->
+                                        min-width="290px">
                                         <template v-slot:activator="{ on }">
                                         <v-text-field
                                             box
@@ -391,7 +391,7 @@
                                         </template>
                                         <v-date-picker v-model="extracurricularEdit.date" @input="extracurricularEdit.menu = false" type="month">
 
-                                        </v-date-picker> <!-- changed,  added at input -->
+                                        </v-date-picker>
                                     </v-menu>
                                     <v-btn @click="submitExtracurricular()">Add Extracurricular Activity</v-btn>
                                 </v-card>
@@ -415,22 +415,22 @@
                 </div>
 
                 <div v-show="page == 'savedinfo'">
-                    <v-container> <!-- changed -->
+                    <v-container>
                         <v-layout>
-                                <v-flex xs3> <!-- changed -->
-                                    <v-card class="ma-3 pa-3"> <!-- changed -->
-                                        <p class="title font-weight-light">Click the <v-icon>add</v-icon>  icon to use the piece of information on the current resume.</p> <!-- changed -->
-                                    </v-card> <!-- changed -->
-                                    <v-card flat color="rgba(0,0,0,0)" height="5%"> <!-- changed -->
-                                    </v-card> <!-- changed -->
-                                    <v-card class="ma-3 pa-3"> <!-- changed -->
-                                        <p class="title font-weight-light">Choose a position to change the layout of the information on the resume.</p> <!-- changed -->
-                                    </v-card> <!-- changed -->
-                                </v-flex> <!-- changed -->
-                                <v-flex xs9> <!-- changed -->
+                                <v-flex xs3>
+                                    <v-card class="ma-3 pa-3">
+                                        <p class="title font-weight-light">Click the <v-icon>add</v-icon>  icon to use the piece of information on the current resume.</p>
+                                    </v-card>
+                                    <v-card flat color="rgba(0,0,0,0)" height="5%">
+                                    </v-card>
+                                    <v-card class="ma-3 pa-3">
+                                        <p class="title font-weight-light">Choose a position to change the layout of the information on the resume.</p>
+                                    </v-card>
+                                </v-flex>
+                                <v-flex xs9>
                                     <v-card class="ma-3 pa-3" id="personalinformation1">
                                         <v-card-text class="display-1">Personal Information</v-card-text>
-                                        <div v-show="personalinfoEdit.first_name !='' " class="subheading pa-1 ml-3"> <!-- changed -->
+                                        <div v-show="personalinfoEdit.first_name !='' " class="subheading pa-1 ml-3">
                                             <v-card-text class="headline pa-1 ml-3">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}}</v-card-text>
                                             <v-card-text class="headline pa-1 ml-3">{{personalinfoEdit.email}}</v-card-text>
                                             <v-card-text class="headline pa-1 ml-3">{{personalinfoEdit.professional_title}}</v-card-text>
@@ -467,7 +467,7 @@
                                         </v-card>
                                     <v-card class="ma-3 pa-3" id="workexp1">
                                         <v-card-text class="display-1">Work Experience</v-card-text>
-                                        <v-radio-group v-model="workexpposition" row>
+                                        <!-- <v-radio-group v-model="workexpposition" row>
                                             <span>Pick a position</span><br>
                                             <v-radio label=" 1" value="1"></v-radio>
                                             <v-radio label=" 2" value="2"></v-radio>
@@ -476,21 +476,21 @@
                                             <v-radio label="5" value="5"></v-radio>
                                             <v-radio label="6" value="6"></v-radio>
                                             <v-radio label="7" value="7"></v-radio>
-                                        </v-radio-group>
-                                        <!-- <v-menu offset-y>
-                                                <template v-slot:activator="{ on }">
-                                                    <v-btn v-on="on"> Pick an area </v-btn>
-                                                </template>
-                                                <v-list>
-                                                    <v-list-tile
-                                                        v-for="(item, index) in templates"
-                                                        :key="index"
-                                                        @click="template = item.model, templateLabel = item.name"
-                                                        >
-                                                        <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-                                                    </v-list-tile>
-                                                    </v-list>
-                                            </v-menu> -->
+                                        </v-radio-group> -->
+                                        <v-menu offset-y>
+                                            <template v-slot:activator="{ on }">
+                                                <v-btn v-on="on"> Pick an area </v-btn>
+                                            </template>
+                                            <v-list>
+                                                <v-list-tile
+                                                    v-for="(position, index) in workexppositions"
+                                                    :key="index"
+                                                    @click="workexpposition = position"
+                                                    >
+                                                    <v-list-tile-title>{{ position }}</v-list-tile-title>
+                                                </v-list-tile>
+                                                </v-list>
+                                        </v-menu>
                                         <div v-for="exp in workexplist">
                                             <v-layout>
                                                 <v-flex xs10>
@@ -500,13 +500,13 @@
                                                     <v-card-text class="ml-4 pl-2">{{exp.description}}</v-card-text><br>
                                                 </v-flex>
                                                 <v-flex xs2>
-                                                    <v-btn fab flat @click="includeWork(exp); apply('statement'); exp.displayShow = !exp.displayShow " v-if="exp.displayShow">
+                                                    <v-btn fab flat @click="addToDisplay(exp,'workexp')" v-if="!exp.displayShow">{{exp.displayShow}}
                                                         <v-icon big>check_box_outline_blank</v-icon>
                                                     </v-btn>
-                                                    <v-btn fab flat @click="removeFromDisplay('workexp',exp._id); apply('statement'); exp.displayShow = !exp.displayShow" v-if="!exp.displayShow">
+                                                    <v-btn fab flat @click="removeFromDisplay('workexp',exp._id); apply('workexp'); exp.displayShow = !exp.displayShow" v-if="exp.displayShow">{{exp.displayShow}}
                                                         <v-icon big>check_box</v-icon>
                                                     </v-btn>
-                                                    <v-btn @click="deleteItem('workexp',exp); apply('statement')" icon>
+                                                    <v-btn @click="deleteItem('workexp',exp); apply('workexp')" icon>
                                                         <v-icon big color="grey">delete</v-icon>
                                                     </v-btn>
                                                 </v-flex>
@@ -517,7 +517,7 @@
                                     </v-card>
                                     <v-card class="ma-3 pa-3" id="education1">
                                         <v-card-text class="display-1">Education</v-card-text>
-                                        <v-radio-group v-model="educationposition" row>
+                                        <!-- <v-radio-group v-model="educationposition" row>
                                             <span>Pick a position</span><br>
                                             <v-radio label=" 1" value="1"></v-radio>
                                             <v-radio label=" 2" value="2"></v-radio>
@@ -526,7 +526,21 @@
                                             <v-radio label="5" value="5"></v-radio>
                                             <v-radio label="6" value="6"></v-radio>
                                             <v-radio label="7" value="7"></v-radio>
-                                        </v-radio-group>
+                                        </v-radio-group> -->
+                                        <v-menu offset-y>
+                                                <template v-slot:activator="{ on }">
+                                                    <v-btn v-on="on"> Pick an area </v-btn>
+                                                </template>
+                                                <v-list>
+                                                    <v-list-tile
+                                                        v-for="(position, index) in educationpositions"
+                                                        :key="index"
+                                                        @click="educationposition = position"
+                                                        >
+                                                        <v-list-tile-title>{{ position }}</v-list-tile-title>
+                                                    </v-list-tile>
+                                                    </v-list>
+                                            </v-menu>
                                         <div v-for="exp in educationlist">
                                             <v-layout>
                                                 <v-flex xs9>
@@ -1312,9 +1326,7 @@
                                                                 <v-card-text class="pa-1">{{awardsEdit.description}}</v-card-text>
                                                             </v-card>
                                                         </v-flex>
-                                                    <!-- </v-layout>
-            
-                                                    <v-layout> -->
+                                                   
                                                         <v-flex xs3 class="pa-1">
                                                             <v-container grid-list-lg fluid>
                                                                 <v-layout column>
