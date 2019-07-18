@@ -71,6 +71,7 @@ var app= new Vue ({
           title: "",
           description: "",
           date: "",
+          menu: false,
           user_id: ""
         },
         languagesEdit: {
@@ -202,7 +203,7 @@ var app= new Vue ({
   
 
     methods: {
-      toPrint: function(divID) { //changed
+      toPrint: function(divID) { 
         var divElements = document.getElementById(divID).innerHTML;
         var oldPage = document.body.innerHTML;
 
@@ -934,6 +935,7 @@ var app= new Vue ({
             title: "",
             description: "",
             date: "",
+            menu:false
           }
           app.getData("extracurricular");
 
