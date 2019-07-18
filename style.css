@@ -34,10 +34,77 @@ z-index: 100;
    background-attachment: fixed;
    font-family: 'Nunito Sans', 'Roboto', sans-serif;
  }
- #hero { /*changed*/
+ #hero { 
    height: 60%;
-   margin: 14% 0;
+   margin: 20% 0 36% 0;
  }
+ #page {
+    height: 1414.7px;
+    width: 1093.3px;
+    margin: 0px auto;
+ }
+ .homeMargin {
+    margin: 30% 0;
+ }
+
+
+ .display-4Def { /*changed until bottom*/
+  font-size: 112px;
+  font-weight: 100;
+ }
+ .display-3Def {
+  font-size: 56px;
+  font-weight: 400;
+ }
+ .display-2Def {
+  font-size: 45px;
+  font-weight: 400;
+ }
+ .display-1Def {
+  font-size: 34px;
+  font-weight: 400;
+ }
+ .headlineDef {
+  font-size: 24px;
+  font-weight: 400;
+ }
+  .titleDef {
+  font-size: 20px;
+  font-weight: 500;
+ }
+  .subheadingDef {
+  font-size: 16px;
+  font-weight: 400;
+ }
+  .body-2Def {
+  font-size: 14px;
+  font-weight: 500;
+ }
+  .body-1Def {
+  font-size: 24px;
+  font-weight: 400;
+ }
+  .captionDef {
+  font-size: 24px;
+  font-weight: 400;
+ }
+
+ @media only screen and (max-width: 1247px) {
+  #page {
+    height: 1061px;
+    width: 820px;
+  }
+}
+ @media only screen and (max-width: 850px) {
+  #page {
+    height: 530.5px;
+    width: 410px;
+  }
+  #hero {
+    height: 100%;
+    margin: 30% 0;
+  }
+}
 
  /*
 .dark { color: rgba(85, 82, 89, 1); }

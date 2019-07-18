@@ -129,12 +129,20 @@ var app= new Vue ({
           name: "Template 2"
         },
         {
-          model: "taft",
+          model: "basezones",
           name: "Template 3"
         },
         {
           model: "sharon",
           name: "Template 4"
+        },
+        {
+          model: "template5",
+          name: "Template 5"
+        },
+        {
+          model: "template6",
+          name: "Template 6"
         },
       ],
       
@@ -211,7 +219,7 @@ var app= new Vue ({
   
 
     methods: {
-      toPrint: function(divID) { 
+      toPrint: function(divID) {
         var divElements = document.getElementById(divID).innerHTML;
         var oldPage = document.body.innerHTML;
 
@@ -235,6 +243,7 @@ var app= new Vue ({
         app.getData("program");
         app.getData("softskill");
         app.getData("award");
+        app.includeDisplay()
         },
 
       register: function() {
@@ -592,7 +601,7 @@ var app= new Vue ({
           this.zone7 = display;
           this.zone7_type = type;
       },
-      
+
 
       newKellyColorPickerMain: function () {
         addEventListener("click", function () {
@@ -634,60 +643,96 @@ var app= new Vue ({
       },
 
       includeDisplay: function () {
-        this.getData();
+        
+        var newdisplay=[]
+        app.statementdisplay= [];
+        app.workexpdisplay= [];
+        app.educationdisplay= [];
+        app.accomplishmentdisplay= [];
+        app.extracurriculardisplay= [];
+        app.languagesdisplay= [];
+        app.programsdisplay= [];
+        app.softskillsdisplay= [];
+        app.awardsdisplay= [];
+
+
         app.educationlist.forEach(function(item){
           if(item.displayShow == true){
-            app.educationdisplay.push(item)
+            newdisplay.push(item);
+            app.educationdisplay=newdisplay;
+            newdisplay=[];
           }
         });
         app.workexplist.forEach(function(item){
+
+
           if(item.displayShow == true){
-            app.workexpdisplay.push(item)
+            newdisplay.push(item);
+            app.workexpdisplay=newdisplay
+            newdisplay=[];
+
           }
         });
         app.accomplishmentlist.forEach(function(item){
           if(item.displayShow == true){
-            app.accomplishmentdisplay.push(item)
+            newdisplay.push(item);
+            app.accomplishmentdisplay=newdisplay
+            newdisplay=[];
           }
         });
         app.extracurricularlist.forEach(function(item){
           if(item.displayShow == true){
-            app.extracurriculardisplay.push(item)
+            newdisplay.push(item);
+            app.extracurriculardisplay=newdisplay
+            newdisplay=[];
           }
         });
         app.languageslist.forEach(function(item){
           if(item.displayShow == true){
-            app.languagesdisplay.push(item)
+            newdisplay.push(item);
+            app.languagesdisplay=newdisplay
+            newdisplay=[];
           }
         });
         app.programslist.forEach(function(item){
           if(item.displayShow == true){
-            app.programsdisplay.push(item)
+            newdisplay.push(item);
+            app.programsdisplay=newdisplay
+            newdisplay=[];
           }
         });
         app.softskillslist.forEach(function(item){
           if(item.displayShow == true){
-            app.softskillsdisplay.push(item)
+            newdisplay.push(item);
+            app.softskillsdisplay=newdisplay
+            newdisplay=[];
           }
         });
         app.awardslist.forEach(function(item){
           if(item.displayShow == true){
-            app.awardsdisplay.push(item)
+            newdisplay.push(item);
+            app.awardsdisplay=newdisplay
+            newdisplay=[];
           }
         });
         app.statementlist.forEach(function(item){
           if(item.displayShow == true){
-            app.statementdisplay.push(item)
+            newdisplay.push(item);
+            app.statementdisplay=newdisplay
+            newdisplay=[];
           }
         });
 
 
       },
 
-      addToDisplay: function (item,what) {
-        item.displayShow != item.displayShow;
-        fetch(`${url}/${what}/${item._id}`, {
+      addToDisplay: function (item,want) {
+
+        item.displayShow = !item.displayShow;
+
+        fetch(`${url}/${want}/${item._id}`, {
           method:"PUT",
+          credentials: "include",
           headers:{
             "Content-type": "application/json"
           },
@@ -698,7 +743,6 @@ var app= new Vue ({
               alert(data.msg)
             });
           } else {
-            app.getData(what);
             app.includeDisplay();
           }
         });
@@ -740,14 +784,14 @@ var app= new Vue ({
   			});
 
       },
-  
+
 
       getData: function(want) {
         fetch(`${url}/${want}`,{
           credentials: "include"
         }).then(function (response) { //then executes when browser has received response from browser
           response.json().then(function (data) {
-  
+
             if(want=="statement"){
               app.statementlist = data.statementlist
             }
@@ -775,7 +819,8 @@ var app= new Vue ({
             if(want=="award"){
               app.awardslist = data.awardlist
             }
-  
+            app.includeDisplay();
+
             });
           });
         },
@@ -820,7 +865,7 @@ var app= new Vue ({
       },
 
         submitStatement: function (){
-          app.checklogin() 
+          app.checklogin()
           app.statementEdit.user_id = app.userID
           fetch(`${url}/statement`, {
             credentials: "include",
@@ -844,7 +889,7 @@ var app= new Vue ({
         },
 
         submitNewWorkexp: function (){
-          app.checklogin() 
+          app.checklogin()
           app.workexpEdit.user_id = app.userID
           fetch(`${url}/workexp`, {
             credentials: "include",
@@ -873,8 +918,8 @@ var app= new Vue ({
 
         },
 
-        submitEducation: function (){ 
-          app.checklogin() 
+        submitEducation: function (){
+          app.checklogin()
           app.educationEdit.user_id = app.userID
           fetch(`${url}/education`, {
             credentials: "include",
@@ -902,8 +947,8 @@ var app= new Vue ({
 
         },
 
-        submitAccomplishment: function (){ 
-          app.checklogin() 
+        submitAccomplishment: function (){
+          app.checklogin()
           app.accomplishmentEdit.user_id = app.userID
           fetch(`${url}/accomplishment`, {
             credentials: "include",
@@ -927,8 +972,8 @@ var app= new Vue ({
 
         },
 
-        submitLanguage: function (){ 
-          app.checklogin() 
+        submitLanguage: function (){
+          app.checklogin()
           app.languagesEdit.user_id = app.userID
           fetch(`${url}/language`, {
             credentials: "include",
@@ -952,8 +997,8 @@ var app= new Vue ({
 
         },
 
-        submitProgram: function (){ 
-          app.checklogin() 
+        submitProgram: function (){
+          app.checklogin()
           app.programsEdit.user_id = app.userID
           fetch(`${url}/program`, {
             credentials: "include",
@@ -976,8 +1021,8 @@ var app= new Vue ({
 
 
         },
-        submitAward: function (){ 
-          app.checklogin() 
+        submitAward: function (){
+          app.checklogin()
           app.awardsEdit.user_id = app.userID
           fetch(`${url}/award`, {
             credentials: "include",
@@ -1005,7 +1050,7 @@ var app= new Vue ({
         },
 
         submitExtracurricular: function (){
-          app.checklogin() 
+          app.checklogin()
           app.extracurricularEdit.user_id = app.userID
           fetch(`${url}/extracurricular`, {
             credentials: "include",
@@ -1030,8 +1075,8 @@ var app= new Vue ({
 
 
         },
-        submitSoftskill: function (){ 
-          app.checklogin() 
+        submitSoftskill: function (){
+          app.checklogin()
           app.checklogin()
           app.softskillsEdit.user_id = app.userID
           fetch(`${url}/softskill`, {
