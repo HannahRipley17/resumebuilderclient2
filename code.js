@@ -5,6 +5,7 @@ var app= new Vue ({
     el: "#app1",
 
     data: {
+      loadinglists: false,
       username: "", 
       password: "", 
       userID: "",
@@ -144,6 +145,10 @@ var app= new Vue ({
           model: "template6",
           name: "Template 6"
         },
+        {
+          model: "template7",
+          name: "Template 7"
+        },
       ],
       
       statementdisplay: [],
@@ -167,6 +172,19 @@ var app= new Vue ({
       programsposition: 0,
       softskillsposition: 0,
       awardsposition: 0,
+
+      positionEdit: {
+        statementposition: 0,
+        workexpposition: 0,
+        educationposition: 0,
+        accomplishmentposition: 0,
+        extracurricularposition: 0,
+        languagesposition: 0,
+        programsposition: 0,
+        softskillsposition: 0,
+        awardsposition: 0,
+        user_id: "",
+      },
 
       statementpositions: ["1", "2", "3", "4", "5", "6", "7"],
       workexppositions: ["1", "2", "3", "4", "5", "6", "7"],
@@ -204,6 +222,16 @@ var app= new Vue ({
       statementcheck: false,
       awardscheck: false,
 
+      loginError: false, 
+      loginErrorMsg: "", 
+      loginSuccess: false, 
+      registerSuccess: false, 
+
+      addError: false, 
+      addErrorMsg: "", 
+      deleteError: false, 
+      deleteErrorMsg: "", 
+
 
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -232,41 +260,32 @@ var app= new Vue ({
         document.location.reload(true);
   },
 
-      loadlists: function() {
-        app.checklogin();
-        app.getData("statement");
-        app.getData("workexp");
-        app.getData("education");
-        app.getData("accomplishment");
-        app.getData("extracurricular");
-        app.getData("language");
-        app.getData("program");
-        app.getData("softskill");
-        app.getData("award");
-        app.includeDisplay()
-        },
 
-      register: function() {
-  			fetch(`${url}/users/register`, {
-  				method: "POST",
-  				credentials: "include",
-  				headers: {
-  					"Content-type": "application/json"
-  				},
-  				body: JSON.stringify({
-  					username: this.username,
-  					password: this.password
-  				})
-  			}).then(function(response) {
-  				if (response.status == 422 || response.status == 400) {
-  					response.json().then(function(data) {
-  						alert(data.msg);
-  					})
-  				} else if (response.status == 201) {
-  					console.log("registered");
-  				}
-  			});
-  		},
+  register: function() {
+    fetch(`${url}/users/register`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        username: this.username,
+        password: this.password
+      })
+    }).then(function(response) {
+      if (response.status == 422 || response.status == 400) {
+        response.json().then(function(data) {
+          app.loginError = true; //changed
+          console.log("Error", data.msg);//changed
+          app.loginErrorMsg = "Username and Password are required"; //changed
+        })
+      } else if (response.status == 201) {
+        app.loginError = false; // changed
+        app.registerSuccess = true;//changed
+        app.page = "form"; //changed
+      }
+    });
+  },
 
   		login: function() {
         console.log(this.username);
@@ -283,10 +302,12 @@ var app= new Vue ({
   			}).then(function(response) {
   				if (response.status == 403) {
   					response.json().then(function(data) {
-  						alert(data.msg);
+  						app.loginError = true; //changed
+              app.loginErrorMsg = data.msg; //changed
   					})
   				}else if(response.status == 200){
-            alert("logged in");
+              app.loginError = false; // changed
+              app.loginSuccess = true;//changed
             response.json().then( function(data){
               app.userID = data.user_id
               app.page = "form";
@@ -297,6 +318,7 @@ var app= new Vue ({
           }
   			});
   		},
+
 
       phoneNum: function () {
         var x = this.personalinfoEdit.phone.replace(/\D/g, '').match(`(\d{0,3})(\d{0,3})(\d{0,4})`);
@@ -642,89 +664,7 @@ var app= new Vue ({
         };
       },
 
-      includeDisplay: function () {
-        
-        var newdisplay=[]
-        app.statementdisplay= [];
-        app.workexpdisplay= [];
-        app.educationdisplay= [];
-        app.accomplishmentdisplay= [];
-        app.extracurriculardisplay= [];
-        app.languagesdisplay= [];
-        app.programsdisplay= [];
-        app.softskillsdisplay= [];
-        app.awardsdisplay= [];
 
-
-        app.educationlist.forEach(function(item){
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.educationdisplay=newdisplay;
-            newdisplay=[];
-          }
-        });
-        app.workexplist.forEach(function(item){
-
-
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.workexpdisplay=newdisplay
-            newdisplay=[];
-
-          }
-        });
-        app.accomplishmentlist.forEach(function(item){
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.accomplishmentdisplay=newdisplay
-            newdisplay=[];
-          }
-        });
-        app.extracurricularlist.forEach(function(item){
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.extracurriculardisplay=newdisplay
-            newdisplay=[];
-          }
-        });
-        app.languageslist.forEach(function(item){
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.languagesdisplay=newdisplay
-            newdisplay=[];
-          }
-        });
-        app.programslist.forEach(function(item){
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.programsdisplay=newdisplay
-            newdisplay=[];
-          }
-        });
-        app.softskillslist.forEach(function(item){
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.softskillsdisplay=newdisplay
-            newdisplay=[];
-          }
-        });
-        app.awardslist.forEach(function(item){
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.awardsdisplay=newdisplay
-            newdisplay=[];
-          }
-        });
-        app.statementlist.forEach(function(item){
-          if(item.displayShow == true){
-            newdisplay.push(item);
-            app.statementdisplay=newdisplay
-            newdisplay=[];
-          }
-        });
-
-
-      },
 
       addToDisplay: function (item,want) {
 
@@ -740,14 +680,183 @@ var app= new Vue ({
         }).then(function (response) {
           if (response.status == 400){
             response.json().then(function (data) {
-              alert(data.msg)
+              app.addError = true; // changed
+              app.addErrorMsg = data.msg; // changed
             });
           } else {
+            app.addError = false; // changed
             app.includeDisplay();
           }
         });
       },
 
+      loadlists: async function() {
+        app.loadinglists = true;
+        app.checklogin()
+          console.log("starting loadlist");
+          await app.getData("statement");
+          await app.getData("workexp");
+          await app.getData("education");
+          await app.getData("accomplishment");
+          await app.getData("extracurricular");
+          await app.getData("language");
+          await app.getData("program");
+          await app.getData("softskill");
+          await app.getData("award");
+          app.includeDisplay();
+        
+        app.loadinglists = false;
+        console.log("reloading");
+        },
+
+      includeDisplay: function () {
+        var newdisplay=[]
+        app.statementdisplay= [];
+        app.workexpdisplay= [];
+        app.educationdisplay= [];
+        app.accomplishmentdisplay= [];
+        app.extracurriculardisplay= [];
+        app.languagesdisplay= [];
+        app.programsdisplay= [];
+        app.softskillsdisplay= [];
+        app.awardsdisplay= [];
+
+        app.educationlist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.educationdisplay=newdisplay;
+        newdisplay=[];
+
+        app.workexplist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.workexpdisplay=newdisplay
+        newdisplay=[];
+
+        app.accomplishmentlist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.accomplishmentdisplay=newdisplay
+        newdisplay=[];
+
+        app.extracurricularlist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.extracurriculardisplay=newdisplay
+        newdisplay=[];
+
+        app.languageslist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.languagesdisplay=newdisplay
+        newdisplay=[];
+
+        app.programslist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.programsdisplay=newdisplay
+        newdisplay=[];
+
+        app.softskillslist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.softskillsdisplay=newdisplay
+        newdisplay=[];
+
+        app.awardslist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.awardsdisplay=newdisplay
+        newdisplay=[];
+
+        app.statementlist.forEach(function(item){
+          if(item.displayShow == true){
+            newdisplay.push(item);
+          }
+        });
+        app.statementdisplay=newdisplay
+        newdisplay=[];
+      },
+
+      getPosition: function () {
+        fetch(`${url}/position`,{
+          credentials: "include"
+        }).then(function (response) { //then executes when browser has received response from browser
+          response.json().then(function (data) {
+            app.statementposition = data. statementposition;
+            app.workexpposition = data.workexpposition;
+            app.educationposition = data.educationposition;
+            app.accomplishmentposition = data.accomplishmentposition;
+            app.extracurricularposition = data.extracurricularposition;
+            app.languagesposition = data.languagesposition;
+            app.programsposition = data.programsposition;
+            app.softskillsposition = data.softskillsposition;
+            app.awardsposition = data.awardsposition;
+          });
+        });
+
+      },
+
+      newPosition: function (){
+        app.checklogin()
+        app.positionEdit.user_id = app.userID
+        fetch(`${url}/position`, {
+          credentials: "include",
+          method:"POST",
+          headers:{
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(app.positionEdit)
+      }).then(function (response) {
+        //response.json().then((data)=>{console.log(data.msg)})
+        app.statementposition = response. statementposition;
+        app.workexpposition = response.workexpposition;
+        app.educationposition = response.educationposition;
+        app.accomplishmentposition = response.accomplishmentposition;
+        app.extracurricularposition = response.extracurricularposition;
+        app.languagesposition = response.languagesposition;
+        app.programsposition = response.programsposition;
+        app.softskillsposition = response.softskillsposition;
+        app.awardsposition = response.awardsposition;
+      });
+      },
+
+      setPosition: function () {
+        item.displayShow = !item.displayShow;
+        fetch(`${url}/position/${item._id}`, {
+          method:"PUT",
+          credentials: "include",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(item)
+        }).then(function (response) {
+          if (response.status == 400){
+            response.json().then(function (data) {
+              alert(data.msg)
+            });
+          }
+          app.getPosition();
+        });
+      },
+
+      
 
       pdfSave: function () {
         var doc = new jsPDF();
@@ -773,10 +882,12 @@ var app= new Vue ({
   						alert(data.msg);
               app.userID = ""
               app.page = "login"
+              return false
   					})
   				}else if(response.status == 200){
             response.json().then( function(data){
               app.userID = data.user_id
+              return true
 
             })
 
@@ -787,6 +898,8 @@ var app= new Vue ({
 
 
       getData: function(want) {
+        return new Promise(resolve => {
+
         fetch(`${url}/${want}`,{
           credentials: "include"
         }).then(function (response) { //then executes when browser has received response from browser
@@ -819,9 +932,10 @@ var app= new Vue ({
             if(want=="award"){
               app.awardslist = data.awardlist
             }
-            app.includeDisplay();
+            resolve(true);
 
             });
+          });
           });
         },
 
@@ -884,8 +998,6 @@ var app= new Vue ({
           app.getData("statement");
 
         });
-
-
         },
 
         submitNewWorkexp: function (){
@@ -1077,7 +1189,6 @@ var app= new Vue ({
         },
         submitSoftskill: function (){
           app.checklogin()
-          app.checklogin()
           app.softskillsEdit.user_id = app.userID
           fetch(`${url}/softskill`, {
             credentials: "include",
@@ -1109,11 +1220,12 @@ var app= new Vue ({
             method: "DELETE"
           }).then(function(response){
             if (response.status == 204){
-              console.log("Deleted Item")
+              console.log("Deleted Item");
               app.getData(thing);
             } else if(response.status == 400){
               response.json().then(function(data){
-                alert(data.msg)
+                app.deleteError = true; //changed
+                app.deleteErrorMsg = data.msg; //changed
               })
             }
 
@@ -1124,8 +1236,8 @@ var app= new Vue ({
 
 
 
-    },
 
+    },
     computed: {
         category_title_font: function () {
           return {
