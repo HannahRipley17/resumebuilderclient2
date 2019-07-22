@@ -19,8 +19,8 @@
                         <v-spacer></v-spacer>
                         <v-toolbar-items>
                             <v-btn flat @click="page = 'form'" class=" subheadingDef">Input Form</v-btn>
-                            <v-btn flat @click="page = 'savedinfo'; loadlists()" class="subheadingDef">Your Info</v-btn>
-                            <v-btn flat @click="page = 'preview'; loadlists()" class=" subheadingDef">Preview</v-btn>
+                            <v-btn flat @click="page = 'savedinfo'; loadlists(); getPosition()" class="subheadingDef">Your Info</v-btn>
+                            <v-btn flat @click="page = 'preview'; loadlists(); setPosition()" class=" subheadingDef">Preview</v-btn>
                             <v-btn flat @click="page = 'login'" class="subheadingDef">Login</v-btn>
                         </v-toolbar-items>
                 </v-toolbar>
@@ -28,8 +28,8 @@
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
                             <v-btn flat @click="page = 'form'" class=" subheadingDef">Input Form</v-btn>
-                            <v-btn flat @click="page = 'savedinfo'; loadlists()" class="subheadingDef">Your Info</v-btn>
-                            <v-btn flat @click="page = 'preview'; loadlists()" class=" subheadingDef">Preview</v-btn>
+                            <v-btn flat @click="page = 'savedinfo'; loadlists(); getPosition()" class="subheadingDef">Your Info</v-btn>
+                            <v-btn flat @click="page = 'preview'; loadlists(); setPosition()" class=" subheadingDef">Preview</v-btn>
                             <v-btn flat @click="page = 'login'" class="subheadingDef">Login</v-btn>
                     </v-toolbar-items>
                     
