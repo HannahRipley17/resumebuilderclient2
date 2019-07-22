@@ -13,6 +13,16 @@ var app= new Vue ({
       modal: false,
       page: "home",
       color: "",
+      panel: 0, 
+      panel1: 0, 
+      panel2: 0, 
+      panel3: 0, 
+      panel4: 0, 
+      panel5: 0, 
+      panel6: 0, 
+      panel7: 0, 
+      panel8: 0, 
+      panel9: 0, 
 
         educationlist:[],
         workexplist:[            
@@ -163,16 +173,6 @@ var app= new Vue ({
 
       add_remove: "",
 
-      statementposition: 0,
-      workexpposition: 0,
-      educationposition: 0,
-      accomplishmentposition: 0,
-      extracurricularposition: 0,
-      languagesposition: 0,
-      programsposition: 0,
-      softskillsposition: 0,
-      awardsposition: 0,
-
       positionEdit: {
         statementposition: 0,
         workexpposition: 0,
@@ -241,6 +241,7 @@ var app= new Vue ({
         v => !!v || 'This field is required',
       ],
     },
+
     created: function () {
       
     },
@@ -275,50 +276,49 @@ var app= new Vue ({
     }).then(function(response) {
       if (response.status == 422 || response.status == 400) {
         response.json().then(function(data) {
-          app.loginError = true; //changed
-          console.log("Error", data.msg);//changed
-          app.loginErrorMsg = "Username and Password are required"; //changed
+          app.loginError = true; 
+          console.log("Error", data.msg);
+          app.loginErrorMsg = "Username and Password are required"; 
         })
       } else if (response.status == 201) {
         app.loginError = false; // changed
-        app.registerSuccess = true;//changed
-        app.page = "form"; //changed
-        app.newPosition();
+        app.registerSuccess = true;
+        app.page = "form"; 
       }
     });
   },
 
-  		login: function() {
-        console.log(this.username);
-  			fetch(`${url}/users/login`, {
-  				method: "POST",
-  				credentials: "include",
-  				headers: {
-  					"Content-type": "application/json"
-  				},
-  				body: JSON.stringify({
-  					username: this.username,
-  					password: this.password
-  				})
-  			}).then(function(response) {
-  				if (response.status == 403) {
-  					response.json().then(function(data) {
-  						app.loginError = true; //changed
-              app.loginErrorMsg = data.msg; //changed
-  					})
-  				}else if(response.status == 200){
-              app.loginError = false; // changed
-              app.loginSuccess = true;//changed
-            response.json().then( function(data){
-              app.userID = data.user_id
-              app.page = "form";
-              app.loadlists();
+  login: function() {
+    console.log(this.username);
+    fetch(`${url}/users/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        username: this.username,
+        password: this.password
+      })
+    }).then(function(response) {
+      if (response.status == 403) {
+        response.json().then(function(data) {
+          app.loginError = true; 
+          app.loginErrorMsg = data.msg; 
+        })
+      }else if(response.status == 200){
+          app.loginError = false; // changed
+          app.loginSuccess = true;
+        response.json().then( function(data){
+          app.userID = data.user_id
+          app.page = "form";
+          app.loadlists();
 
-            })
+        })
 
-          }
-  			});
-  		},
+      }
+    });
+  },
 
 
       phoneNum: function () {
@@ -559,6 +559,7 @@ var app= new Vue ({
             app.positionEdit.softskillsposition = data.softskillsposition;
             app.positionEdit.awardsposition = data.awardsposition;
             console.log("ran");
+            app.setZone();
           });
         });
 
@@ -589,7 +590,7 @@ var app= new Vue ({
       },
 
       setPosition: function () {
-       
+        
         fetch(`${url}/position`, {
           method:"PUT",
           credentials: "include",
@@ -1023,8 +1024,8 @@ var app= new Vue ({
               app.getData(thing);
             } else if(response.status == 400){
               response.json().then(function(data){
-                app.deleteError = true; //changed
-                app.deleteErrorMsg = data.msg; //changed
+                app.deleteError = true; 
+                app.deleteErrorMsg = data.msg;
               })
             }
 
@@ -1038,14 +1039,15 @@ var app= new Vue ({
 
     },
     computed: {
-        category_title_font: function () {
-          return {
-            'subheading': this.$vuetify.breakpoint.xsOnly,
-            'title': this.$vuetify.breakpoint.smOnly,
-            'headline': this.$vuetify.breakpoint.mdOnly,
-            'display-1': this.$vuetify.breakpoint.lgOnly
-          }
+      
+      binding () {
+        const binding = {}
 
-        }
-      },
+        if (this.$vuetify.breakpoint.mdAndDown) binding.column = true
+
+        return binding
+    },
+},
+
+      
 })
