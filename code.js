@@ -186,15 +186,15 @@ var app= new Vue ({
         user_id: "",
       },
 
-      statementpositions: ["1", "2", "3", "4", "5", "6", "7"],
-      workexppositions: ["1", "2", "3", "4", "5", "6", "7"],
-      educationpositions: ["1", "2", "3", "4", "5", "6", "7"],
-      accomplishmentpositions: ["1", "2", "3", "4", "5", "6", "7"],
-      extracurricularpositions: ["1", "2", "3", "4", "5", "6", "7"],
-      languagespositions: ["1", "2", "3", "4", "5", "6", "7"],
-      programspositions: ["1", "2", "3", "4", "5", "6", "7"],
-      softskillspositions: ["1", "2", "3", "4", "5", "6", "7"],
-      awardspositions: ["1", "2", "3", "4", "5", "6", "7"],
+      statementpositions: [1,2,3,4,5,6,7],
+      workexppositions: [1,2,3,4,5,6,7],
+      educationpositions: [1,2,3,4,5,6,7],
+      accomplishmentpositions: [1,2,3,4,5,6,7],
+      extracurricularpositions: [1,2,3,4,5,6,7],
+      languagespositions: [1,2,3,4,5,6,7],
+      programspositions: [1,2,3,4,5,6,7],
+      softskillspositions: [1,2,3,4,5,6,7],
+      awardspositions: [1,2,3,4,5,6,7],
 
       zone1: [],
       zone2: [],
@@ -283,6 +283,7 @@ var app= new Vue ({
         app.loginError = false; // changed
         app.registerSuccess = true;//changed
         app.page = "form"; //changed
+        app.newPosition();
       }
     });
   },
@@ -374,255 +375,254 @@ var app= new Vue ({
       },
 
 
-      apply: function (type) {
-        var display = [];
-        if (type == "workexp") {
-          display = this.workexpdisplay;
-          if (this.workexpposition == "1") {
-            this.apply1(type,display,);
-          }
-          else if (this.workexpposition == "2") {
-            this.apply2(type,display);
-          }
-          else if (this.workexpposition == "3") {
-            this.apply3(type,display);
-          }
-          else if (this.workexpposition == "4") {
-            this.apply4(type,display);
-          }
-          else if (this.workexpposition == "5") {
-            this.apply5(type,display);
-          }
-          else if (this.workexpposition == "6") {
-            this.apply6(type,display);
-          }
-          else if (this.workexpposition == "7") {
-            this.apply7(type,display);
-          }
-        }
-        else if (type == "education") {
-          display = this.educationdisplay;
-          if (this.educationposition == "1") {
-            this.apply1(type, display);
-          }
-          else if (this.educationposition == "2") {
-            this.apply2(type, display);
-          }
-          else if (this.educationposition == "3") {
-            this.apply3(type, display);
-          }
-          else if (this.educationposition == "4") {
-            this.apply4(type, display);
-          }
-          else if (this.educationposition == "5") {
-            this.apply5(type, display);
-          }
-          else if (this.educationposition == "6") {
-            this.apply6(type, display);
-          }
-          else if (this.educationposition == "7") {
-            this.apply7(type, display);
-          }
-        }
-        else if (type == "statement") {
-          display = this.statementdisplay;
-          if (this.statementposition == "1") {
-            this.apply1(type, display);
-          }
-          else if (this.statementposition == "2") {
-            this.apply2(type, display);
-          }
-          else if (this.statementposition == "3") {
-            this.apply3(type, display);
-          }
-          else if (this.statementposition == "4") {
-            this.apply4(type, display);
-          }
-          else if (this.statementposition == "5") {
-            this.apply5(type, display);
-          }
-          else if (this.statementposition == "6") {
-            this.apply6(type, display);
-          }
-          else if (this.statementposition == "7") {
-            this.apply7(type, display);
-          }
-        }
-        else if (type == "accomplishment") {
-          display = this.accomplishmentdisplay;
-          if (this.accomplishmentposition == "1") {
-            this.apply1(type, display);
-          }
-          else if (this.accomplishmentposition == "2") {
-            this.apply2(type, display);
-          }
-          else if (this.accomplishmentposition == "3") {
-            this.apply3(type, display);
-          }
-          else if (this.accomplishmentposition == "4") {
-            this.apply4(type, display);
-          }
-          else if (this.accomplishmentposition == "5") {
-            this.apply5(type, display);
-          }
-          else if (this.accomplishmentposition == "6") {
-            this.apply6(type, display);
-          }
-          else if (this.accomplishmentposition == "7") {
-            this.apply7(type, display);
-          }
-        }
-        else if (type == "award") {
-          display = this.awardsdisplay;
-          if (this.awardsposition == "1") {
-            this.apply1(type, display);
-          }
-          else if (this.awardsposition == "2") {
-            this.apply2(type, display);
-          }
-          else if (this.awardsposition == "3") {
-            this.apply3(type, display);
-          }
-          else if (this.awardsposition == "4") {
-            this.apply4(type, display);
-          }
-          else if (this.awardsposition == "5") {
-            this.apply5(type, display);
-          }
-          else if (this.awardsposition == "6") {
-            this.apply6(type, display);
-          }
-          else if (this.awardsposition == "7") {
-            this.apply7(type, display);
-          }
-        }
-        else if (type == "language") {
-          display = this.languagesdisplay;
-          if (this.languagesposition == "1") {
-            this.apply1(type, display);
-          }
-          else if (this.languagesposition == "2") {
-            this.apply2(type, display);
-          }
-          else if (this.languagesposition == "3") {
-            this.apply3(type, display);
-          }
-          else if (this.languagesposition == "4") {
-            this.apply4(type, display);
-          }
-          else if (this.languagesposition == "5") {
-            this.apply5(type, display);
-          }
-          else if (this.languagesposition == "6") {
-            this.apply6(type, display);
-          }
-          else if (this.languagesposition == "7") {
-            this.apply7(type, display);
-          }
-        }
-        else if (type == "extracurricular") {
-          display = this.extracurriculardisplay;
-          if (this.extracurricularposition == "1") {
-            this.apply1(type, display);
-          }
-          else if (this.extracurricularposition == "2") {
-            this.apply2(type, display);
-          }
-          else if (this.extracurricularposition == "3") {
-            this.apply3(type, display);
-          }
-          else if (this.extracurricularposition == "4") {
-            this.apply4(type, display);
-          }
-          else if (this.extracurricularposition == "5") {
-            this.apply5(type, display);
-          }
-          else if (this.extracurricularposition == "6") {
-            this.apply6(type, display);
-          }
-          else if (this.extracurricularposition == "7") {
-            this.apply7(type, display);
-          }
-        }
-        else if (type == "programs") {
-          display = this.programsdisplay;
-          if (this.programsposition == "1") {
-            this.apply1(type, display);
-          }
-          else if (this.programsposition == "2") {
-            this.apply2(type, display);
-          }
-          else if (this.programsposition == "3") {
-            this.apply3(type, display);
-          }
-          else if (this.programsposition == "4") {
-            this.apply4(type, display);
-          }
-          else if (this.programsposition == "5") {
-            this.apply5(type, display);
-          }
-          else if (this.programsposition == "6") {
-            this.apply6(type, display);
-          }
-          else if (this.programsposition == "7") {
-            this.apply7(type, display);
-          }
-        }
-        else if (type == "skills") {
-          display = this.softskillsdisplay;
-          if (this.softskillsposition == "1") {
-            this.apply1(type, display);
-          }
-          else if (this.softskillsposition == "2") {
-            this.apply2(type, display);
-          }
-          else if (this.softskillsposition == "3") {
-            this.apply3(type, display);
-          }
-          else if (this.softskillsposition == "4") {
-            this.apply4(type, display);
-          }
-          else if (this.softskillsposition == "5") {
-            this.apply5(type, display);
-          }
-          else if (this.softskillsposition == "6") {
-            this.apply6(type, display);
-          }
-          else if (this.softskillsposition == "7") {
-            this.apply7(type, display);
-          }
-        }
-      },
+      // apply: function (type) {
+      //   var display = [];
+      //   if (type == "workexp") {
+      //     display = this.workexpdisplay;
+      //     if (this.workexpposition == "1") {
+      //       this.apply1(type,display,);
+      //     }
+      //     else if (this.workexpposition == "2") {
+      //       this.apply2(type,display);
+      //     }
+      //     else if (this.workexpposition == "3") {
+      //       this.apply3(type,display);
+      //     }
+      //     else if (this.workexpposition == "4") {
+      //       this.apply4(type,display);
+      //     }
+      //     else if (this.workexpposition == "5") {
+      //       this.apply5(type,display);
+      //     }
+      //     else if (this.workexpposition == "6") {
+      //       this.apply6(type,display);
+      //     }
+      //     else if (this.workexpposition == "7") {
+      //       this.apply7(type,display);
+      //     }
+      //   }
+      //   else if (type == "education") {
+      //     display = this.educationdisplay;
+      //     if (this.educationposition == "1") {
+      //       this.apply1(type, display);
+      //     }
+      //     else if (this.educationposition == "2") {
+      //       this.apply2(type, display);
+      //     }
+      //     else if (this.educationposition == "3") {
+      //       this.apply3(type, display);
+      //     }
+      //     else if (this.educationposition == "4") {
+      //       this.apply4(type, display);
+      //     }
+      //     else if (this.educationposition == "5") {
+      //       this.apply5(type, display);
+      //     }
+      //     else if (this.educationposition == "6") {
+      //       this.apply6(type, display);
+      //     }
+      //     else if (this.educationposition == "7") {
+      //       this.apply7(type, display);
+      //     }
+      //   }
+      //   else if (type == "statement") {
+      //     display = this.statementdisplay;
+      //     if (this.statementposition == "1") {
+      //       this.apply1(type, display);
+      //     }
+      //     else if (this.statementposition == "2") {
+      //       this.apply2(type, display);
+      //     }
+      //     else if (this.statementposition == "3") {
+      //       this.apply3(type, display);
+      //     }
+      //     else if (this.statementposition == "4") {
+      //       this.apply4(type, display);
+      //     }
+      //     else if (this.statementposition == "5") {
+      //       this.apply5(type, display);
+      //     }
+      //     else if (this.statementposition == "6") {
+      //       this.apply6(type, display);
+      //     }
+      //     else if (this.statementposition == "7") {
+      //       this.apply7(type, display);
+      //     }
+      //   }
+      //   else if (type == "accomplishment") {
+      //     display = this.accomplishmentdisplay;
+      //     if (this.accomplishmentposition == "1") {
+      //       this.apply1(type, display);
+      //     }
+      //     else if (this.accomplishmentposition == "2") {
+      //       this.apply2(type, display);
+      //     }
+      //     else if (this.accomplishmentposition == "3") {
+      //       this.apply3(type, display);
+      //     }
+      //     else if (this.accomplishmentposition == "4") {
+      //       this.apply4(type, display);
+      //     }
+      //     else if (this.accomplishmentposition == "5") {
+      //       this.apply5(type, display);
+      //     }
+      //     else if (this.accomplishmentposition == "6") {
+      //       this.apply6(type, display);
+      //     }
+      //     else if (this.accomplishmentposition == "7") {
+      //       this.apply7(type, display);
+      //     }
+      //   }
+      //   else if (type == "award") {
+      //     display = this.awardsdisplay;
+      //     if (this.awardsposition == "1") {
+      //       this.apply1(type, display);
+      //     }
+      //     else if (this.awardsposition == "2") {
+      //       this.apply2(type, display);
+      //     }
+      //     else if (this.awardsposition == "3") {
+      //       this.apply3(type, display);
+      //     }
+      //     else if (this.awardsposition == "4") {
+      //       this.apply4(type, display);
+      //     }
+      //     else if (this.awardsposition == "5") {
+      //       this.apply5(type, display);
+      //     }
+      //     else if (this.awardsposition == "6") {
+      //       this.apply6(type, display);
+      //     }
+      //     else if (this.awardsposition == "7") {
+      //       this.apply7(type, display);
+      //     }
+      //   }
+      //   else if (type == "language") {
+      //     display = this.languagesdisplay;
+      //     if (this.languagesposition == "1") {
+      //       this.apply1(type, display);
+      //     }
+      //     else if (this.languagesposition == "2") {
+      //       this.apply2(type, display);
+      //     }
+      //     else if (this.languagesposition == "3") {
+      //       this.apply3(type, display);
+      //     }
+      //     else if (this.languagesposition == "4") {
+      //       this.apply4(type, display);
+      //     }
+      //     else if (this.languagesposition == "5") {
+      //       this.apply5(type, display);
+      //     }
+      //     else if (this.languagesposition == "6") {
+      //       this.apply6(type, display);
+      //     }
+      //     else if (this.languagesposition == "7") {
+      //       this.apply7(type, display);
+      //     }
+      //   }
+      //   else if (type == "extracurricular") {
+      //     display = this.extracurriculardisplay;
+      //     if (this.extracurricularposition == "1") {
+      //       this.apply1(type, display);
+      //     }
+      //     else if (this.extracurricularposition == "2") {
+      //       this.apply2(type, display);
+      //     }
+      //     else if (this.extracurricularposition == "3") {
+      //       this.apply3(type, display);
+      //     }
+      //     else if (this.extracurricularposition == "4") {
+      //       this.apply4(type, display);
+      //     }
+      //     else if (this.extracurricularposition == "5") {
+      //       this.apply5(type, display);
+      //     }
+      //     else if (this.extracurricularposition == "6") {
+      //       this.apply6(type, display);
+      //     }
+      //     else if (this.extracurricularposition == "7") {
+      //       this.apply7(type, display);
+      //     }
+      //   }
+      //   else if (type == "programs") {
+      //     display = this.programsdisplay;
+      //     if (this.programsposition == "1") {
+      //       this.apply1(type, display);
+      //     }
+      //     else if (this.programsposition == "2") {
+      //       this.apply2(type, display);
+      //     }
+      //     else if (this.programsposition == "3") {
+      //       this.apply3(type, display);
+      //     }
+      //     else if (this.programsposition == "4") {
+      //       this.apply4(type, display);
+      //     }
+      //     else if (this.programsposition == "5") {
+      //       this.apply5(type, display);
+      //     }
+      //     else if (this.programsposition == "6") {
+      //       this.apply6(type, display);
+      //     }
+      //     else if (this.programsposition == "7") {
+      //       this.apply7(type, display);
+      //     }
+      //   }
+      //   else if (type == "skills") {
+      //     display = this.softskillsdisplay;
+      //     if (this.softskillsposition == "1") {
+      //       this.apply1(type, display);
+      //     }
+      //     else if (this.softskillsposition == "2") {
+      //       this.apply2(type, display);
+      //     }
+      //     else if (this.softskillsposition == "3") {
+      //       this.apply3(type, display);
+      //     }
+      //     else if (this.softskillsposition == "4") {
+      //       this.apply4(type, display);
+      //     }
+      //     else if (this.softskillsposition == "5") {
+      //       this.apply5(type, display);
+      //     }
+      //     else if (this.softskillsposition == "6") {
+      //       this.apply6(type, display);
+      //     }
+      //     else if (this.softskillsposition == "7") {
+      //       this.apply7(type, display);
+      //     }
+      //   }
+      // },
 
-
-      apply1: function (type, display) {
-        this.zone1 = display;
-        this.zone1_type = type;
-      },
-      apply2: function (type, display) {
-        this.zone2 = display;
-        this.zone2_type = type;
-      },
-      apply3: function (type, display) {
-          this.zone3 = display;
-          this.zone3_type = type;
-      },
-      apply4: function (type, display) {
-          this.zone4 = display;
-          this.zone4_type = type;
-      },
-      apply5: function (type, display) {
-          this.zone5 = display;
-          this.zone5_type = type;
-      },
-      apply6: function (type, display) {
-          this.zone6 = display;
-          this.zone6_type = type;
-      },
-      apply7: function (type, display) {
-          this.zone7 = display;
-          this.zone7_type = type;
-      },
+      // apply1: function (type, display) {
+      //   this.zone1 = display;
+      //   this.zone1_type = type;
+      // },
+      // apply2: function (type, display) {
+      //   this.zone2 = display;
+      //   this.zone2_type = type;
+      // },
+      // apply3: function (type, display) {
+      //     this.zone3 = display;
+      //     this.zone3_type = type;
+      // },
+      // apply4: function (type, display) {
+      //     this.zone4 = display;
+      //     this.zone4_type = type;
+      // },
+      // apply5: function (type, display) {
+      //     this.zone5 = display;
+      //     this.zone5_type = type;
+      // },
+      // apply6: function (type, display) {
+      //     this.zone6 = display;
+      //     this.zone6_type = type;
+      // },
+      // apply7: function (type, display) {
+      //     this.zone7 = display;
+      //     this.zone7_type = type;
+      // },
 
 
       newKellyColorPickerMain: function () {
@@ -703,8 +703,9 @@ var app= new Vue ({
           await app.getData("program");
           await app.getData("softskill");
           await app.getData("award");
+          // app.setPosition();
           app.includeDisplay();
-        
+
         app.loadinglists = false;
         console.log("reloading");
         },
@@ -799,15 +800,17 @@ var app= new Vue ({
           credentials: "include"
         }).then(function (response) { //then executes when browser has received response from browser
           response.json().then(function (data) {
-            app.statementposition = data. statementposition;
-            app.workexpposition = data.workexpposition;
-            app.educationposition = data.educationposition;
-            app.accomplishmentposition = data.accomplishmentposition;
-            app.extracurricularposition = data.extracurricularposition;
-            app.languagesposition = data.languagesposition;
-            app.programsposition = data.programsposition;
-            app.softskillsposition = data.softskillsposition;
-            app.awardsposition = data.awardsposition;
+            app.positionEdit.statementposition = data.statementposition;
+            app.positionEdit.workexpposition = data.workexpposition;
+            app.positionEdit.educationposition = data.educationposition;
+            app.positionEdit.accomplishmentposition = data.accomplishmentposition;
+            app.positionEdit.extracurricularposition = data.extracurricularposition;
+            app.positionEdit.languagesposition = data.languagesposition;
+            app.positionEdit.programsposition = data.programsposition;
+            app.positionEdit.softskillsposition = data.softskillsposition;
+            app.positionEdit.awardsposition = data.awardsposition;
+            
+            
           });
         });
 
@@ -838,14 +841,14 @@ var app= new Vue ({
       },
 
       setPosition: function () {
-        item.displayShow = !item.displayShow;
-        fetch(`${url}/position/${item._id}`, {
+       
+        fetch(`${url}/position`, {
           method:"PUT",
           credentials: "include",
           headers:{
             "Content-type": "application/json"
           },
-          body: JSON.stringify(item)
+          body: JSON.stringify(app.positionEdit)
         }).then(function (response) {
           if (response.status == 400){
             response.json().then(function (data) {
@@ -856,7 +859,55 @@ var app= new Vue ({
         });
       },
 
-      
+      setZone:function (){
+        app.sortToZone(app.positionEdit.statementposition,app.statementdisplay, "statement");
+        app.sortToZone(app.positionEdit.workexpposition,app.workexpdisplay, "workexp");
+        app.sortToZone(app.positionEdit.educationposition,app.statementdisplay, "education");
+        app.sortToZone(app.positionEdit.extracurricularposition,app.statementdisplay, "extracurricular");
+        app.sortToZone(app.positionEdit.languagesposition,app.languagesdisplay, "language");
+        app.sortToZone(app.positionEdit.programsposition,app.programsdisplay, "programs");
+        app.sortToZone(app.positionEdit.softskillsposition,app.softskillsdisplay, "skills");
+        app.sortToZone(app.positionEdit.awardsposition,app.awardsdisplay, "award");
+        app.sortToZone(app.positionEdit.accomplishmentposition,app.accomplishmentdisplay, "accomplishment");
+        console.log("sorted zones");
+      },
+
+      sortToZone: function (position,displayList,type) {
+        console.log(displayList);
+        console.log("here");
+        console.log(position);
+        
+        if(position == 1){
+          app.zone1=displayList;
+          app.zone1_type=type;
+          console.log("added to zone 1");
+        }
+        if(position == 2){
+          app.zone2=displayList;
+          app.zone2_type=type;
+        }
+        if(position == 3){
+          app.zone3=displayList
+          app.zone3_type=type;
+        }
+        if(position == 4){
+          app.zone4=displayList
+          app.zone4_type=type;
+        }
+        if(position == 5){
+          app.zone5=displayList
+          app.zone5_type=type;
+        }
+        if(position == 6){
+          app.zone6=displayList;
+          app.zone6_type=type;
+        }
+        if(position == 7){
+          app.zone7=displayList;
+          app.zone7_type=type;
+        }
+      },
+
 
       pdfSave: function () {
         var doc = new jsPDF();
@@ -1241,9 +1292,9 @@ var app= new Vue ({
     computed: {
         category_title_font: function () {
           return {
-            'subheading': this.$vuetify.breakpoint.xsOnly, 
-            'title': this.$vuetify.breakpoint.smOnly, 
-            'headline': this.$vuetify.breakpoint.mdOnly, 
+            'subheading': this.$vuetify.breakpoint.xsOnly,
+            'title': this.$vuetify.breakpoint.smOnly,
+            'headline': this.$vuetify.breakpoint.mdOnly,
             'display-1': this.$vuetify.breakpoint.lgOnly
           }
 
