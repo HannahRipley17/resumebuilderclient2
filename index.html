@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="hannahstyle1.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:350,300,400,500,700,900|Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
@@ -86,7 +86,7 @@
                                                 <p class="subheadingDef text-xs-left mb-2">Enter a secure password for the account: </p>
                                                 <v-text-field  prepend-icon="lock" name="Password" label="Password" type="password" v-model="password" class="mb-4 mx-2"></v-text-field>
                                                 <v-card-actions align="center">
-                                                    <v-btn @click="register()" color="color: rgba(234, 238, 242, 1)" class="mx-auto">SIGN UP</v-btn>
+                                                    <v-btn @click="register(); newPosition()" color="color: rgba(234, 238, 242, 1)" class="mx-auto">SIGN UP</v-btn>
                                                 </v-card-actions>
                                             </v-form>
                                         </v-card>
@@ -1074,51 +1074,51 @@
                 
                         </v-toolbar>
                         <v-container>
-                            <v-layout>
-                                <v-flex xs3 offset-xs9>
-                                    <v-card id="fixedPos" v-show="pickingColorMain">
-                                        <v-card-text>
-                                            <canvas id="color-picker-main" width="150" height="150" style="width: 150px; height: 150px;"></canvas>
-                                        </v-card-text>
-                                    </v-card>
-        
-                                    <v-card id="fixedPos" v-show="pickingColor">
-                                        <v-card-text>
-                                            <canvas id="color-picker-accent" width="150" height="150" style="width: 150px; height: 150px;"></canvas>
-                                        </v-card-text>
-                                    </v-card>
-                                </v-flex>
-                            </v-layout>
+                        <v-layout>
+                            <v-flex xs3 offset-xs9>
+                                <v-card id="fixedPos" v-show="pickingColorMain">
+                                    <v-card-text>
+                                        <canvas id="color-picker-main" width="150" height="150" style="width: 150px; height: 150px;"></canvas>
+                                    </v-card-text>
+                                </v-card>
+    
+                                <v-card id="fixedPos" v-show="pickingColor">
+                                    <v-card-text>
+                                        <canvas id="color-picker-accent" width="150" height="150" style="width: 150px; height: 150px;"></canvas>
+                                    </v-card-text>
+                                </v-card>
+                            </v-flex>
+                        </v-layout>
                         </v-container>
                         <v-container>
                                 <v-container grid-list-lg v-if="template == 'malia'">
                                         <v-layout justify-center row-wrap>
-                                                <v-flex> <!-- changed -->
+                                                <v-flex>
                                                     <v-card id="page">
                                                         <div id="printPDF">
-                                                                <v-card id="padding" class="maliaTempBar align-content-center" justify-center flat :color="selected_color_main"> <!-- changed -->
+                                                                <v-card id="padding" class="maliaTempBar align-content-center" justify-center flat :color="selected_color_main">
                                                                     <v-layout>
                                                                         <v-flex  xs8 offset-xs4>
                                                                             <v-card class="align-content-center justify-content-center">
                                                                                 <v-card-text>
                                                                                     <div id="zone6">
                                                                                             <v-card v-if="zone6_type == 'statement'" flat class="">
-                                                                                                    <div v-for="item in zone6" class="pa-2">
-                                                                                                            <v-card-text class="ma-0 pa-0 font-italic text-xs-center font-weight-medium subheadingDef">{{item.statement}}</v-card-text>
-                                                                                                    </div>
+                                                                                                <div v-for="item in zone6" class="pa-2">
+                                                                                                    <v-card-text class="ma-0 pa-0 font-italic text-xs-center font-weight-medium subheadingDef">{{item.statement}}</v-card-text>
+                                                                                                </div>
                                                                                             </v-card>
                                                                                             <v-card v-if="zone6_type == 'workexp'" flat class="">
                                                                                                     <v-card flat class="titleDef pt-0 pb-2 mb-1" style="border-bottom:2px solid;"> Work Experience</v-card>
                                                                                                     <div v-for="item in zone6" class="pl-2 pr-2">
-                                                                                                            <v-card-text class="pa-1 pl-3 font-weight-bold">{{item.company}} | {{item.title}} - <span class="body-2Def grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
-                                                                                                            <v-card-text class="pa-1 pl-5 body-1Def">{{item.description}}</v-card-text>
+                                                                                                        <v-card-text class="pa-1 pl-3 font-weight-bold">{{item.company}} | {{item.title}} - <span class="body-2Def grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
+                                                                                                        <v-card-text class="pa-1 pl-5 body-1Def">{{item.description}}</v-card-text>
                                                                                                     </div>
                                                                                             </v-card>
                                                                                             <v-card v-if="zone6_type == 'education'" flat class="">
                                                                                                     <v-card flat class="titleDef pt-0 pb-2 mb-1" style="border-bottom:2px solid;">Education</v-card>
                                                                                                     <div v-for="item in zone6" class="pl-2 pr-2">
-                                                                                                            <v-card-text class="pa-1 pl-3 font-weight-bold subheadingDef">{{item.college}}</v-card-text>
-                                                                                                            <v-card-text class="pa-1 pl-5 subheadingDef">{{item.degree}} - <span class="body-2Def grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
+                                                                                                        <v-card-text class="pa-1 pl-3 font-weight-bold subheadingDef">{{item.college}}</v-card-text>
+                                                                                                        <v-card-text class="pa-1 pl-5 subheadingDef">{{item.degree}} - <span class="body-2Def grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
                                                                                                     </div>
                                                                                             </v-card>
                                                                                             <v-card v-if="zone6_type == 'accomplishment'" flat class="">
@@ -3958,5 +3958,5 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
     <script src="html5kellycolorpicker.js"></script>
-	<script src="code.js"></script>
+	<script src="hannahcode1.js"></script>
 </html>

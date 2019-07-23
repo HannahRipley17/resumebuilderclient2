@@ -173,6 +173,7 @@ var app= new Vue ({
 
       add_remove: "",
 
+      
       positionEdit: {
         statementposition: 0,
         workexpposition: 0,
@@ -577,7 +578,7 @@ var app= new Vue ({
         body: JSON.stringify(app.positionEdit)
       }).then(function (response) {
         //response.json().then((data)=>{console.log(data.msg)})
-        app.statementposition = response. statementposition;
+        app.statementposition = response.statementposition;
         app.workexpposition = response.workexpposition;
         app.educationposition = response.educationposition;
         app.accomplishmentposition = response.accomplishmentposition;
@@ -608,11 +609,12 @@ var app= new Vue ({
           app.setZone();
         });
       },
+
       setZone:function (){
         app.sortToZone(app.positionEdit.statementposition,app.statementdisplay, "statement");
         app.sortToZone(app.positionEdit.workexpposition,app.workexpdisplay, "workexp");
-        app.sortToZone(app.positionEdit.educationposition,app.statementdisplay, "education");
-        app.sortToZone(app.positionEdit.extracurricularposition,app.statementdisplay, "extracurricular");
+        app.sortToZone(app.positionEdit.educationposition,app.educationdisplay, "education");
+        app.sortToZone(app.positionEdit.extracurricularposition,app.extracurriculardisplay, "extracurricular");
         app.sortToZone(app.positionEdit.languagesposition,app.languagesdisplay, "language");
         app.sortToZone(app.positionEdit.programsposition,app.programsdisplay, "programs");
         app.sortToZone(app.positionEdit.softskillsposition,app.softskillsdisplay, "skills");
