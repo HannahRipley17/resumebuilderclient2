@@ -144,7 +144,7 @@ var app= new Vue ({
           name: "Template 3"
         },
         {
-          model: "sharon",
+          model: "template4",
           name: "Template 4"
         },
         {
