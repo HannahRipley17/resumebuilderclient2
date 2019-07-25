@@ -59,7 +59,7 @@ z-index: 100;
     padding: 10px 4px;
    }
  .homeMargin {
-    margin: 15% 0;
+    margin: 20% 0;
  }
  .load {
   margin: 18% 0 48% 0;
@@ -175,6 +175,58 @@ z-index: 100;
   .maliaTempBar {
     height: 200px;
  }
+.homeMargin {
+    margin: 15% 0;
+ }
+ .load {
+  margin: 18% 0 48% 0;
+ }
+
+ .maliaTempBar {
+  height: 266.7px;
+ }
+
+  #page .display-4Def {
+  font-size: 112px;
+  font-weight: 100;
+ }
+  #page .display-3Def {
+  font-size: 56px;
+  font-weight: 400;
+ }
+  #page .display-2Def {
+  font-size: 45px;
+  font-weight: 400;
+ }
+  #page .display-1Def {
+  font-size: 34px;
+  font-weight: 400;
+ }
+  #page .headlineDef {
+  font-size: 24px;
+  font-weight: 400;
+ }
+  #page .titleDef {
+  font-size: 20px;
+  font-weight: 500;
+ }
+  #page .subheadingDef {
+  font-size: 16px;
+  font-weight: 400;
+ }
+   #page .body-2Def {
+  font-size: 14px;
+  font-weight: 500;
+ }
+  #page .body-1Def {
+  font-size: 14px;
+  font-weight: 400;
+ }
+  #page .captionDef {
+  font-size: 12px;
+  font-weight: 400;
+ }
+
 }
 @media only screen and (max-width: 1260px) {
   #smallPage {
@@ -312,3 +364,14 @@ z-index: 100;
 progress::-webkit-progress-bar {
   color: crimson;
 } */
+
+/*
+font-family: 'Merriweather', serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Libre Baskerville', serif;
+font-family: 'Karla', sans-serif;
+font-family: 'Arvo', serif;
+font-family: 'Source Serif Pro', serif;
+font-family: 'EB Garamond', serif;
+font-family: 'Cairo', sans-serif;
+ */
