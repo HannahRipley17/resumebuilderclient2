@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="hannahstyle1.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:350,300,400,500,700,900|Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
 		 <!-- <link href="https://fonts.googleapis.com/css?family=Arvo:400,700|Cairo:200,300,400,600,700,900|EB+Garamond:400,500,600,700,800|Karla:400,700|Libre+Baskerville:400,700|Merriweather:300,400,700,900|Montserrat:100,200,300,400,500,600,700,800,900|Source+Serif+Pro:400,600,700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Arvo:400,700|Cairo:200,300,400,600,700,900|EB+Garamond:400,500,600,700,800|Karla:400,700|Libre+Baskerville:400,700|Merriweather:300,400,700,900|Montserrat:100,200,300,400,500,600,700,800,900|Source+Serif+Pro:400,600,700&display=swap" rel="stylesheet"> added fonts -->
@@ -265,15 +265,61 @@
                                         </v-card>
                                     </v-flex>
                                 </v-layout>
-                            </v-container>
-                        <v-container>
-                        
+                        </v-container>
                         <v-container>
                             <v-layout>
-                                <v-flex xs12 lg10 offset-lg1>
+                                <v-flex xs12 md3 class="ml-3 mb-3 mr-3">
+                                    <v-card class="pa-2 ma-2 ma-2">
+                                        <v-card-text class="headlineDef">Tips</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Employers wants your resume to focus on how you can contribute to the company</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Target your resume to the specific employer</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Use keywords from the job description</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Try to keep it to one page</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Avoid using first person pronouns such as 'I' and 'me'</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">A personal branding statement should be simple, memorable, and able to be said in one breath</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Keep it simple, stupid -Dwight Schrute</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Use bullet points instead of paragraphs</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Use action verbs, remove passive voice</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Give the what, how, why and results of your past job experiences.</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="subheadingDef">Quantify your experiences with numbers, $, #, and %</v-card-text>
+                                    </v-card>
+                                    <v-card class="pa-2 ma-2">
+                                        <v-card-text class="titleDef">Tips for making a resume on your own</v-card-text>
+                                        <v-card-text class="subheadingDef">Content over fanciness- oftentimes, an automatic program reads your resume instead of a person, so be sure to include everything you want</v-card-text>
+                                        <v-card-text class="subheadingDef">Sometimes the file format submitted the company requires will mess up or not see colors on your resume, so be sure that your resume will still look okay if the design doesn't come through</v-card-text>
+                                        <v-card-text class="subheadingDef">Don't include profile pictures (unless you're in Europe). American companies rarely appreciate a profile picture</v-card-text>
+                                        <v-card-text class="subheadingDef">Include a link to your portfolio, if relevant</v-card-text>
+                                        <v-card-text class="subheadingDef">Don't put your references on your resume- only submit references if requested</v-card-text>
+
+                                    </v-card>
+                                    
+                                </v-flex>
+                                <v-flex xs12 md9 offset-lg1>
                                     <v-card elevation=10>
-                                        <v-layout v-bind="lgbinding"> <!-- changed -->
-                                            <v-flex xs12 lg6> <!-- changed -->
+                                        <v-layout v-bind="lgbinding">
+                                            <v-flex xs12 lg6>
                                                 <v-card>
                                                     <v-expansion-panel v-model="panel">
                                                         <v-expansion-panel-content id="personalinformation">
@@ -293,7 +339,7 @@
                                                                                 <v-text-field label="Professional Title (ex. Web Developer)" v-model="personalinfoEdit.professional_title"></v-text-field>
                                                                             </v-flex>
                                                                             <v-flex xs6 pa-3>
-                                                                                    <v-text-field label="Phone number"  v-model="personalinfoEdit.phone" placeholder="(555) 555-5555" required :counter="14" :rules="fieldRules" id="phone" :oninput="phoneNum()" ></v-text-field>
+                                                                                    <v-text-field label="Phone number"  v-model="personalinfoEdit.phone" placeholder="(555) 555-5555" required :counter="14" :rules="fieldRules" id="phone" ></v-text-field>
                                                                             </v-flex>
                                                                         </v-layout>
                                                                         <v-layout>
@@ -325,7 +371,7 @@
                                                                                 <v-text-field label="Country" v-model="personalinfoEdit.country"></v-text-field>
                                                                             </v-flex>
                                                                         </v-layout>
-                                                                        <v-btn @click="">Update Personal Info</v-btn>
+                                                                        <v-btn @click="PersonalInfoUpdate()">Update Personal Info</v-btn>
                                                                     </v-card-text>
                                                                 </v-card>
                                                         </v-expansion-panel-content>
@@ -515,41 +561,40 @@
                                                     </v-expansion-panel> 
                                                 </v-card> 
                                                 <v-card> 
-                                                    <v-expansion-panel v-model="panel7"> 
-
+                                                    <v-expansion-panel v-model="panel7">
                                                         <v-expansion-panel-content id="awards">
-                                                                <template v-slot:header> <v-card-text class="display-1Def">Awards</v-card-text></template>
-                                                                <v-card class="ma-2 pa-4">
-                                                                    <v-text-field box label="Title" v-model="awardsEdit.title"></v-text-field>
-                                                                    <v-text-field box label="Received from" v-model="awardsEdit.receivedfrom"></v-text-field>
-                                                                    <v-menu
-                                                                    v-model="awardsEdit.menu"
-                                                                    :close-on-content-click="false"
-                                                                    :nudge-right="40"
-                                                                    lazy
-                                                                    transition="scale-transition"
-                                                                    offset-y
-                                                                    full-width
-                                                                    min-width="290px"
-                                                                >
-                                                                    <template v-slot:activator="{ on }">
-                                                                    <v-text-field
-                                                                        box
-                                                                        v-model="awardsEdit.date"
-                                                                        label="Date"
-                                                                        prepend-icon="event"
-                                                                        readonly
-                                                                        v-on="on"
-                                                                    ></v-text-field>
-                                                                    </template>
-                                                                    <v-date-picker v-model="awardsEdit.date" @input="awardsEdit.menu = false" type="month">
-                                                                        
-                                                                    </v-date-picker>
-                                                                </v-menu>
-                                                                    <v-textarea auto-grow rows="2"
-                                                                    box label="Brief description of your award" v-model="awardsEdit.description"></v-textarea>
-                                                                    <v-btn @click="submitAward()">Add Award</v-btn>
-                                                                </v-card>
+                                                            <template v-slot:header> <v-card-text class="display-1Def">Awards</v-card-text></template>
+                                                            <v-card class="ma-2 pa-4">
+                                                                <v-text-field box label="Title" v-model="awardsEdit.title"></v-text-field>
+                                                                <v-text-field box label="Received from" v-model="awardsEdit.receivedfrom"></v-text-field>
+                                                                <v-menu
+                                                                v-model="awardsEdit.menu"
+                                                                :close-on-content-click="false"
+                                                                :nudge-right="40"
+                                                                lazy
+                                                                transition="scale-transition"
+                                                                offset-y
+                                                                full-width
+                                                                min-width="290px"
+                                                            >
+                                                                <template v-slot:activator="{ on }">
+                                                                <v-text-field
+                                                                    box
+                                                                    v-model="awardsEdit.date"
+                                                                    label="Date"
+                                                                    prepend-icon="event"
+                                                                    readonly
+                                                                    v-on="on"
+                                                                ></v-text-field>
+                                                                </template>
+                                                                <v-date-picker v-model="awardsEdit.date" @input="awardsEdit.menu = false" type="month">
+                                                                    
+                                                                </v-date-picker>
+                                                            </v-menu>
+                                                                <v-textarea auto-grow rows="2"
+                                                                box label="Brief description of your award" v-model="awardsEdit.description"></v-textarea>
+                                                                <v-btn @click="submitAward()">Add Award</v-btn>
+                                                            </v-card>
                                                         </v-expansion-panel-content>
                                                     </v-expansion-panel> 
                                                 </v-card> 
@@ -606,7 +651,6 @@
                                             </v-flex>
                                         </v-layout>
                                     </v-card>
-                
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -643,7 +687,7 @@
                                                         <v-card id="smallPage">
                                                             <v-card id="padding" class="align-content-center" justify-center flat :color="selected_color_main"> 
                                                                 <v-layout>
-                                                                    <v-flex  xs8 offset-xs4>
+                                                                    <v-flex xs8 offset-xs4>
                                                                         <v-card color="red" class="align-content-center justify-content-center">
                                                                             <h1 class="subheadingDef"> Zone 1 </h1>
                                                                         </v-card>
@@ -697,12 +741,161 @@
                                                             </v-layout>
                                                         </v-card>
                                                     </v-container>
-                                                    <v-container grid-list-lg v-if="template == 'hannah'">
-                                                        <v-card id="smallPage">
-                                                            <v-card id="padding" class="align-content-center" justify-center flat :color="selected_color_main"> 
+                                                    <v-container grid-list-xs fluid v-if="template == 'hannah'">
+                                                            <v-layout justify-center row-wrap>
+                                                                <v-flex>
+                                                                    <v-card id="smallPage">
+                                                                        <v-card id="padding" class="align-content-center" justify-center flat> 
+                                                                            <v-layout id="zone0" class="pa-0">
+                                                                                <v-flex xs4></v-flex>
+                                                                                <v-flex xs8>
+                                                                                    <v-card class="pa-1 text-xs-right" flat :color="selected_color_main" >
+                                                                                        <v-card-text>Personal information</v-card-text>
+                                                                                    </v-card>
+                                                                                </v-flex>
+                                                                            </v-layout>
+                                                                            <v-card color="red" class="align-content-center justify-content-center">
+                                                                                <h1 class="subheadingDef"> Zone 1 </h1>
+                                                                            </v-card>
+                                                                            <v-layout >
+                                                                                <v-flex column xs8>
+                                                                                    <v-card flat color="yellow">
+                                                                                        <h1 class="subheadingDef"> Zone 2 </h1> 
+                                                                                    </v-card>
+                                                                                    <v-card flat color="orange">
+                                                                                            <h1 class="subheadingDef"> Zone 3 </h1>
+                                                                                </v-card>
+                                                                                <v-card flat color="green">
+                                                                                            <h1 class="subheadingDef"> Zone 4 </h1> 
+                                                                                </v-card>
+                                                                                <v-card flat color="blue">
+                                                                                            <h1 class="subheadingDef white--text"> Zone 5 </h1> 
+                                                                                </v-card>
+                                                                                </v-flex>
+                                                                                <v-flex column xs4 class="pr-4">
+                                                                                    <v-card :color="selected_color_accent" flat class="ma-1">
+                                                                                        <v-card flat color="purple">
+                                                                                            <h1 class="subheadingDef white--text"> Zone 6 </h1> 
+                                                                                        </v-card>
+                                                                                        <v-card flat color="pink">
+                                                                                            <h1 class="subheadingDef white--text"> Zone 7 </h1> 
+                                                                                        </v-card>
+                                                                                        <v-card flat color="grey">
+                                                                                            <h1 class="subheadingDef white--text"> Zone 8 </h1> 
+                                                                                        </v-card>
+                                                                                    </v-card>
+                                                                                </v-flex>
+                                                                            </v-layout>
+                                                                        </v-card>
+                                                                    </v-card>
+                                                                </v-flex>
+                                                            </v-layout>
+                                                    </v-container>
+
+                                                    <v-container grid-list-xs fluid v-if="template == 'template5'">
+                                                            <v-layout row wrap class="justify-center">
+                                                                <v-flex>
+                                                                    <v-card id="smallPage">
+                                                                        <v-card id="padding" class="align-content-center" justify-center flat> 
+                                                                            
+                                                                    <v-layout id="zone0" class="pa-0">
+                                                                        <v-flex xs5></v-flex>
+                                                                        <v-flex xs7>
+                                                                            <v-card class="pa-1 text-xs-right" flat :color="selected_color_main" >
+                                                                                <v-card-text>Personal information</v-card-text>
+                                                                            </v-card>
+                                                                        </v-flex>
+                                                                    </v-layout>
+                                                                            
+                                                                            <v-card color="red" class="align-content-center justify-content-center">
+                                                                                    <h1 class="subheadingDef"> Zone 1 </h1>
+                                                                                </v-card>
+                                                                                <v-card flat color="yellow">
+                                                                                        <h1 class="subheadingDef"> Zone 2 </h1> 
+                                                                            </v-card>
+                                                                            <v-card flat color="orange">
+                                                                                        <h1 class="subheadingDef"> Zone 3 </h1>
+                                                                            </v-card>
+                                                                            <v-card flat color="green">
+                                                                                        <h1 class="subheadingDef"> Zone 4 </h1> 
+                                                                            </v-card>
+                                                                            <v-card  flat :color="selected_color_accent" class="pa-2">
+                                                                                <v-layout>
+                                                                                    <v-flex xs4>
+                                                                                            <v-card flat color="blue">
+                                                                                                    <h1 class="subheadingDef white--text"> Zone 5 </h1> 
+                                                                                        </v-card>
+                                                                                    </v-flex>
+                                                                                    <v-flex xs4>
+                                                                                            <v-card flat color="purple">
+                                                                                                    <h1 class="subheadingDef white--text"> Zone 6 </h1> 
+                                                                                        </v-card>
+                                                                                    </v-flex>
+                                                                                    <v-flex xs4>
+                                                                                            <v-card flat color="pink">
+                                                                                                    <h1 class="subheadingDef white--text"> Zone 7 </h1> 
+                                                                                        </v-card>
+                                                                                    </v-flex>
+                                                                                </v-layout>
+                                                                            </v-card>
+                                                                        </v-card>
+                                                                    </v-card>
+                                                                </v-flex>
+                                                            </v-layout>
+                                                    </v-container>
+
+                                                    <v-container grid-list-xs fluid v-if="template == 'template6'">
+                                                            <v-layout justify-center row-wrap>
+                                                                <v-flex>
+                                                                    <v-card id="smallPage">
+                                                                            <v-card id="padding" class="align-content-center" justify-center flat> 
+                                                                                <v-img :src="imgsrc">
+                                                                                    <v-layout id="zone0" class="pa-0">
+                                                                                        <v-flex xs4></v-flex>
+                                                                                        <v-flex xs8>
+                                                                                            <v-card class="pa-3 text-xs-right" flat color="transparent">
+                                                                                                <v-card-text>Personal information</v-card-text>
+                                                                                            </v-card>
+                                                                                        </v-flex>
+                                                                                    </v-layout>
+                                                                                    <v-card color="red" class="align-content-center justify-content-center">
+                                                                                            <h1 class="subheadingDef"> Zone 1 </h1>
+                                                                                        </v-card>
+                                                                                    <v-layout>
+                                                                                        <v-flex column xs8>
+                                                                                                <v-card flat color="yellow">
+                                                                                                        <h1 class="subheadingDef"> Zone 2 </h1> 
+                                                                                            </v-card>
+                                                                                            <v-card flat color="orange">
+                                                                                                    <h1 class="subheadingDef"> Zone 3 </h1>
+                                                                                        </v-card>
+                                                                                        <v-card flat color="green">
+                                                                                                <h1 class="subheadingDef"> Zone 4 </h1> 
+                                                                                    </v-card>
+                                                                                    <v-card flat color="blue">
+                                                                                            <h1 class="subheadingDef white--text"> Zone 5 </h1> 
+                                                                                </v-card>
+                                                                                        </v-flex>
+                                                                                        <v-flex column xs4 class="pr-4">
+                                                                                            <v-card :color="selected_color_accent" class="pa-2 ma-1">
+                                                                                                    <v-card flat color="purple">
+                                                                                                            <h1 class="subheadingDef white--text"> Zone 6 </h1> 
+                                                                                                </v-card>
+                                                                                                <v-card flat color="pink">
+                                                                                                        <h1 class="subheadingDef white--text"> Zone 7 </h1> 
+                                                                                            </v-card>
+                                                                                            <div id="zone7" color="grey">
+                                                                                                    <h1 class="subheadingDef"> Zone 8 </h1>
+                                                                                                </div>
+                                                                                            </v-card>
+                                                                                        </v-flex>
+                                                                                    </v-layout>
+                                                                                </v-img>
+                                                                            </v-card>
+                                                                        </v-card>
+                                                                </v-flex>
                                                                 
-                                                            </v-card>
-                                                        </v-card>
+                                                            </v-layout>
                                                     </v-container>
 
                                                 </div>
@@ -1761,8 +1954,7 @@
                                                             <v-card-text class="headlineDef pa-1 ">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}} | <span class="titleDef">{{personalinfoEdit.professional_title}}</span> </v-card-text>
                                                             <v-card-text class="titleDef pa-1 ">{{personalinfoEdit.email}}</v-card-text>
                                                             <v-card-text class="titleDef pa-1 ">{{personalinfoEdit.phone}}</v-card-text>
-                                                            <v-card-text class="body-1Def pa-1 ">{{personalinfoEdit.address}}</v-card-text>
-                                                            <v-card-text class="body-1Def pa-1 ">{{personalinfoEdit.city}}{{personalinfoEdit.state}}{{personalinfoEdit.zip}}</v-card-text>
+                                                            <v-card-text class="body-1Def pa-1 ">{{personalinfoEdit.address}} {{personalinfoEdit.city}}{{personalinfoEdit.state}}{{personalinfoEdit.zip}}</v-card-text>
                                                         </v-card>
                                                     </v-flex>
                                                 </v-layout>
@@ -3113,58 +3305,58 @@
                                                         <v-layout>
                                                             <v-flex xs4>
                                                                 <div id="zone5" class="mb-3">
-                                                                    <v-card v-if="zone5_type == 'statement'" flat transparent class="ml-3 mr-3 pa-4">
+                                                                    <v-card v-if="zone5_type == 'statement'" flat color="transparent" class="ml-3 mr-3 pa-4">
                                                                         <div v-for="item in zone5" class="pa-2">
                                                                             <v-card-text class="font-italic titleDef">{{item.statement}}</v-card-text>
                                                                         </div>
                                                                     </v-card>
-                                                                    <v-card v-if="zone5_type == 'workexp'" flat transparent class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                                    <v-card v-if="zone5_type == 'workexp'" flat color="transparent" class="ml-3 mr-3 pl-4 pr-4 pb-4">
                                                                         <v-card-text class="titleDef pt-0">Work Experience</v-card-text>
                                                                         <div v-for="item in zone5" class="pl-2 pr-2">
                                                                             <v-card-text class="pa-1 pl-3 font-weight-bold subheadingDef">{{item.company}} | {{item.title}} - <span class="body-2Def grey--text text--darken-2">{{item.startdate}} - {{item.enddate}}</span></v-card-text>
                                                                             <v-card-text class="pa-1 pl-3 body-1Def">{{item.description}}</v-card-text>
                                                                         </div>
                                                                     </v-card>
-                                                                    <v-card v-if="zone5_type == 'education'" flat transparent class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                                    <v-card v-if="zone5_type == 'education'" flat color="transparent" class="ml-3 mr-3 pl-4 pr-4 pb-4">
                                                                         <v-card-text  class="titleDef pt-0">Education</v-card-text>
                                                                         <div v-for="item in zone5" class="pl-2 pr-2">
                                                                             <v-card-text class="pa-1 pl-3 font-weight-bold subheadingDef">{{item.college}}</v-card-text>
                                                                             <v-card-text class="pa-1 pl-3 subheadingDef">{{item.degree}} - <span class="body-2Def grey--text text--darken-2">{{item.gradyear}}</span></v-card-text>
                                                                         </div>
                                                                     </v-card>
-                                                                    <v-card v-if="zone5_type == 'accomplishment'" flat transparent class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                                    <v-card v-if="zone5_type == 'accomplishment'" flat color="transparent" class="ml-3 mr-3 pl-4 pr-4 pb-4">
                                                                         <v-card-text class="titleDef pt-0">Accomplishments</v-card-text>
                                                                         <div v-for="item in zone5" class="pl-2 pr-2">
                                                                             <v-card-text class="pa-1 pl-3  font-weight-bold subheadingDef">{{item.title}}</v-card-text>
                                                                             <v-card-text class="pa-1 pl-3 body-1Def">{{item.description}}</v-card-text>
                                                                         </div>
                                                                     </v-card>
-                                                                    <v-card v-if="zone5_type == 'extracurricular'" flat transparent class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                                    <v-card v-if="zone5_type == 'extracurricular'" flat color="transparent" class="ml-3 mr-3 pl-4 pr-4 pb-4">
                                                                         <v-card-text  class="titleDef pt-0">Extracurriculars</v-card-text>
                                                                         <div v-for="item in zone5" class="pl-2 pr-2">
                                                                             <v-card-text class="pa-1 pl-3  font-weight-bold subheadingDef">{{item.title}} - <span class="body-2Def grey--text text--darken-2">{{item.date}}</span></v-card-text>
                                                                             <v-card-text class="pa-1 pl-3 body-1Def">{{item.description}}</v-card-text>
                                                                         </div>
                                                                     </v-card>
-                                                                    <v-card v-if="zone5_type == 'language'" flat transparent class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                                    <v-card v-if="zone5_type == 'language'" flat color="transparent" class="ml-3 mr-3 pl-4 pr-4 pb-4">
                                                                         <v-card-text  class="titleDef pt-0">Languages</v-card-text>
                                                                         <div v-for="item in zone5" class="pl-2 pr-2">
                                                                             <v-card-text class="pa-1 pl-3 font-weight-bold subheadingDef">{{item.title}} | {{item.proficiency}}</v-card-text>
                                                                         </div>
                                                                     </v-card>
-                                                                    <v-card v-if="zone5_type == 'programs'" flat transparent class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                                    <v-card v-if="zone5_type == 'programs'" flat color="transparent" class="ml-3 mr-3 pl-4 pr-4 pb-4">
                                                                         <v-card-text  class="titleDef pt-0">Programs</v-card-text>
                                                                         <div v-for="item in zone5" class="pl-2 pr-2">
                                                                             <v-card-text class="pa-1 pl-3  font-weight-bold subheadingDef" >{{item.title}} | {{item.proficiency}}</v-card-text>
                                                                         </div>
                                                                     </v-card>
-                                                                    <v-card v-if="zone5_type == 'skills'" flat transparent class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                                    <v-card v-if="zone5_type == 'skills'" flat color="transparent" class="ml-3 mr-3 pl-4 pr-4 pb-4">
                                                                         <v-card-text  class="titleDef pt-0">Skills</v-card-text>
                                                                         <div v-for="item in zone5" class="pl-2 pr-2">
                                                                             <v-card-text class="pa-1 pl-3  font-weight-bold subheadingDef">{{item.title}}</v-card-text>
                                                                         </div>
                                                                     </v-card>
-                                                                    <v-card v-if="zone5_type == 'award'" flat transparent class="ml-3 mr-3 pl-4 pr-4 pb-4">
+                                                                    <v-card v-if="zone5_type == 'award'" flat color="transparent" class="ml-3 mr-3 pl-4 pr-4 pb-4">
                                                                         <v-card-text  class="titleDef pt-0">Awards</v-card-text>
                                                                         <div v-for="item in zone5" class="pl-2 pr-2">
                                                                             <v-card-text class="pa-1 pl-3 subheadingDef">{{item.title}} - <span class="body-2Def grey--text text--darken-2">{{item.date}}</span></v-card-text>
@@ -3393,8 +3585,7 @@
                                                                     <v-card-text class="headlineDef pa-1 ">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}} | <span class="titleDef">{{personalinfoEdit.professional_title}}</span> </v-card-text>
                                                                     <v-card-text class="titleDef pa-1 ">{{personalinfoEdit.email}}</v-card-text>
                                                                     <v-card-text class="titleDef pa-1 ">{{personalinfoEdit.phone}}</v-card-text>
-                                                                    <v-card-text class="body-1Def pa-1 ">{{personalinfoEdit.address}}</v-card-text>
-                                                                    <v-card-text class="body-1Def pa-1 ">{{personalinfoEdit.city}}{{personalinfoEdit.state}}{{personalinfoEdit.zip}}</v-card-text>
+                                                                    <v-card-text class="body-1Def pa-1 ">{{personalinfoEdit.address}} {{personalinfoEdit.city}}{{personalinfoEdit.state}}{{personalinfoEdit.zip}}</v-card-text>
                                                                 </v-card>
                                                             </v-flex>
                                                         </v-layout>
@@ -3912,7 +4103,6 @@
                                                             <v-card class="mt-4 mr-4 ml-4 pa-3 text-xs-right" flat :color="selected_color_main" >
                                                                 <v-card-text class="headlineDef pa-1 ">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}} | <span class="headlineDef">{{personalinfoEdit.professional_title}}</span> </v-card-text>
                                                                 <v-card-text class="titleDef pa-1 ">{{personalinfoEdit.email}} | {{personalinfoEdit.phone}}</v-card-text>
-                                                                <v-card-text class="titleDef pa-1 "></v-card-text>
                                                                 <v-card-text class="body-2Def pa-1 ">{{personalinfoEdit.address}}{{personalinfoEdit.city}}{{personalinfoEdit.state}}{{personalinfoEdit.zip}}</v-card-text>
                                                             </v-card>
                                                         </v-flex>
@@ -4885,7 +5075,7 @@
                 </div>
                 <v-footer flat class="pa-3" color="rgba(85, 82, 89, 0.6)">
                     <v-spacer></v-spacer>
-                    <div class=" body-2Def white--text">&copy; Resumaker Team {{ new Date().getFullYear() }}</div>
+                    <div class=" body-2Def white--text">&copy; CodeSchool Resumaker Team {{ new Date().getFullYear() }}</div>
                 </v-footer>
 			</v-content>
 		</v-app>
@@ -4895,5 +5085,5 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
     <script src="html5kellycolorpicker.js"></script>
-	<script src="hannahcode1.js"></script>
+	<script src="code.js"></script>
 </html>

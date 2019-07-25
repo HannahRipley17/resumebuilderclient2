@@ -26,8 +26,7 @@ var app= new Vue ({
       panel9: 0, 
 
         educationlist:[],
-        workexplist:[            
-        ],
+        workexplist:[],
         accomplishmentlist: [],
         extracurricularlist:[],
         languageslist:[],
@@ -236,6 +235,8 @@ var app= new Vue ({
       deleteError: false, 
       deleteErrorMsg: "", 
 
+      imgsrc: "img/blackresumebackground.png",
+
 
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -381,6 +382,7 @@ var app= new Vue ({
         app.programsdisplay= []
         app.softskillsdisplay= []
         app.awardsdisplay= []
+        app.personalinfoEdit={}
       },
 
   
@@ -465,11 +467,96 @@ var app= new Vue ({
           await app.getData("softskill");
           await app.getData("award");
           // app.setPosition();
+          app.getPersonalInfo();
           app.includeDisplay();
         }
         app.loadinglists = false;
         console.log("reloading");
         },
+
+        newPersonalInfo: async function (){
+          console.log("created new personal info object")
+
+          await app.checklogin()
+          var newuserinfo = {
+          first_name: "First",
+          last_name: "Last",
+          address: "123 Address",
+          city: "City",
+          state: "State",
+          phone: "555-555-5555",
+          zip: 55555,
+          country: "Country",
+          email: "Email@email.com",
+          user_id: app.userID
+          }
+
+          fetch(`${url}/personalinfo`, {
+            credentials: "include",
+            method:"POST",
+            headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(newuserinfo)
+        }).then(function (response) {
+          response.json().then((response)=>{
+            console.log(response.personalinfo.first_name)
+            app.personalinfoEdit.first_name = response.personalinfo.first_name
+            app.personalinfoEdit.last_name = response.personalinfo.last_name
+            app.personalinfoEdit.address = response.personalinfo.address
+            app.personalinfoEdit.city = response.personalinfo.city
+            app.personalinfoEdit.state = response.personalinfo.state
+            app.personalinfoEdit.phone = response.personalinfo.phone
+            app.personalinfoEdit.zip = response.personalinfo.zip
+            app.personalinfoEdit.country = response.personalinfo.country
+            app.personalinfoEdit.email = response.personalinfo.email
+            app.personalinfoEdit.user_id = response.personalinfo.user_id
+
+          })
+
+        });
+        },
+
+        getPersonalInfo: function(){
+       fetch(`${url}/personalinfo`,{
+         credentials: "include"
+       }).then(function(response){
+         response.json().then(function(data){
+           app.personalinfoEdit = data
+         })
+       })
+     },
+
+     PersonalInfoUpdate: function(){
+
+       fetch(`${url}/personalinfo`, {
+         method:"PUT",
+         headers:{
+         "Content-type": "application/json"
+         },
+         credentials: "include",
+         body: JSON.stringify(app.personalinfoEdit)
+
+
+     }).then(function (response) {
+       app.personalinfoEdit={
+         first_name :app.personalinfoEdit.first_name,
+         last_name:app.personalinfoEdit.last_name,
+         address:app.personalinfoEdit.address,
+         city:app.personalinfoEdit.city,
+         state:app.personalinfoEdit.state,
+         zip:app.personalinfoEdit.zip ,
+         country:app.personalinfoEdit.country,
+         email:app.personalinfoEdit.email,
+         phone:app.personalinfoEdit.phone,
+         branding_statement:app.personalinfoEdit.branding_statement,
+         professional_title:app.personalinfoEdit.title,
+         linkedin: app.personalinfoEdit.linkedin,
+       }
+
+     app.getData("personalinfo");
+   })
+     },
 
       includeDisplay: function () {
         var newdisplay=[]
@@ -1070,9 +1157,6 @@ var app= new Vue ({
           });
 
         },
-
-
-
 
     },
     computed: {
