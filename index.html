@@ -14,9 +14,12 @@
 		<v-app>
 			<v-content id="body">
                 <v-toolbar v-show="page !='home'"  height=80 flat color="transparent">
-                    <v-btn flat class="text-capitalize titleDef white--text" @click="page = 'home' ">
-                        <v-toolbar-title>Resume<span class="font-weight-light">Builder</span> </v-toolbar-title>
-                    </v-btn>
+                    <v-card color="rgba(85, 82, 89, 0.6)">
+                        <v-btn flat class="text-capitalize titleDef white--text" @click="page = 'home' ">
+                            <v-toolbar-title>Resume<span class="font-weight-light">Builder</span> </v-toolbar-title>
+                        </v-btn>
+                    </v-card>
+                    
                         <v-spacer></v-spacer>
                         <v-toolbar-items>
                             <v-btn flat @click="page = 'form'" class=" subheadingDef">Input Form</v-btn>
@@ -1524,7 +1527,7 @@
                                                         <v-layout>
                                                         <v-flex v-if="islogin == false" id="zone0" xs4 class="text-xs-center">
                                                             <v-card :color="selected_color_accent" height="1140">
-                                                                <v-card tile height="4%">
+                                                                <v-card tile>
                                                                     <v-card-text>
                                                                         <h1 :class="{'headlineDef': $vuetify.breakpoint.xsOnly, 'display-1Def': $vuetify.breakpoint.smOnly}">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}}</h1>
                                                                     </v-card-text>
@@ -1623,7 +1626,7 @@
                                                             </v-flex>
                                                         <v-flex id="zone0" v-if="islogin != false" xs12 class="text-xs-center">
                                                             <v-card :color="selected_color_accent" height="1140">
-                                                                <v-card tile height="4%">
+                                                                <v-card tile>
                                                                     <v-card-text>
                                                                         <h1 :class="{'headlineDef': $vuetify.breakpoint.xsOnly, 'display-1Def': $vuetify.breakpoint.smOnly}">{{personalinfoEdit.first_name}} {{personalinfoEdit.last_name}}</h1>
                                                                     </v-card-text>
@@ -5248,10 +5251,19 @@
                             
                         </v-container>
                     </div>
+
+                    <div v-show="page == 'about'">
+                        <v-container>
+                            <v-card>
+                                <h1>WE ARE THE BEST</h1>
+                                <h2>Contributors: TAFT, SHARON, MALIA, HANNAH, and SHANE AND ANDY</h2>
+                            </v-card>
+                        </v-container>
+                    </div>
                 </div>
                 <v-footer flat class="pa-3" color="rgba(85, 82, 89, 0.6)">
                     <v-spacer></v-spacer>
-                    <div class=" body-2Def white--text">&copy; CodeSchool Resumaker Team {{ new Date().getFullYear() }}</div>
+                    <div class=" body-2Def white--text" @click="page = 'about'">&copy; CodeSchool Resumaker Team {{ new Date().getFullYear() }}</div>
                 </v-footer>
 			</v-content>
 		</v-app>
