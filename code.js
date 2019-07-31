@@ -468,9 +468,7 @@ var app= new Vue ({
 
 
       addToDisplay: function (item,want) {
-
         item.displayShow = !item.displayShow;
-
         fetch(`${url}/${want}/${item._id}`, {
           method:"PUT",
           credentials: "include",
@@ -790,7 +788,7 @@ var app= new Vue ({
       setZone:function (){
         app.zone1 = []
         app.zone2 = []
-        app.zone3= []
+        app.zone3 = []
         app.zone4 = []
         app.zone5 = []
         app.zone6 = []
@@ -817,10 +815,7 @@ var app= new Vue ({
         console.log("sorted zones");
       },
 
-      sortToZone: function (position,displayList,type) {
-
-
-
+      sortToZone: function (position,displayList,type) { 
         if(position == 1){
           app.zone1=displayList;
           app.zone1_type=type;
@@ -850,8 +845,6 @@ var app= new Vue ({
           app.zone7_type=type;
         }
       },
-
-
 
       pdfSave: function () {
         var doc = new jsPDF();
@@ -971,7 +964,6 @@ var app= new Vue ({
         if(whatlist="award"){
           app.awardsdisplay= app.removeFromList(app.awardsdisplay,objid)
         }
-
       },
 
         submitStatement: async function (){
@@ -987,15 +979,12 @@ var app= new Vue ({
               body: JSON.stringify(app.statementEdit)
             }).then(function (response) {
               //response.json().then((data)=>{console.log(data.msg)})
-
               app.statementEdit=
               {
                 statement: ""
               }
               app.getData("statement");
-
             });
-
           } else {
             alert("login test")
           }
@@ -1014,7 +1003,6 @@ var app= new Vue ({
               body: JSON.stringify(app.workexpEdit)
             }).then(function (response) {
               //response.json().then((data)=>{console.log(data.msg)})
-
               app.workexpEdit={
                 company: "",
                 title: "",
@@ -1026,12 +1014,8 @@ var app= new Vue ({
                 position: 0,
               }
               app.getData("workexp");
-
             });
-
           }
-
-
         },
 
         submitEducation: async function (){
@@ -1055,12 +1039,8 @@ var app= new Vue ({
                 menu: false
               }
               app.getData("education");
-
             });
-
           }
-
-
         },
 
         submitAccomplishment: async function (){
